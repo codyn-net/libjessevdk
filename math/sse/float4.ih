@@ -1,0 +1,3 @@
+#include "float4.hh"
+
+using namespace math;
