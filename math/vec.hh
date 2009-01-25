@@ -136,6 +136,11 @@ namespace math
 		{
 			return Operator::operate(*this, other, Operator::modulator);
 		}
+
+		inline Vec<Base> operator-() const
+		{
+			return Operator::operate(*this, -1, Operator::multiplier);
+		}
 		
 		inline typename Base::type length() const
 		{
@@ -322,6 +327,20 @@ namespace math
 			Vec3<Type>::values[0] = x;
 			Vec3<Type>::values[1] = y;
 			Vec3<Type>::values[2] = z;
+		}
+		
+		vec3(Vec2Data<Type> const &xy, Type z)
+		{
+			Vec3<Type>::values[0] = xy.x;
+			Vec3<Type>::values[1] = xy.y;
+			Vec3<Type>::values[2] = z;
+		}
+		
+		vec3(Type x, Vec2Data<Type> const &yz)
+		{
+			Vec3<Type>::values[0] = x;
+			Vec3<Type>::values[1] = yz.x;
+			Vec3<Type>::values[2] = yz.y;
 		}
 		
 		vec3(Type const (&vals)[3])

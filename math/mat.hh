@@ -113,6 +113,11 @@ namespace math
 			return Operator::operate(*this, single, Operator::substractor);
 		}
 		
+		inline Mat<Base> operator-() const
+		{
+			return Operator::operate(*this, -1, Operator::substractor);
+		}
+		
 		Mat<Base> &transpose();
 		inline Mat<Base> transpose() const
 		{
