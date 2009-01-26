@@ -196,8 +196,8 @@ namespace math
 			
 			struct
 			{
-				Vec2<Type> x;
-				Vec2<Type> y;
+				Vec<Vec2Data<Type> > x;
+				Vec<Vec2Data<Type> > y;
 			};			
 		};
 		
@@ -216,6 +216,8 @@ namespace math
 		{
 			return determinant();
 		}
+		
+		Vec<Vec2Data<Type> > operator*(Vec<Vec2Data<Type> > const &v) const;
 		
 		static Mat<Mat2Data<Type> > identity;
 		static Mat<Mat2Data<Type> > empty;
@@ -280,6 +282,19 @@ namespace math
 	}
 	
 	template <typename Type>
+	Vec<Vec2Data<Type> > Mat2Data<Type>::operator*(Vec<Vec2Data<Type> > const &v) const
+	{
+		float const *a = values;
+		
+		Type r[2] = {
+			a[0] * v.x + a[2] * v.y,
+			a[1] * v.x + a[3] * v.y
+		};
+		
+		return *reinterpret_cast<Vec<Vec2Data<Type> > *>(r);
+	}
+	
+	template <typename Type>
 	struct Mat2 : Mat<Mat2Data<Type> >
 	{
 	};
@@ -336,9 +351,9 @@ namespace math
 			
 			struct
 			{
-				Vec3<Type> x;
-				Vec3<Type> y;
-				Vec3<Type> z;
+				Vec<Vec3Data<Type> > x;
+				Vec<Vec3Data<Type> > y;
+				Vec<Vec3Data<Type> > z;
 			};			
 		};
 	
@@ -356,6 +371,8 @@ namespace math
 		{
 			return determinant();
 		}
+		
+		Vec<Vec3Data<Type> > operator*(Vec<Vec3Data<Type> > const &v) const;
 		
 		static Mat<Mat3Data<Type> > identity;
 		static Mat<Mat3Data<Type> > empty;
@@ -437,6 +454,20 @@ namespace math
 	}
 	
 	template <typename Type>
+	Vec<Vec3Data<Type> > Mat3Data<Type>::operator*(Vec<Vec3Data<Type> > const &v) const
+	{
+		float const *a = values;
+		
+		float r[3] = {
+			a[0] * v.x + a[3] * v.y + a[6] * v.z,
+			a[1] * v.x + a[4] * v.y + a[7] * v.z,
+			a[2] * v.x + a[5] * v.y + a[8] * v.z
+		};
+		
+		return *reinterpret_cast<Vec<Vec3Data<Type> > *>(r);
+	}
+	
+	template <typename Type>
 	struct Mat3 : Mat<Mat3Data<Type> >
 	{
 	};
@@ -496,10 +527,10 @@ namespace math
 			
 			struct
 			{
-				Vec4<Type> x;
-				Vec4<Type> y;
-				Vec4<Type> z;
-				Vec4<Type> w;
+				Vec<Vec4Data<Type> > x;
+				Vec<Vec4Data<Type> > y;
+				Vec<Vec4Data<Type> > z;
+				Vec<Vec4Data<Type> > w;
 			};			
 		};
 		
@@ -518,6 +549,8 @@ namespace math
 		{
 			return determinant();
 		}
+		
+		Vec<Vec4Data<Type> > operator*(Vec<Vec4Data<Type> > const &v) const;
 		
 		static Mat<Mat4Data<Type> > identity;
 		static Mat<Mat4Data<Type> > empty;
@@ -630,6 +663,21 @@ namespace math
 		};
 		
 		return *reinterpret_cast<Mat<Mat4Data<Type> > *>(v);
+	}
+	
+	template <typename Type>
+	Vec<Vec4Data<Type> > Mat4Data<Type>::operator*(Vec<Vec4Data<Type> > const &v) const
+	{
+		float const *a = values;
+		
+		float r[4] = {
+			a[0] * v.x + a[4] * v.y + a[8] * v.z + a[12] * v.w,
+			a[1] * v.x + a[5] * v.y + a[9] * v.z + a[13] * v.w,
+			a[2] * v.x + a[6] * v.y + a[10] * v.z + a[14] * v.w,
+			a[3] * v.x + a[7] * v.y + a[11] * v.z + a[15] * v.w
+		};
+		
+		return *reinterpret_cast<Vec<Vec4Data<Type> > *>(r);
 	}
 	
 	template <typename Type>

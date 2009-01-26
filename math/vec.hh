@@ -284,12 +284,12 @@ namespace math
 				Type b;
 			};
 			struct {
-				Vec2<Type> xy;
+				Vec<Vec2Data<Type> > xy;
 				Type _zpad;
 			};
 			struct {
 				Type _xpad;
-				Vec2<Type> yz;
+				Vec<Vec2Data<Type> > yz;
 			};
 		};
 		
@@ -392,19 +392,19 @@ namespace math
 				Type a;
 			};
 			struct {
-				Vec2<Type> xy;
-				Vec2<Type>zw;
+				Vec<Vec2Data<Type> > xy;
+				Vec<Vec2Data<Type> > zw;
 			};
 			struct {
-				Vec2<Type> rg;
-				Vec2<Type> ba;
+				Vec<Vec2Data<Type> > rg;
+				Vec<Vec2Data<Type> > ba;
 			};
 			struct {
-				Vec3<Type> xyz;
+				Vec<Vec3Data<Type> > xyz;
 				Type _wpad;
 			};
 			struct {
-				Vec3<Type> rgb;
+				Vec<Vec3Data<Type> > rgb;
 				Type _apad;
 			};
 		};

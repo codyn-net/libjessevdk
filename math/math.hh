@@ -3,6 +3,7 @@
 
 #include "vec.hh"
 #include "mat.hh"
+#include "operations.hh"
 
 #ifdef ENABLE_SSE
 #include "sse/float4.hh"
