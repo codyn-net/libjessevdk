@@ -409,9 +409,9 @@ namespace math
 
 		float onec = 1.0 - cosAngle;
 
-		rot.x = vec3<Type>(cosAngle, -1 * axis.z * sinAngle, axis.y * sinAngle) + axis * onec * axis.x;
-		rot.y = vec3<Type>(axis.z * sinAngle, cosAngle, -1 * axis.x * sinAngle) + axis * onec * axis.y;
-		rot.z = vec3<Type>(-1 * axis.y * sinAngle, axis.x * sinAngle, cosAngle) + axis * onec * axis.z;
+		rot.x = vec3<Type>(cosAngle, axis.z * sinAngle, -axis.y * sinAngle) + axis * onec * axis.x;
+		rot.y = vec3<Type>(-axis.z * sinAngle, cosAngle, axis.x * sinAngle) + axis * onec * axis.y;
+		rot.z = vec3<Type>(axis.y * sinAngle, -axis.x * sinAngle, cosAngle) + axis * onec * axis.z;
 
 		return rot;
 	}
@@ -599,7 +599,7 @@ namespace math
 	template <typename Type>
 	Mat<Mat4Data<Type> > Mat4Data<Type>::rotation(float angle, Vec<Vec3Data<Type> > const &axis)
 	{
-		return Mat3Data<Type>::rotation(angle, axis).extend();
+		return Mat<Mat3Data<Type> >::rotation(angle, axis).extend();
 	}
 	
 	template <typename Type>
