@@ -341,6 +341,9 @@ namespace math
 
 	
 	template <typename Type>
+	struct Mat4Data;
+	
+	template <typename Type>
 	struct Mat3Data : MatTypeDefine<Type, 3>
 	{
 		typedef Operators<Mat<Mat3Data<Type> > > Operator;
@@ -373,12 +376,45 @@ namespace math
 		}
 		
 		Vec<Vec3Data<Type> > operator*(Vec<Vec3Data<Type> > const &v) const;
+		Mat<Mat4Data<Type> > extend() const;
 		
 		static Mat<Mat3Data<Type> > identity;
 		static Mat<Mat3Data<Type> > empty;
 		static Mat<Mat3Data<Type> > zeros;
 		static Mat<Mat3Data<Type> > ones;
+		
+		static Mat<Mat3Data<Type> > rotation(float angle, Vec<Vec3Data<Type> > const &axis);
 	};
+	
+	template <typename Type>
+	Mat<Mat4Data<Type> > Mat3Data<Type>::extend() const
+	{
+		Type r[16] = {
+			x.x, x.y, x.z, 0,
+			y.x, y.y, y.z, 0,
+			z.x, z.y, z.z, 0,
+			0, 0, 0, 1
+		};
+		
+		return *reinterpret_cast<Mat<Mat4Data<Type> > *>(r);
+	}
+	
+	template <typename Type>
+	Mat<Mat3Data<Type> > Mat3Data<Type>::rotation(float angle, Vec<Vec3Data<Type> > const &axis)
+	{
+		Mat<Mat3Data<Type> > rot;
+
+		float cosAngle = cos(angle);
+		float sinAngle = sin(angle);
+
+		float onec = 1.0 - cosAngle;
+
+		rot.x = vec3<Type>(cosAngle, -1 * axis.z * sinAngle, axis.y * sinAngle) + axis * onec * axis.x;
+		rot.y = vec3<Type>(axis.z * sinAngle, cosAngle, -1 * axis.x * sinAngle) + axis * onec * axis.y;
+		rot.z = vec3<Type>(-1 * axis.y * sinAngle, axis.x * sinAngle, cosAngle) + axis * onec * axis.z;
+
+		return rot;
+	}
 	
 	template <typename Type>
 	Mat<Mat3Data<Type> > Mat3Data<Type>::inverse() const
@@ -556,7 +592,15 @@ namespace math
 		static Mat<Mat4Data<Type> > empty;
 		static Mat<Mat4Data<Type> > zeros;
 		static Mat<Mat4Data<Type> > ones;
+		
+		static Mat<Mat4Data<Type> > rotation(float angle, Vec<Vec3Data<Type> > const &axis);
 	};
+	
+	template <typename Type>
+	Mat<Mat4Data<Type> > Mat4Data<Type>::rotation(float angle, Vec<Vec3Data<Type> > const &axis)
+	{
+		return Mat3Data<Type>::rotation(angle, axis).extend();
+	}
 	
 	template <typename Type>
 	Mat<Mat4Data<Type> > Mat4Data<Type>::inverse() const
