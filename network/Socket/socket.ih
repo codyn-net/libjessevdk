@@ -1,4 +1,0 @@
-#include "socket.hh"
-
-using namespace optimization::network;
-using namespace base;

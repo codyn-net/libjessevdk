@@ -1,10 +1,11 @@
-#ifndef __STLEXT_OBJECT_H__
-#define __STLEXT_OBJECT_H__
+#ifndef __BASE_OBJECT_H__
+#define __BASE_OBJECT_H__
 
 #include <cassert>
 #include <vector>
 #include "Signals/Signal/signal.hh"
 #include <iostream>
+#include <stdint.h>
 
 namespace base
 {
@@ -145,15 +146,13 @@ namespace base
 			
 			/** Add private data to the object.
 			  */
-			template <typename DataType>
-			void addPrivateData(DataType **data);
+			template <typename T>
+			void addPrivateData(T **data);
 		private:
 			void destroy();
 			
-			PrivateData **privateDataAddress(size_t offset) const;
-			
-			template <typename DataType>
-			size_t privateDataOffset(DataType **data) const;
+			PrivateData **privateDataAddress(intptr_t offset) const;
+			intptr_t privateDataOffset(PrivateData **data) const;
 	};
 
 	inline Object::Object()
@@ -219,9 +218,9 @@ namespace base
 		return d_data == other.d_data;
 	}
 	
-	inline Object::PrivateData **Object::privateDataAddress(size_t offset) const
+	inline Object::PrivateData **Object::privateDataAddress(intptr_t offset) const
 	{
-		return (PrivateData **)((size_t)&d_data + offset);
+		return (PrivateData **)((intptr_t)&d_data + offset);
 	}
 	
 	inline signals::Signal<Object> &Object::onDestroy()
@@ -229,20 +228,14 @@ namespace base
 		return d_data->onDestroy;
 	}
 	
-	template <typename DataType>
-	inline size_t Object::privateDataOffset(DataType **data) const
-	{
-		return (size_t)data - (size_t)&d_data;
-	}
-	
-	template <typename DataType>
-	void Object::addPrivateData(DataType **data) 
+	template <typename T>
+	inline void Object::addPrivateData(T **data)
 	{
 		if (!d_data)
 			return;
 
-		d_data->managedData.push_back(privateDataOffset(data));
+		d_data->managedData.push_back(privateDataOffset(reinterpret_cast<PrivateData **>(data)));
 	}
 }
 
-#endif /* __STLEXT_OBJECT_H__ */
+#endif /* __BASE_OBJECT_H__ */

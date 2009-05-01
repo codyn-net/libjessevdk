@@ -1,7 +1,0 @@
-#include "addressinfo.hh"
-
-#include <sstream>
-#include <string.h>
-
-using namespace optimization::network;
-using namespace std;
