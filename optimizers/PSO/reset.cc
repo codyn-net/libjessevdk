@@ -10,6 +10,8 @@ void PSO::reset()
 	/* Create new initial population of particles */	
 	for (size_t i = 0; i < d_data->populationSize; ++i)
 	{
-		sols[i] = Particle(boundaries(), fitness());
+		Fitness *fn = fitness().copy();
+		sols[i] = Particle(i, boundaries(), *fn);
+		delete fn;
 	}
 }

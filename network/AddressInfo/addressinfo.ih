@@ -3,6 +3,6 @@
 #include <sstream>
 #include <string.h>
 
-using namespace base::network;
+using namespace network;
 using namespace base;
 using namespace std;

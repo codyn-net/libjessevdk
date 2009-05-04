@@ -1,5 +1,5 @@
-#ifndef __BASE_NETWORK_TCP_SERVER_HH__
-#define __BASE_NETWORK_TCP_SERVER_HH__
+#ifndef __NETWORK_TCP_SERVER_HH__
+#define __NETWORK_TCP_SERVER_HH__
 
 #include "Object/object.hh"
 #include "Socket/socket.hh"
@@ -9,8 +9,6 @@
 #include <string>
 #include <vector>
 
-namespace base
-{
 namespace network
 {
 	class TcpServer : public Object
@@ -54,8 +52,7 @@ namespace network
 		return d_data->onNewConnection;
 	}
 }
-}
 
-#endif /* __BASE_NETWORK_TCP_SERVER_HH__ */
+#endif /* __NETWORK_TCP_SERVER_HH__ */
 
 // vi:ts=4

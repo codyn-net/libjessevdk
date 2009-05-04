@@ -2,11 +2,10 @@
 
 void PSO::initialize(Boundaries const &boundaries, Fitness const &fitness)
 {
-	Optimizer::initialize(boundaries, fitness);
-	Particle best(boundaries, fitness);
+	Particle best(0, boundaries, fitness);
 
 	d_data = new Data(best);
-	addPrivateData(&d_data);
+	addPrivateData(d_data);
 
 	/* Default settings */
 	d_data->populationSize = 30;

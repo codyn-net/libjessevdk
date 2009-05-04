@@ -6,4 +6,4 @@
 
 using namespace std;
 using namespace base;
-using namespace base::network;
+using namespace network;

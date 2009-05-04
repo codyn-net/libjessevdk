@@ -36,7 +36,7 @@ namespace base
 			  */
 			template <typename Other>
 			Cloneable(Cloneable<Other> const &other);
-		
+			
 			/** Specialised custom cloneable copy constructor.
 			  * This copy constructor is used to copy a cloneable of class Base.
 			  * This specialisation is needed to overload the default copy
@@ -54,6 +54,9 @@ namespace base
 			  */
 			template <typename Other>
 			Cloneable(Other const &other);
+			
+			template <typename Other>
+			Cloneable(Other *other);
 
 			/** Deconstructor.
 			  * @author Jesse van den Kieboom
@@ -92,6 +95,9 @@ namespace base
 			  */
 			template <typename Other>
 			Cloneable<Base> &operator=(Other const &other);
+			
+			template <typename Other>
+			Cloneable<Base> &operator=(Other *other);
 		
 			/** Dereference operator.
 			  * Dereferencing a cloneable yields a reference to the 
@@ -169,6 +175,9 @@ namespace base
 		
 			template <typename Other>
 			Cloneable<Base> &assign(Other const &other);
+			
+			template <typename Other>
+			Cloneable<Base> &assign(Other *other);
 	};
 
 	// Constructors
@@ -185,6 +194,14 @@ namespace base
 	{
 		// Clone other
 		d_base = other.clone();
+	}
+	
+	template <typename Base>
+	template <typename Other>
+	inline Cloneable<Base>::Cloneable(Other *other)
+	{
+		// Take over other
+		d_base = other;
 	}
 
 	template <typename Base>
@@ -228,6 +245,20 @@ namespace base
 	
 		return *this;
 	}
+	
+	template <typename Base>
+	template <typename Other>
+	Cloneable<Base>& Cloneable<Base>::assign(Other *other)
+	{
+		// Assign other to this cloneable with self-destroy check
+		if (d_base != other)
+		{
+			destroy();
+			d_base = other;
+		}
+	
+		return *this;
+	}
 
 	template <typename Base>
 	Cloneable<Base>& Cloneable<Base>::operator=(Cloneable<Base> const &other)
@@ -245,6 +276,13 @@ namespace base
 	template <typename Base>
 	template <typename Other>
 	Cloneable<Base>& Cloneable<Base>::operator=(Other const &other)
+	{
+		return assign(other);
+	}
+	
+	template <typename Base>
+	template <typename Other>
+	Cloneable<Base>& Cloneable<Base>::operator=(Other *other)
 	{
 		return assign(other);
 	}

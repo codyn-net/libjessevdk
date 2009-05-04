@@ -23,6 +23,8 @@ namespace base
 			
 			bool endsWith(std::string const &other);
 			bool startsWith(std::string const &other);
+			
+			String &replace(std::string const &search, std::string const &replace);
 	};
 
 	template <typename Container>

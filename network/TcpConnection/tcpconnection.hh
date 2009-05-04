@@ -1,5 +1,5 @@
-#ifndef __BASE_NETWORK_TCP_CONNECTION_H__
-#define __BASE_NETWORK_TCP_CONNECTION_H__
+#ifndef __NETWORK_TCP_CONNECTION_H__
+#define __NETWORK_TCP_CONNECTION_H__
 
 #include "Object/object.hh"
 #include "Socket/socket.hh"
@@ -7,8 +7,6 @@
 #include <giomm/unixinputstream.h>
 #include <string>
 
-namespace base
-{
 namespace network
 {
 	class TcpConnection : public Object
@@ -71,7 +69,6 @@ namespace network
 		return d_data->socket;
 	}
 }
-}
 
-#endif /* __BASE_NETWORK_TCP_CONNECTION_H__ */
+#endif /* __NETWORK_TCP_CONNECTION_H__ */
 

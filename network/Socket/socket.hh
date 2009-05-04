@@ -1,11 +1,9 @@
-#ifndef __BASE_NETWORK_SOCKET_H__
-#define __BASE_NETWORK_SOCKET_H__
+#ifndef __NETWORK_SOCKET_H__
+#define __NETWORK_SOCKET_H__
 
 #include "Object/object.hh"
 #include "AddressInfo/addressinfo.hh"
 
-namespace base
-{
 namespace network
 {
 	class Socket : public Object
@@ -70,7 +68,6 @@ namespace network
 		return d_data->onClosed;
 	}
 }
-}
 
-#endif /* __BASE_NETWORK_SOCKET_H__ */
+#endif /* __NETWORK_SOCKET_H__ */
 

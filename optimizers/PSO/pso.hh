@@ -38,36 +38,41 @@ namespace optimizers
 				struct Data : public base::Object::PrivateData
 				{
 					std::vector<double> velocity;
-					std::vector<double> best;
 					
-					double fitness;
+					/* Best position and fitness */
+					std::vector<double> best;
+					base::Cloneable<optimization::Fitness> bestFitness;
 				};
 				
 				Data *d_data;
 				
 				public:
-					Particle(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
+					Particle(size_t id, optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
 					
 					virtual void reset();
 					
 					virtual Particle *clone() const;
+					virtual Particle *copy() const;
 
 					virtual void update(Settings const &settings);
 					virtual void update(Settings const &settings, Particle const &gbest);
 					
+					virtual std::vector<double> const &velocity() const;
+					
 					virtual std::vector<double> const &best() const;
-					virtual double bestFitness() const;
+					virtual optimization::Fitness const &bestFitness() const;
 				protected:
-					virtual void initialize(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
 					virtual void updateBest();
 					virtual void updatePosition(Settings const &settings, size_t dimension);
+				private:
+					void initialize(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
 			};
 
 			/* Public functions */
 			PSO(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
 			
 			virtual void reset();
-			virtual bool iterate();
+			virtual bool iteration();
 		private:
 			struct Data : public base::Object::PrivateData
 			{
@@ -82,9 +87,8 @@ namespace optimizers
 			};
 		
 			Data *d_data;
-
-			/* Private functions */
-			virtual void initialize(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
+			
+			void initialize(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
 	};
 }
 

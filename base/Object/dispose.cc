@@ -8,13 +8,13 @@ bool Object::dispose()
 	d_data->disposing = true;
 	ref();
 
-	for (vector<size_t>::reverse_iterator iter = d_data->managedData.rbegin(); d_data && iter != d_data->managedData.rend(); ++iter)
+	for (vector<PrivateData *>::reverse_iterator iter = d_data->managedData.rbegin(); d_data && iter != d_data->managedData.rend(); ++iter)
 	{
-		PrivateData *data = *privateDataAddress(*iter);
+		PrivateData *data = *iter;
 		
 		if (!data)
 			continue;
-			
+
 		if (!data->dispose(*this))
 		{
 			unref();

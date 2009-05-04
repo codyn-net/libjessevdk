@@ -1,4 +1,4 @@
 #include "socket.hh"
 
-using namespace base::network;
+using namespace network;
 using namespace base;

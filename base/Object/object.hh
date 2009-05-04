@@ -21,7 +21,7 @@ namespace base
 		private:
 			struct Data
 			{
-				std::vector<size_t> managedData;
+				std::vector<PrivateData *> managedData;
 				bool disposing;
 				size_t refCount;
 		
@@ -41,11 +41,7 @@ namespace base
 					:
 						d_data(data)
 					{
-						object.addPrivateData(&d_data);
-					}
-					
-					Augmentation(Augmentation const &other)
-					{
+						object.addPrivateData(d_data);
 					}
 				protected:
 					Object::PrivateData *d_data;
@@ -129,6 +125,8 @@ namespace base
 			  */
 			bool operator==(Object const &other) const;
 			
+			bool operator!=(Object const &other) const;
+			
 			/* signals */
 			signals::Signal<Object> &onDestroy();
 			bool dispose();
@@ -146,20 +144,15 @@ namespace base
 			
 			/** Add private data to the object.
 			  */
-			template <typename T>
-			void addPrivateData(T **data);
+			void addPrivateData(PrivateData *data);
 		private:
 			void destroy();
-			
-			PrivateData **privateDataAddress(intptr_t offset) const;
-			intptr_t privateDataOffset(PrivateData **data) const;
 	};
 
 	inline Object::Object()
 	:
 		d_data(new Data())
 	{
-		//std::cout << "My data: " << std::hex << d_data << std::endl;
 	}
 
 	inline Object::~Object()
@@ -218,23 +211,14 @@ namespace base
 		return d_data == other.d_data;
 	}
 	
-	inline Object::PrivateData **Object::privateDataAddress(intptr_t offset) const
+	inline bool Object::operator!=(Object const &other) const
 	{
-		return (PrivateData **)((intptr_t)&d_data + offset);
+		return !(*this == other);
 	}
 	
 	inline signals::Signal<Object> &Object::onDestroy()
 	{
 		return d_data->onDestroy;
-	}
-	
-	template <typename T>
-	inline void Object::addPrivateData(T **data)
-	{
-		if (!d_data)
-			return;
-
-		d_data->managedData.push_back(privateDataOffset(reinterpret_cast<PrivateData **>(data)));
 	}
 }
 

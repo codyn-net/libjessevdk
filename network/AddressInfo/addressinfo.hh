@@ -1,13 +1,11 @@
-#ifndef __BASE_NETWORK_ADDRESS_INFO_H__
-#define __BASE_NETWORK_ADDRESS_INFO_H__
+#ifndef __NETWORK_ADDRESS_INFO_H__
+#define __NETWORK_ADDRESS_INFO_H__
 
 #include "Object/object.hh"
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
 
-namespace base
-{
 namespace network
 {
 	class AddressInfo : public :Object
@@ -71,7 +69,6 @@ namespace network
 		return d_data->current ? d_data->current->ai_addrlen : 0;
 	}
 }
-}
 
-#endif /* __BASE_NETWORK_ADDRESS_INFO_H__ */
+#endif /* __NETWORK_ADDRESS_INFO_H__ */
 

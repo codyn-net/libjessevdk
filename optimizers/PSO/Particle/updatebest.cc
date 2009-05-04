@@ -2,11 +2,9 @@
 
 void PSO::Particle::updateBest()
 {
-	double curf = fitness().value();
-	
-	if (curf > d_data->fitness)
+	if (fitness() > d_data->bestFitness)
 	{
-		d_data->fitness = curf;
+		d_data->bestFitness = fitness().copy();
 		d_data->best.assign(values().begin(), values().end());
 	}
 }

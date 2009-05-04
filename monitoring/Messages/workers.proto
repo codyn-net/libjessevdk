@@ -1,0 +1,17 @@
+package monitoring;
+
+message WorkersRequest {
+	required int32 id = 1;
+}
+
+message WorkersResponse {
+	required int32 id = 1;
+	
+	message Worker {
+		required int32 id = 1;
+		required string address = 2;
+		required int32 tasksHandled = 3;
+	}
+	
+	repeated Worker worker = 2;
+}
