@@ -2,15 +2,15 @@
 #define __NETWORK_TCP_CLIENT_H__
 
 #include <string>
-#include "TcpConnection/tcpconnection.hh"
+#include "Connection/tcpconnection.hh"
 
 namespace network
 {
 	class TcpClient
 	{
 		public:
-			static TcpConnection connect(std::string const &host, std::string const &port);
-			static TcpConnection connect(std::string const &host, size_t port);
+			static Connection connect(std::string const &host, std::string const &port);
+			static Connection connect(std::string const &host, size_t port);
 	};
 }
 

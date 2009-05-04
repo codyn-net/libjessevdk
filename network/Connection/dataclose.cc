@@ -1,6 +1,6 @@
 #include "tcpconnection.ih"
 
-void TcpConnection::Data::close()
+void Connection::Data::close()
 {
 	socket.close();
 }

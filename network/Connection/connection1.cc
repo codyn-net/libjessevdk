@@ -1,6 +1,6 @@
 #include "tcpconnection.ih"
 
-TcpConnection::TcpConnection()
+Connection::Connection()
 {
 	d_data = new Data();
 	addPrivateData(d_data);

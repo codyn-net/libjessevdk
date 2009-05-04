@@ -2,12 +2,12 @@
 #include <errno.h>
 #include <string.h>
 
-TcpConnection TcpClient::connect(string const &host, string const &port)
+Connection TcpClient::connect(string const &host, string const &port)
 {
 	AddressInfo info(host, port);
 	
 	if (!info)
-		return TcpConnection();
+		return Connection();
 	
 	do
 	{
@@ -25,8 +25,8 @@ TcpConnection TcpClient::connect(string const &host, string const &port)
 			continue;
 		}
 		
-		return TcpConnection(socket, *reinterpret_cast<struct sockaddr_in *>(info.socketAddress()));
+		return Connection(socket, *reinterpret_cast<struct sockaddr_in *>(info.socketAddress()));
 	} while (info.next());
 	
-	return TcpConnection();
+	return Connection();
 }

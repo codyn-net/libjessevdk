@@ -1,5 +1,5 @@
 #include "tcpconnection.ih"
 
-TcpConnection::Data::Data()
+Connection::Data::Data()
 {
 }

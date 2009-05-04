@@ -1,10 +1,10 @@
 #include "tcpconnection.ih"
 
-TcpConnection::TcpConnection(Socket &socket, struct sockaddr_in const &address)
+Connection::Connection(Socket &socket)
 :
 	FileDescriptor(0)
 {
-	d_data = new Data(socket, address);
+	d_data = new Data(socket);
 	addPrivateData(d_data);
 	
 	construct(socket.socket(), d_data);

@@ -2,7 +2,7 @@
 
 bool TcpServer::onConnectionClosed(int fd)
 {
-	for (vector<TcpConnection>::iterator iter = d_data->connections.begin(); iter != d_data->connections.end(); ++iter)
+	for (vector<Connection>::iterator iter = d_data->connections.begin(); iter != d_data->connections.end(); ++iter)
 	{
 		if (iter->fd() == fd)
 		{

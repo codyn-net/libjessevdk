@@ -1,6 +1,6 @@
 #include "tcpconnection.ih"
 
-bool TcpConnection::Data::onSocketClosed()
+bool Connection::Data::onSocketClosed()
 {
 	close();
 	return false;

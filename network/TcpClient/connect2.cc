@@ -1,6 +1,6 @@
 #include "tcpclient.ih"
 
-TcpConnection TcpClient::connect(string const &host, size_t port)
+Connection TcpClient::connect(string const &host, size_t port)
 {
 	stringstream s;
 	

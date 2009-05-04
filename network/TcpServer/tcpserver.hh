@@ -3,7 +3,7 @@
 
 #include "Object/object.hh"
 #include "Socket/socket.hh"
-#include "TcpConnection/tcpconnection.hh"
+#include "Connection/tcpconnection.hh"
 
 #include <glibmm.h>
 #include <string>
@@ -20,9 +20,9 @@ namespace network
 			
 			std::string host;
 			std::string port;
-			std::vector<TcpConnection> connections;
+			std::vector<Connection> connections;
 			
-			base::signals::Signal<TcpConnection &> onNewConnection;
+			base::signals::Signal<Connection &> onNewConnection;
 			
 			~Data();
 			void close();
@@ -39,7 +39,7 @@ namespace network
 			bool listen();
 			void close();
 
-			base::signals::Signal<TcpConnection &> &onNewConnection();
+			base::signals::Signal<Connection &> &onNewConnection();
 		private:
 			void initialize(std::string const &host, std::string const &port);
 			bool onAccept(Glib::IOCondition condition);
@@ -47,7 +47,7 @@ namespace network
 			bool onConnectionClosed(int fd);
 	};
 	
-	inline base::signals::Signal<TcpConnection &> &TcpServer::onNewConnection()
+	inline base::signals::Signal<Connection &> &TcpServer::onNewConnection()
 	{
 		return d_data->onNewConnection;
 	}

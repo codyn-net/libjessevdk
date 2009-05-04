@@ -8,11 +8,11 @@
 
 namespace network
 {
-	class TcpConnection : public os::FileDescriptor
+	class Connection : public os::FileDescriptor
 	{
 		public:
-			TcpConnection();
-			TcpConnection(Socket &socket, struct sockaddr_in const &address);
+			Connection();
+			Connection(Socket &socket);
 			
 			operator bool() const;
 			
@@ -23,10 +23,9 @@ namespace network
 			struct Data : public os::FileDescriptor::Data
 			{
 				Socket socket;
-				struct sockaddr_in address;
 			
 				Data();
-				Data(Socket &socket, struct sockaddr_in const &address);
+				Data(Socket &socket);
 
 				bool onSocketClosed();
 				virtual void close();
@@ -35,12 +34,12 @@ namespace network
 			Data *d_data;
 	};
 	
-	inline TcpConnection::operator bool() const
+	inline Connection::operator bool() const
 	{
 		return d_data->socket;
 	}
 	
-	inline Socket &TcpConnection::socket()
+	inline Socket &Connection::socket()
 	{
 		return d_data->socket;
 	}
