@@ -2,7 +2,7 @@
 #define __NETWORK_TCP_CLIENT_H__
 
 #include <string>
-#include "Connection/tcpconnection.hh"
+#include "Connection/connection.hh"
 
 namespace network
 {

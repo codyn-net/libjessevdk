@@ -3,7 +3,7 @@
 
 #include "Object/object.hh"
 #include "Socket/socket.hh"
-#include "Connection/tcpconnection.hh"
+#include "Connection/connection.hh"
 
 #include <glibmm.h>
 #include <string>

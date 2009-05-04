@@ -1,4 +1,4 @@
-#include "tcpconnection.ih"
+#include "connection.ih"
 
 Connection::Connection(Socket &socket)
 :

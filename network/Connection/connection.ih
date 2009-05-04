@@ -1,4 +1,4 @@
-#include "tcpconnection.hh"
+#include "connection.hh"
 
 #include <errno.h>
 #include <string>

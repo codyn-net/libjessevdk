@@ -1,4 +1,4 @@
-#include "tcpconnection.ih"
+#include "connection.ih"
 
 void Connection::Data::close()
 {
