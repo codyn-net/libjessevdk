@@ -18,10 +18,21 @@ namespace os
 		
 		public:
 			Pipe();
+			Pipe(int readEnd, int writeEnd);
 			
 			FileDescriptor &readEnd();
 			FileDescriptor &writeEnd();
 	};
+	
+	inline FileDescriptor &Pipe::readEnd()
+	{
+		return d_data->readEnd;
+	}
+	
+	inline FileDescriptor &Pipe::writeEnd()
+	{
+		return d_data->writeEnd;
+	}
 }
 
 #endif /* __OS_PIPE_H__ */

@@ -12,6 +12,8 @@ namespace os
 			static bool variable(std::string const &name, std::string &value);
 			static bool variable(std::string const &name);
 			static std::vector<std::string> path(std::string const &name);
+			
+			static std::vector<std::string> all();
 		private:
 			/* Private functions */
 			Environment(); // NI

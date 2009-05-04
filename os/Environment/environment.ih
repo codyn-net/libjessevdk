@@ -1,6 +1,7 @@
 #include "environment.hh"
 
 #include <stdlib.h>
+#include <unistd.h>
 #include "String/string.hh"
 
 using namespace std;

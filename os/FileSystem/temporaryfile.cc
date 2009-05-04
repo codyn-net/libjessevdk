@@ -2,7 +2,7 @@
 
 bool FileSystem::temporaryFile(string &path, ofstream &ofstr) 
 {
-	char p[] = "/tmp/transpony.XXXXXX";
+	char p[] = "/tmp/optimization.XXXXXX";
 	int f = mkstemp(p);
 	
 	if (f == -1)

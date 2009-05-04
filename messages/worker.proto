@@ -3,16 +3,30 @@ package messages.worker;
 message WorkerRequest {
 	required int32 id = 1;
 	required string name = 2;
-	required string fitness = 3;
 
 	message Dispatch {
-		repeated double solution = 1;
-		optional string info = 2;
-	}	
+		required string fitness = 1;
+		repeated double solution = 2;
+		
+		message KeyValue {
+			required string key = 1;
+			required string value = 2;
+		}
+
+		repeated KeyValue settings = 3;
+	}
+	
+	required Dispatch dispatch = 3;
 }
 
 message WorkerResponse {
+	enum Status {
+		Success = 0;
+		Timeout = 1;
+		Failed = 2;
+	}
+	
 	required int32 id = 1;
-	required bool success = 2;
+	required Status status = 2;
 	repeated double fitness = 3;
 }
