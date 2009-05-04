@@ -3,7 +3,7 @@
 void AddressInfo::initialize(int ret, struct addrinfo *addr)
 {
 	d_data = new Data();
-	addPrivateData(&d_data);
+	addPrivateData(d_data);
 
 	if (ret == -1 || !addr)
 	{

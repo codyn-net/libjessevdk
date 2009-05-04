@@ -8,7 +8,7 @@
 
 namespace network
 {
-	class AddressInfo : public :Object
+	class AddressInfo : public base::Object
 	{
 		struct Data : public Object::PrivateData
 		{

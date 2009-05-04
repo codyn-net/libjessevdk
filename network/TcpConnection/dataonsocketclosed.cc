@@ -2,6 +2,6 @@
 
 bool TcpConnection::Data::onSocketClosed()
 {
-	onClosed();
+	close();
 	return false;
 }

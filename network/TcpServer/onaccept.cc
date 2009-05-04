@@ -17,7 +17,7 @@ bool TcpServer::onAccept(Glib::IOCondition condition)
 		TcpConnection connection(s, addr);
 		
 		d_data->connections.push_back(connection);
-		connection.onClosed().addData(*this, &TcpServer::onConnectionClosed, connection);
+		connection.onClosed().add(*this, &TcpServer::onConnectionClosed);
 
 		d_data->onNewConnection(connection);
 		return true;

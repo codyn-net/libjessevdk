@@ -1,10 +1,10 @@
 #include "tcpserver.ih"
 
-bool TcpServer::onConnectionClosed(TcpConnection connection)
+bool TcpServer::onConnectionClosed(int fd)
 {
 	for (vector<TcpConnection>::iterator iter = d_data->connections.begin(); iter != d_data->connections.end(); ++iter)
 	{
-		if (*iter == connection)
+		if (iter->fd() == fd)
 		{
 			d_data->connections.erase(iter);
 			break;

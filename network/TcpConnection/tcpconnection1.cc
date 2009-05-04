@@ -3,5 +3,5 @@
 TcpConnection::TcpConnection()
 {
 	d_data = new Data();
-	addPrivateData(&d_data);
+	addPrivateData(d_data);
 }

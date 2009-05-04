@@ -11,9 +11,9 @@
 
 namespace network
 {
-	class TcpServer : public Object
+	class TcpServer : public base::Object
 	{
-		struct Data : public Object::PrivateData
+		struct Data : public base::Object::PrivateData
 		{
 			Socket listenSocket;
 			Glib::RefPtr<Glib::IOSource> listenSource;
@@ -22,7 +22,7 @@ namespace network
 			std::string port;
 			std::vector<TcpConnection> connections;
 			
-			signals::Signal<TcpConnection &> onNewConnection;
+			base::signals::Signal<TcpConnection &> onNewConnection;
 			
 			~Data();
 			void close();
@@ -39,15 +39,15 @@ namespace network
 			bool listen();
 			void close();
 
-			signals::Signal<TcpConnection &> &onNewConnection();
+			base::signals::Signal<TcpConnection &> &onNewConnection();
 		private:
 			void initialize(std::string const &host, std::string const &port);
 			bool onAccept(Glib::IOCondition condition);
 			
-			bool onConnectionClosed(TcpConnection connection);
+			bool onConnectionClosed(int fd);
 	};
 	
-	inline signals::Signal<TcpConnection &> &TcpServer::onNewConnection()
+	inline base::signals::Signal<TcpConnection &> &TcpServer::onNewConnection()
 	{
 		return d_data->onNewConnection;
 	}

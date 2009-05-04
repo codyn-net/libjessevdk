@@ -6,9 +6,9 @@
 
 namespace network
 {
-	class Socket : public Object
+	class Socket : public base::Object
 	{
-		struct Data	: public Object::PrivateData
+		struct Data	: public base::Object::PrivateData
 		{
 			AddressInfo info;
 			int socket;
@@ -16,7 +16,7 @@ namespace network
 			~Data();
 			void close();
 			
-			signals::Signal<> onClosed;
+			base::signals::Signal<> onClosed;
 		};
 		
 		Data *d_data;
@@ -45,7 +45,7 @@ namespace network
 			
 			void close();
 			
-			signals::Signal<> &onClosed();
+			base::signals::Signal<> &onClosed();
 	};
 	
 	inline int Socket::socket() const

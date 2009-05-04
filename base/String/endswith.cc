@@ -1,4 +1,5 @@
 #include "string.ih"
+#include <iostream>
 
 bool String::endsWith(string const &other) 
 {
@@ -8,5 +9,5 @@ bool String::endsWith(string const &other)
 	if (l < ol)
 		return false;
 
-	return other.substr(l - ol) == other;
+	return substr(l - ol) == other;
 }
