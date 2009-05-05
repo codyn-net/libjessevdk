@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
+#include "SocketAddress/socketaddress.hh"
 
 namespace network
 {
@@ -36,8 +37,7 @@ namespace network
 			int socketType() const;
 			int protocol() const;
 			
-			struct sockaddr *socketAddress() const;
-			size_t socketAddressLength() const;
+			SocketAddress socketAddress() const;
 		private:
 			void resolve(std::string const &host, std::string const &port, struct addrinfo hint);
 			void initialize(int ret, struct addrinfo *addr);
@@ -63,14 +63,9 @@ namespace network
 		return d_data->current ? d_data->current->ai_protocol : 0;
 	}
 	
-	inline struct sockaddr *AddressInfo::socketAddress() const
+	inline SocketAddress AddressInfo::socketAddress() const
 	{
-		return d_data->current ? d_data->current->ai_addr : 0;
-	}
-	
-	inline size_t AddressInfo::socketAddressLength() const
-	{
-		return d_data->current ? d_data->current->ai_addrlen : 0;
+		return d_data->current ? SocketAddress(*reinterpret_cast<struct sockaddr_in *>(d_data->current->ai_addr)) : SocketAddress();
 	}
 }
 

@@ -7,20 +7,23 @@
 
 namespace os
 {
-	class FileDescriptor : public base::Object
+	class FileDescriptor : virtual public base::Object
 	{
 		public:
 			struct DataArgs
 			{
 				friend class FileDescriptor;
-				
+
 				int fd;
 				std::string data;
-				
+			
 				void buffer(std::string const &data);
 
 				DataArgs(int fd, std::string *buffer);
-				
+				DataArgs *clone() const;
+			
+				virtual ~DataArgs() {};
+
 				private:
 					std::string *privBuffer;
 			};
@@ -43,6 +46,8 @@ namespace os
 		protected:
 			struct Data : public base::Object::PrivateData
 			{
+				friend class FileDescriptor;
+
 				struct Type
 				{
 					enum Values
@@ -62,12 +67,17 @@ namespace os
 			
 				std::string buffer;
 			
-				virtual bool onIO(Glib::IOCondition condition);
 				virtual void close();
+				
+				private:
+					bool onIO(Glib::IOCondition condition);
+				protected:
+					virtual int recv(std::string &data);
+					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
 			};
 
-			FileDescriptor(Data *data);
-			void construct(int fd, Data *data);
+			FileDescriptor(bool createData);
+			void setData(Data *data);
 		private:
 			Data *d_data;
 

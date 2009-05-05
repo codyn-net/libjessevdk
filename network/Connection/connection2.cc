@@ -2,11 +2,13 @@
 
 Connection::Connection(Socket &socket)
 :
-	FileDescriptor(0)
+	FileDescriptor(static_cast<Data *>(0))
 {
 	d_data = new Data();
 	addPrivateData(d_data);
 	
-	construct(-1, d_data);
+	setData(d_data);
+	assign(-1);
+
 	setSocket(socket);
 }

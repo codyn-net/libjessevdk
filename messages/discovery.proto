@@ -1,5 +1,6 @@
 package messages.discovery;
 
 message Greeting {
-	required int32 port = 1;
+	required string port = 1;
+	optional string host = 2;
 }

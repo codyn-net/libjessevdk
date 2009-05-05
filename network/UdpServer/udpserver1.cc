@@ -1,9 +1,11 @@
 #include "udpserver.ih"
 
-UdpServer::UdpServer(size_t port) 
+UdpServer::UdpServer(size_t port)
+:
+	Connection(false)
 {
 	stringstream s;
 	s << port;
 	
-	initialize("localhost", s.str());
+	initialize("0.0.0.0", s.str());
 }

@@ -11,7 +11,7 @@ namespace network
 		struct Data	: public base::Object::PrivateData
 		{
 			AddressInfo info;
-			struct sockaddr_in address;
+			SocketAddress address;
 
 			int socket;
 			
@@ -47,10 +47,9 @@ namespace network
 			bool connect();
 			
 			void close();
-			
-			AddressInfo &addressInfo();
-			
+
 			base::signals::Signal<> &onClosed();
+			SocketAddress &address();
 	};
 	
 	inline int Socket::socket() const
@@ -68,11 +67,11 @@ namespace network
 		return d_data->socket != -1;
 	}
 	
-	inline AddressInfo &Socket::addressInfo()
+	inline SocketAddress &Socket::address()
 	{
-		return d_data->info;
+		return d_data->address;
 	}
-	
+
 	inline base::signals::Signal<> &Socket::onClosed()
 	{
 		return d_data->onClosed;

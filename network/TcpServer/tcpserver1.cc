@@ -5,5 +5,5 @@ TcpServer::TcpServer(size_t port)
 	stringstream s;
 	s << port;
 	
-	initialize("localhost", s.str());
+	initialize("0.0.0.0", s.str());
 }

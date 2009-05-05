@@ -8,7 +8,7 @@
 
 namespace network
 {
-	class Connection : public os::FileDescriptor
+	class Connection : virtual public os::FileDescriptor
 	{
 		public:
 			Connection();
@@ -16,23 +16,20 @@ namespace network
 			
 			operator bool() const;
 			Socket &socket();
-			
-			std::string host() const;
-			size_t port() const;
 		protected:
-			void setSocket(Socket &socket);
-		private:
 			struct Data : public os::FileDescriptor::Data
 			{
 				Socket socket;
-				struct sockaddr_in lastAddress;
 
 				bool onSocketClosed();
 				virtual void close();
-				
-				virtual bool onIO(Glib::IOCondition condition);
 			};
-		
+
+			void setSocket(Socket &socket);
+
+			Connection(bool createData);
+			void setData(Data *data);
+		private:
 			Data *d_data;
 	};
 	

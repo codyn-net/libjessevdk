@@ -73,6 +73,9 @@ namespace optimizers
 			
 			virtual void reset();
 			virtual bool iteration();
+			
+			virtual Particle &best();
+			virtual Particle const &best() const;
 		private:
 			struct Data : public base::Object::PrivateData
 			{
@@ -90,6 +93,16 @@ namespace optimizers
 			
 			void initialize(optimization::Boundaries const &boundaries, optimization::Fitness const &fitness);
 	};
+	
+	inline PSO::Particle &PSO::best()
+	{
+		return dynamic_cast<PSO::Particle &>(Optimizer::best());
+	}
+	
+	inline PSO::Particle const &PSO::best() const
+	{
+		return dynamic_cast<PSO::Particle const &>(Optimizer::best());
+	}
 }
 
 #endif /* __OPTIMIZERS_PSO_H__ */

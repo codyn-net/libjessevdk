@@ -27,6 +27,7 @@ namespace network
 		protected:
 			virtual Socket accept();
 			virtual AddressInfo listenAddressInfo();
+			virtual bool listenOnSocket(Socket &socket);
 		private:
 			void initialize(std::string const &host, std::string const &port);
 	};

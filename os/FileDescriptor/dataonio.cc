@@ -9,17 +9,8 @@ bool FileDescriptor::Data::onIO(Glib::IOCondition condition)
 	}
 	
 	/* try to read something */
-	char buffer[1024];
-	ssize_t len;
-	
-	if (type == Type::Socket)
-	{
-		len = recv(fd, buffer, 1024 - 1, 0);
-	}
-	else
-	{
-		len = read(fd, buffer, 1024 - 1);
-	}
+	string buffer;
+	ssize_t len = recv(buffer);
 	
 	if (len < 1)
 	{
@@ -31,14 +22,14 @@ bool FileDescriptor::Data::onIO(Glib::IOCondition condition)
 
 		cerr << "Error occurred: " << len << ", " << strerror(errno) << endl;
 		close();
+		return false;
 	}
 	
-	buffer[len] = '\0';
 	this->buffer += buffer;
 
-	DataArgs args(fd, &(this->buffer));
+	Cloneable<DataArgs> args = createArgs(fd, &(this->buffer));
 	this->buffer = "";
 
-	onData(args);
+	onData(*args);
 	return true;
 }

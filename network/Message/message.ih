@@ -1,7 +1,0 @@
-#include "message.hh"
-
-#include <sstream>
-
-using namespace std;
-using namespace network;
-using namespace base;

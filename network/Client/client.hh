@@ -12,7 +12,7 @@ namespace network
 			/* Constructor/destructor */
 			bool connect();
 		protected:
-			AddressInfo connectAddressInfo() = 0;
+			virtual AddressInfo connectAddressInfo() = 0;
 		private:
 			/* Private functions */
 		

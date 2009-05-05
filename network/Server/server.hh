@@ -11,7 +11,7 @@
 
 namespace network
 {
-	class Server : public base::Object
+	class Server : virtual public base::Object
 	{
 		struct Data : public base::Object::PrivateData
 		{
@@ -30,13 +30,14 @@ namespace network
 		public:
 			Server();
 			
-			bool listen();
+			virtual bool listen();
 			virtual void close();
 
 			base::signals::Signal<Connection &> &onNewConnection();
 		protected:
 			virtual Socket accept() = 0;
 			virtual AddressInfo listenAddressInfo() = 0;
+			virtual bool listenOnSocket(Socket &socket) = 0;
 			
 			Socket &listenSocket();
 		private:

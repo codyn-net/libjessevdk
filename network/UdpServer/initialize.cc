@@ -7,4 +7,6 @@ void UdpServer::initialize(string const &host, string const &port)
 	
 	d_data->host = host;
 	d_data->port = port;
+
+	setData(d_data);
 }

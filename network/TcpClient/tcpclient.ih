@@ -1,5 +1,5 @@
 #include "tcpclient.hh"
-#include <stringstream>
+#include <sstream>
 
 using namespace network;
 using namespace std;

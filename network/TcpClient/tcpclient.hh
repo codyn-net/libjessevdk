@@ -14,7 +14,10 @@ namespace network
 			std::string port;
 		};
 		
+		Data *d_data;
+		
 		public:
+			TcpClient();
 			TcpClient(std::string const &host, std::string const &port);
 			TcpClient(std::string const &host, size_t port);
 		protected:

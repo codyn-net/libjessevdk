@@ -1,6 +1,8 @@
 #include "udpserver.ih"
 
-UdpServer::UdpServer(string const &port) 
+UdpServer::UdpServer(string const &port)
+:
+	Connection(false) 
 {
-	initialize("localhost", port);
+	initialize("0.0.0.0", port);
 }
