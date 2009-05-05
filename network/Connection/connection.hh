@@ -17,7 +17,7 @@ namespace network
 			operator bool() const;
 			Socket &socket();
 		protected:
-			struct Data : public os::FileDescriptor::Data
+			struct Data : virtual public os::FileDescriptor::Data
 			{
 				Socket socket;
 

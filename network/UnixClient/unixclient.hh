@@ -12,6 +12,8 @@ namespace network
 			std::string filename;
 		};
 		
+		Data *d_data;
+		
 		public:
 			UnixClient(std::string const &filename);
 		protected:

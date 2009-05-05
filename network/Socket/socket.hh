@@ -34,7 +34,7 @@ namespace network
 			
 			Socket(int socket = -1);
 			Socket(AddressInfo info);
-			Socket(int socket, struct sockaddr_in &address);
+			Socket(int socket, struct sockaddr *address, socklen_t size);
 			
 			int socket() const;
 			

@@ -7,9 +7,13 @@ namespace network
 {
 	class UnixServer : public Server
 	{	
-		struct Data : public base::Object::PrivateData
+		struct Data : public Server::Data
 		{
 			std::string filename;
+			
+			protected:
+				virtual void close();
+				virtual Socket accept();
 		};
 		
 		Data *d_data;
@@ -19,10 +23,9 @@ namespace network
 			UnixServer(std::string const &filename);
 
 			/* Public functions */
-			virtual void close();
 		protected:
-			virtual int accept();
 			virtual AddressInfo listenAddressInfo();
+			virtual bool listenOnSocket(Socket &socket);
 		private:
 			/* Private functions */
 		

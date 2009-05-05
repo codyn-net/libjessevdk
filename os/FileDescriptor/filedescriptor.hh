@@ -44,7 +44,7 @@ namespace os
 			base::signals::Signal<DataArgs &> &onData();
 
 		protected:
-			struct Data : public base::Object::PrivateData
+			struct Data : virtual public base::Object::PrivateData
 			{
 				friend class FileDescriptor;
 

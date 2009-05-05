@@ -24,12 +24,15 @@ namespace network
 			};
 			
 			/* Instance data */
-			struct sockaddr_in address;
+			struct sockaddr *address;
+			socklen_t size;
 			
 			std::string host;
 			std::string port;
 			
 			int cached;
+			
+			~Data();
 		};
 
 		Data *d_data;
@@ -37,7 +40,7 @@ namespace network
 		public:
 			/* Constructor/destructor */
 			SocketAddress();
-			SocketAddress(struct sockaddr_in const &address);
+			SocketAddress(struct sockaddr const *address, socklen_t size);
 		
 			/* Public functions */
 			int family() const;
@@ -54,17 +57,17 @@ namespace network
 	
 	inline int SocketAddress::family() const
 	{
-		return d_data->address.sin_family;
+		return d_data->address ? d_data->address->sa_family : 0;
 	}
 	
 	inline SocketAddress::operator sockaddr const *() const
 	{
-		return reinterpret_cast<sockaddr *>(&d_data->address);
+		return d_data->address;
 	}
 	
 	inline size_t SocketAddress::length() const
 	{
-		return sizeof(sockaddr_in);
+		return d_data->size;
 	}
 }
 

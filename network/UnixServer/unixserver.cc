@@ -6,4 +6,6 @@ UnixServer::UnixServer(string const &filename)
 	addPrivateData(d_data);
 	
 	d_data->filename = filename;
+	
+	setData(d_data);
 }

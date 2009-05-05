@@ -13,38 +13,41 @@ namespace network
 {
 	class Server : virtual public base::Object
 	{
-		struct Data : public base::Object::PrivateData
-		{
-			Socket listenSocket;
-			Glib::RefPtr<Glib::IOSource> listenSource;
-
-			std::vector<Connection> connections;
-			base::signals::Signal<Connection &> onNewConnection;
-			
-			~Data();
-			void close();
-		};
-		
-		Data *d_data;
-
 		public:
-			Server();
-			
 			virtual bool listen();
-			virtual void close();
+			void close();
 
 			base::signals::Signal<Connection &> &onNewConnection();
 		protected:
-			virtual Socket accept() = 0;
+			struct Data : virtual public base::Object::PrivateData
+			{
+				friend class  Server;
+
+				Socket listenSocket;
+				Glib::RefPtr<Glib::IOSource> listenSource;
+
+				std::vector<Connection> connections;
+				base::signals::Signal<Connection &> onNewConnection;
+			
+				~Data();
+	
+				bool onAccept(Glib::IOCondition condition);
+				void onConnectionClosed(int fd);
+				
+				protected:
+					virtual void close();
+					virtual Socket accept() = 0;
+			};
+
+			Server();
+			void setData(Data *data);
+
 			virtual AddressInfo listenAddressInfo() = 0;
 			virtual bool listenOnSocket(Socket &socket) = 0;
 			
 			Socket &listenSocket();
 		private:
-			void initialize();
-			bool onAccept(Glib::IOCondition condition);
-			
-			bool onConnectionClosed(int fd);
+			Data *d_data;
 	};
 	
 	inline base::signals::Signal<Connection &> &Server::onNewConnection()

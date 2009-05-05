@@ -2,7 +2,7 @@
 #include <errno.h>
 #include <string.h>
 
-bool Server::onAccept(Glib::IOCondition condition)
+bool Server::Data::onAccept(Glib::IOCondition condition)
 {
 	Socket s = accept();
 	
@@ -15,10 +15,10 @@ bool Server::onAccept(Glib::IOCondition condition)
 			debug_network << "Accepted connection from " << s.address().host() << ":" << s.address().port();
 		}
 		
-		d_data->connections.push_back(connection);
-		connection.onClosed().add(*this, &Server::onConnectionClosed);
+		connections.push_back(connection);
+		connection.onClosed().add(*this, &Server::Data::onConnectionClosed);
 
-		d_data->onNewConnection(connection);
+		onNewConnection(connection);
 		return true;
 	}
 	

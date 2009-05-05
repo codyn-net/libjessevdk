@@ -23,6 +23,6 @@ AddressInfo::AddressInfo(string const &filename)
 	info->ai_addrlen = sizeof(struct sockaddr_un);
 	info->ai_addr = reinterpret_cast<struct sockaddr *>(addr);
 	info->ai_next = 0;
-	
+
 	initialize(0, info);
 }

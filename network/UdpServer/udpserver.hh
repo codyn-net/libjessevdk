@@ -26,13 +26,12 @@ namespace network
 		
 			virtual bool listen();
 		protected:
-			virtual Socket accept();
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);
 		private:
 			void initialize(std::string const &host, std::string const &port);
 
-			struct Data : public Connection::Data
+			struct Data : public Server::Data, public Connection::Data
 			{
 				std::string host;
 				std::string port;
@@ -42,6 +41,7 @@ namespace network
 				protected:
 					virtual int recv(std::string &data);
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
+					virtual Socket accept();
 			};
 		
 			Data *d_data;

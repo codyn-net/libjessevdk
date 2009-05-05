@@ -10,10 +10,12 @@ namespace network
 {
 	class TcpServer : public Server
 	{
-		struct Data : public base::Object::PrivateData
+		struct Data : public Server::Data
 		{
 			std::string host;
 			std::string port;
+			
+			virtual Socket accept();
 		};
 		
 		Data *d_data;
@@ -25,7 +27,6 @@ namespace network
 			TcpServer(std::string const &host, std::string const &port);
 		
 		protected:
-			virtual Socket accept();
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);
 		private:

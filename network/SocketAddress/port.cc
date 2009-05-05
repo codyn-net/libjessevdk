@@ -7,8 +7,8 @@ string const &SocketAddress::port() const
 
 	char port[255];
 
-	int ret = getnameinfo(reinterpret_cast<struct sockaddr *>(&d_data->address),
-	                      sizeof(d_data->address),
+	int ret = getnameinfo(d_data->address,
+	                      d_data->size,
 	                      0, 0,
 	                      port, sizeof(port),
 	                      0);

@@ -65,7 +65,7 @@ namespace network
 	
 	inline SocketAddress AddressInfo::socketAddress() const
 	{
-		return d_data->current ? SocketAddress(*reinterpret_cast<struct sockaddr_in *>(d_data->current->ai_addr)) : SocketAddress();
+		return d_data->current ? SocketAddress(d_data->current->ai_addr, d_data->current->ai_addrlen) : SocketAddress();
 	}
 }
 

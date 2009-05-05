@@ -1,6 +1,7 @@
 #include "server.ih"
 
-Server::Server() 
+Server::Server()
+:
+	d_data(0)
 {
-	initialize();
 }
