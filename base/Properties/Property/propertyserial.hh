@@ -4,6 +4,7 @@
 #include "property1.hh"
 #include <sstream>
 #include <iostream>
+#include "String/string.hh"
 
 namespace base
 {
@@ -19,7 +20,75 @@ namespace base
 			
 			virtual operator std::string() const;
 	};
-	
+
+	namespace
+	{
+		template <typename T>
+		struct implementation
+		{
+			static bool deserialize(std::string const &s, T &val)
+			{
+				std::istringstream istr(s);
+				
+				return istr >> val;
+			}
+			
+			static bool serialize(T const &v, std::string &val)
+			{
+				std::ostringstream ostr;
+				
+				if (ostr << v)
+				{
+					val = ostr.str();
+					return true;
+				}
+				
+				return false;
+			}
+		};
+		
+		template <typename T>
+		struct implementation<std::vector<T> >
+		{
+			static bool deserialize(std::string const &s, std::vector<T> &val)
+			{
+				std::vector<std::string> parts = base::String(s).split(",");
+				std::vector<std::string>::iterator iter;
+				
+				for (iter = parts.begin(); iter != parts.end(); ++iter)
+				{
+					T v;
+					std::istringstream istr(*iter);
+					
+					if (!(istr >> v))
+						return false;
+
+					val.push_back(v);
+				}
+
+				return true;
+			}
+			
+			static bool serialize(std::vector<T> const &v, std::string &val)
+			{
+				typename std::vector<T>::const_iterator iter;
+				std::ostringstream ostr;
+				
+				for (iter = v.begin(); iter != v.end(); ++iter)
+				{
+					if (!(ostr << *iter))
+						return false;
+					
+					if (iter != v.end())
+						ostr << ",";
+				}
+				
+				val = ostr.str();
+				return true;
+			}
+		};
+	}
+
 	template <typename Type>
 	inline PropertySerial<Type>::PropertySerial(std::string const &name, Type &storage)
 	:
@@ -42,11 +111,9 @@ namespace base
 	template <typename Type>
 	inline PropertySerial<Type> &PropertySerial<Type>::operator=(std::string const &value)
 	{
-		std::istringstream istr(value);
-		
 		Type val;
 		
-		if (istr >> val)		
+		if (implementation<Type>::deserialize(value, val))
 			set(val);
 		
 		return *this;
@@ -55,10 +122,10 @@ namespace base
 	template <typename Type>
 	inline PropertySerial<Type>::operator std::string() const
 	{
-		std::ostringstream ostr;
+		std::string val;
 		
-		if (ostr << (Property<Type>::operator Type const &()))
-			return ostr.str();
+		if (implementation<Type>::serialize(Property<Type>::operator Type const &(), val))
+			return val;
 		else
 			return Property<Type>::operator std::string();
 	}

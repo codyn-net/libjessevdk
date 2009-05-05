@@ -1,24 +1,34 @@
 #ifndef __BASE_MODULE_H__
 #define __BASE_MODULE_H__
 
+#include "Object/object.hh"
 #include <string>
+#include <dlfcn.h>
 
 namespace base
 {
-	class Module
+	class Module : base::Object
 	{
-		std::string d_path;
-		void *d_handle;
+		struct Data : base::Object::PrivateData
+		{
+			std::string path;
+			void *handle;
 
-		bool d_state;
-		std::string d_error;
+			bool state;
+			std::string error;
+			
+			~Data();
+		};
+		
+		Data *d_data;
 		
 		public:
 			static std::string const suffix;
+			static std::string const prefix;
 
 			/* Constructor/destructor */
+			Module();
 			Module(std::string const &path);
-			~Module();
 
 			/* Public functions */
 			operator bool() const;
@@ -33,18 +43,28 @@ namespace base
 		
 	};
 	
+	inline Module::operator bool() const
+	{
+		return d_data->state && d_data->handle;
+	}
+	
+	inline std::string const &Module::error() const
+	{
+		return d_data->error;
+	}
+	
 	template <typename TFunction>
 	TFunction Module::lookup(std::string const &symbol)
 	{
-		if (!d_handle)
-			return Type(0);
+		if (!d_data->state || !d_data->handle)
+			return TFunction(0);
 		
-		void *s = dlsym(d_handle, symbol.c_str());
+		void *s = ::dlsym(d_data->handle, symbol.c_str());
 		
 		if (!s)
 		{
-			d_error = dlerror();
-			return 0;
+			d_data->error = dlerror();
+			return TFunction(0);
 		}
 		
 		return reinterpret_cast<TFunction>(s);

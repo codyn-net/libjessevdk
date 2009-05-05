@@ -8,6 +8,7 @@
 
 #define debug_network (debug_out(Network))
 #define debug_worker (debug_out(Worker))
+#define debug_module (debug_out(Module))
 
 namespace base
 {
@@ -29,7 +30,8 @@ namespace base
 				{
 					None = 0,
 					Network = 1 << 0,
-					Worker = 1 << 1
+					Worker = 1 << 1,
+					Module = 1 << 2
 				};
 			};
 			

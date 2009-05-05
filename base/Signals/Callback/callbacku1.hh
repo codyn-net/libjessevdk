@@ -115,7 +115,14 @@ namespace signals
 			}
 
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs, TUserData &), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &, TUserData *), TUserData *data, TArgs &args)
+			{
+				TOtherArgs a = args;
+				return (obj.*function)(a, data);
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData>
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &, TUserData), TUserData data, TArgs &args)
 			{
 				TOtherArgs a = args;
 				return (obj.*function)(a, data);
@@ -133,7 +140,15 @@ namespace signals
 			}
 
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, void (TOtherObject::* const function)(TOtherArgs, TUserData &), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TOtherArgs &, TUserData *), TUserData *data, TArgs &args)
+			{
+				TOtherArgs a = args;
+				(obj.*function)(a, data);
+				return false;
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData>
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TOtherArgs &, TUserData), TUserData data, TArgs &args)
 			{
 				TOtherArgs a = args;
 				(obj.*function)(a, data);

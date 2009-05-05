@@ -10,4 +10,7 @@ void Debug::enableEnvironment()
 	
 	if (Environment::variable("OPTIMIZATION_DEBUG_WORKER"))
 		s_instance->domain() |= Domain::Worker;
+	
+	if (Environment::variable("OPTIMIZATION_DEBUG_MODULE"))
+		s_instance->domain() |= Domain::Module;
 }
