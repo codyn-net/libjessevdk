@@ -14,6 +14,8 @@ namespace network
 		{
 			struct addrinfo *address;
 			struct addrinfo *current;
+			
+			~Data();
 		};
 		
 		Data *d_data;
@@ -23,6 +25,8 @@ namespace network
 			AddressInfo(int ret, struct addrinfo *addr);
 			AddressInfo(std::string const &host, std::string const &port);
 			AddressInfo(std::string const &host, std::string const &port, struct addrinfo hint);
+			
+			AddressInfo(std::string const &filename);
 			
 			operator bool() const;
 			bool next();

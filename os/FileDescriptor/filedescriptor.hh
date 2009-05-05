@@ -18,9 +18,10 @@ namespace os
 				std::string data;
 				
 				void buffer(std::string const &data);
+
+				DataArgs(int fd, std::string *buffer);
 				
 				private:
-					DataArgs(int fd, std::string *buffer);
 					std::string *privBuffer;
 			};
 
@@ -61,7 +62,7 @@ namespace os
 			
 				std::string buffer;
 			
-				bool onIO(Glib::IOCondition condition);
+				virtual bool onIO(Glib::IOCondition condition);
 				virtual void close();
 			};
 

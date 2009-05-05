@@ -15,20 +15,22 @@ namespace network
 			Connection(Socket &socket);
 			
 			operator bool() const;
-			
 			Socket &socket();
 			
-			/* Signals */
+			std::string host() const;
+			size_t port() const;
+		protected:
+			void setSocket(Socket &socket);
 		private:
 			struct Data : public os::FileDescriptor::Data
 			{
 				Socket socket;
-			
-				Data();
-				Data(Socket &socket);
+				struct sockaddr_in lastAddress;
 
 				bool onSocketClosed();
 				virtual void close();
+				
+				virtual bool onIO(Glib::IOCondition condition);
 			};
 		
 			Data *d_data;

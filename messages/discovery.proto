@@ -1,0 +1,5 @@
+package messages.discovery;
+
+message Greeting {
+	required int32 port = 1;
+}

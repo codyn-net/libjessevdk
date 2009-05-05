@@ -2,5 +2,5 @@
 
 TcpServer::TcpServer(string const &port)
 {
-	initialize("", port);
+	initialize("localhost", port);
 }

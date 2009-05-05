@@ -1,6 +1,6 @@
-#include "tcpserver.ih"
+#include "server.ih"
 
-bool TcpServer::onConnectionClosed(int fd)
+bool Server::onConnectionClosed(int fd)
 {
 	for (vector<Connection>::iterator iter = d_data->connections.begin(); iter != d_data->connections.end(); ++iter)
 	{

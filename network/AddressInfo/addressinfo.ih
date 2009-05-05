@@ -1,8 +1,13 @@
 #include "addressinfo.hh"
 
+#include "FileSystem/filesystem.hh"
 #include <sstream>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 
 using namespace network;
 using namespace base;
 using namespace std;
+using namespace os;

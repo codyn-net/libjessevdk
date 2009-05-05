@@ -1,11 +1,11 @@
-#include "tcpserver.ih"
+#include "server.ih"
 #include <iostream>
 #include <errno.h>
 #include <string.h>
 
-bool TcpServer::listen()
+bool Server::listen()
 {
-	AddressInfo info(d_data->host, d_data->port);
+	AddressInfo info(listenAddressInfo());
 
 	do
 	{
@@ -40,7 +40,7 @@ bool TcpServer::listen()
 		/* Add to the main loop to be polled */
 		d_data->listenSource = Glib::IOSource::create(socket, Glib::IO_IN);
 
-		d_data->listenSource->connect(sigc::mem_fun(*this, &TcpServer::onAccept));
+		d_data->listenSource->connect(sigc::mem_fun(*this, &Server::onAccept));
 		d_data->listenSource->attach();
 
 		return true;

@@ -11,6 +11,8 @@ namespace network
 		struct Data	: public base::Object::PrivateData
 		{
 			AddressInfo info;
+			struct sockaddr_in address;
+
 			int socket;
 			
 			~Data();
@@ -32,6 +34,7 @@ namespace network
 			
 			Socket(int socket = -1);
 			Socket(AddressInfo info);
+			Socket(int socket, struct sockaddr_in &address);
 			
 			int socket() const;
 			
@@ -44,6 +47,8 @@ namespace network
 			bool connect();
 			
 			void close();
+			
+			AddressInfo &addressInfo();
 			
 			base::signals::Signal<> &onClosed();
 	};
@@ -61,6 +66,11 @@ namespace network
 	inline Socket::operator bool() const
 	{
 		return d_data->socket != -1;
+	}
+	
+	inline AddressInfo &Socket::addressInfo()
+	{
+		return d_data->info;
 	}
 	
 	inline base::signals::Signal<> &Socket::onClosed()
