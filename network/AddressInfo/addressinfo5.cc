@@ -21,7 +21,7 @@ AddressInfo::AddressInfo(string const &filename)
 	info->ai_socktype = SOCK_STREAM;
 	info->ai_protocol = 0;
 	info->ai_addrlen = sizeof(struct sockaddr_un);
-	info->ai_addr = reinterpret_cast<struct sockaddr *>(addr);
+	info->ai_addr = (sockaddr *)addr;
 	info->ai_next = 0;
 
 	initialize(0, info);

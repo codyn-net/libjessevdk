@@ -2,14 +2,19 @@
 #include <iostream>
 
 Socket::Socket(AddressInfo info)
+:
+	FileDescriptor(false)
 {
 	d_data = new Data();
 	addPrivateData(d_data);
 	
 	d_data->info = info;
 
+	setData(d_data);
+
 	if (info)
-		d_data->socket = ::socket(info.family(), info.socketType(), info.protocol());
-	else
-		d_data->socket = -1;
+	{
+		assign(::socket(info.family(), info.socketType(), info.protocol()));
+		attach();
+	}	
 }

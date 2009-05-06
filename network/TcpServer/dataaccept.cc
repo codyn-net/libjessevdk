@@ -1,6 +1,6 @@
 #include "tcpserver.ih"
 
-Socket TcpServer::Data::accept()
+Client TcpServer::Data::accept()
 {
 	struct sockaddr_in addr;
 	socklen_t len = sizeof(addr);
@@ -9,5 +9,5 @@ Socket TcpServer::Data::accept()
 	
 	int fd = ::accept(listenSocket, ad, &len);
 	
-	return Socket(fd, ad, len);
+	return Client(fd, ad, len);
 }

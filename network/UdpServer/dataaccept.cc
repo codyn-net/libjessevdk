@@ -1,7 +1,7 @@
 #include "udpserver.ih"
 
-Socket UdpServer::Data::accept() 
+Client UdpServer::Data::accept() 
 {
 	/* Cannot accept */
-	return Socket();
+	return Client();
 }

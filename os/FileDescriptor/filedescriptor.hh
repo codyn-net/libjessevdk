@@ -38,8 +38,12 @@ namespace os
 			void write(std::string const &data);
 			void writeLine(std::string const &data);
 			
+			operator bool() const;
+			operator int() const;
+			
 			void close();
 			
+			base::signals::Signal<Glib::IOCondition> &onIO();
 			base::signals::Signal<int> &onClosed();
 			base::signals::Signal<DataArgs &> &onData();
 
@@ -61,28 +65,36 @@ namespace os
 				Type::Values type;
 
 				Glib::RefPtr<Glib::IOSource> source;
+				sigc::connection sourceConnection;
 
+				base::signals::Signal<Glib::IOCondition> onIO;
 				base::signals::Signal<int> onClosed;
 				base::signals::Signal<DataArgs &> onData;
 			
 				std::string buffer;
 			
 				virtual void close();
+				~Data();
 				
 				private:
-					bool onIO(Glib::IOCondition condition);
+					bool onIOSource(Glib::IOCondition condition);
 				protected:
 					virtual int recv(std::string &data);
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
 			};
 
 			FileDescriptor(bool createData);
-			void setData(Data *data);
+			virtual void setData(Data *data);
 		private:
 			Data *d_data;
 
 			void determineType();
 	};
+	
+	inline base::signals::Signal<Glib::IOCondition> &FileDescriptor::onIO()
+	{
+		return d_data->onIO;
+	}
 	
 	inline base::signals::Signal<int> &FileDescriptor::onClosed()
 	{
@@ -95,6 +107,16 @@ namespace os
 	}
 	
 	inline int FileDescriptor::fd() const
+	{
+		return d_data->fd;
+	}
+	
+	inline FileDescriptor::operator bool() const
+	{
+		return d_data->fd != -1;
+	}
+	
+	inline FileDescriptor::operator int() const
 	{
 		return d_data->fd;
 	}

@@ -6,6 +6,7 @@ string const &SocketAddress::host() const
 		return d_data->host;
 		
 	char host[255];
+	host[0] = '\0';
 
 	int ret = getnameinfo(d_data->address,
 	                      d_data->size,

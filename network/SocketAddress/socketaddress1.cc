@@ -6,5 +6,6 @@ SocketAddress::SocketAddress()
 	addPrivateData(d_data);
 	
 	d_data->address = 0;	
+	d_data->size = 0;
 	d_data->cached = Data::Cached::Host | Data::Cached::Port;
 }

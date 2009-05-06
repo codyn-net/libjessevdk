@@ -41,7 +41,7 @@ namespace network
 				protected:
 					virtual int recv(std::string &data);
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
-					virtual Socket accept();
+					virtual Client accept();
 			};
 		
 			Data *d_data;

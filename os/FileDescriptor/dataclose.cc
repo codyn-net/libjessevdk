@@ -4,14 +4,11 @@ void FileDescriptor::Data::close()
 {
 	int pfd = fd;
 
-	::close(pfd);
+	if (sourceConnection)
+		sourceConnection.disconnect();
+	
 	fd = -1;
 
-	if (source)
-	{
-		source->destroy();
-		source.reset();
-	}
-
+	::close(pfd);
 	onClosed(pfd);
 }

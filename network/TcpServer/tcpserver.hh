@@ -15,7 +15,7 @@ namespace network
 			std::string host;
 			std::string port;
 			
-			virtual Socket accept();
+			virtual Client accept();
 		};
 		
 		Data *d_data;

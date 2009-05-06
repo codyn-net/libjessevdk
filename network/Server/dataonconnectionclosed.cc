@@ -2,7 +2,7 @@
 
 void Server::Data::onConnectionClosed(int fd)
 {
-	for (vector<Connection>::iterator iter = connections.begin(); iter != connections.end(); ++iter)
+	for (vector<Client>::iterator iter = connections.begin(); iter != connections.end(); ++iter)
 	{
 		if (iter->fd() == fd)
 		{

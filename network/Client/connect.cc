@@ -1,37 +1,33 @@
 #include "client.ih"
 
-bool Client::connect() 
+Client Client::connect(AddressInfo info)
 {
-	AddressInfo info = connectAddressInfo();
-	
 	if (!info)
-		return false;
+		return Client();
 	
 	do
 	{
-		Socket socket(info);
+		Client client(info);
 		
-		if (!socket)
+		if (!client)
 		{
 			debug_network << "Could not create socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
-		if (!socket.connect())
+		if (!dynamic_cast<Socket &>(client).connect())
 		{
 			debug_network << "Could not connect: " << strerror(errno) << endl;
 			continue;
 		}
-		
-		setSocket(socket);
 		
 		if (Debug::enabled(Debug::Domain::Network))
 		{
 			debug_network << "Connected to " << info.socketAddress().host() << ":" << info.socketAddress().port()  << endl;
 		}
 
-		return true;
+		return client;
 	} while (info.next());
 	
-	return false;
+	return Client();
 }

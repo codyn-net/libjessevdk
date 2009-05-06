@@ -4,23 +4,20 @@
 
 bool Server::Data::onAccept(Glib::IOCondition condition)
 {
-	Socket s = accept();
+	Client client = accept();
 	
-	if (s)
+	if (client)
 	{
-		Connection connection(s);
-		
 		if (Debug::enabled(Debug::Domain::Network))
 		{
-			debug_network << "Accepted connection from " << s.address().host() << ":" << s.address().port();
+			debug_network << "Accepted connection from " << client.address().host() << ":" << client.address().port() << endl;
 		}
 		
-		connections.push_back(connection);
-		connection.onClosed().add(*this, &Server::Data::onConnectionClosed);
+		connections.push_back(client);
+		client.onClosed().add(*this, &Server::Data::onConnectionClosed);
 
-		onNewConnection(connection);
-		return true;
+		onNewConnection(client);
 	}
-	
+
 	return true;
 }

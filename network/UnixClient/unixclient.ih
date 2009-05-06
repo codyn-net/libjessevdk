@@ -1,4 +1,0 @@
-#include "unixclient.hh"
-
-using namespace std;
-using namespace network;

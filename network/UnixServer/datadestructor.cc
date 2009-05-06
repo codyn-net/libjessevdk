@@ -1,8 +1,6 @@
 #include "unixserver.ih"
 
-void UnixServer::Data::close() 
+UnixServer::Data::~Data() 
 {
-	Server::Data::close();
-	
 	::unlink(filename.c_str());
 }

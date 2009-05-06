@@ -42,12 +42,7 @@ bool Server::listen()
 		
 		d_data->listenSocket = socket;
 		
-		/* Add to the main loop to be polled */
-		d_data->listenSource = Glib::IOSource::create(socket, Glib::IO_IN);
-
-		d_data->listenSource->connect(sigc::mem_fun(*d_data, &Server::Data::onAccept));
-		d_data->listenSource->attach();
-
+		socket.onIO().add(*d_data, &Server::Data::onAccept);
 		return true;
 	} while (info.next());
 	

@@ -11,9 +11,10 @@ namespace network
 		{
 			std::string filename;
 			
+			~Data();
+
 			protected:
-				virtual void close();
-				virtual Socket accept();
+				virtual Client accept();
 		};
 		
 		Data *d_data;
@@ -23,6 +24,7 @@ namespace network
 			UnixServer(std::string const &filename);
 
 			/* Public functions */
+			virtual bool listen();
 		protected:
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);

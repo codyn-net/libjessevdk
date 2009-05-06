@@ -3,7 +3,7 @@
 
 #include "Object/object.hh"
 #include "Socket/socket.hh"
-#include "Connection/connection.hh"
+#include "Client/client.hh"
 
 #include <glibmm.h>
 #include <string>
@@ -17,26 +17,22 @@ namespace network
 			virtual bool listen();
 			void close();
 
-			base::signals::Signal<Connection &> &onNewConnection();
+			base::signals::Signal<Client &> &onNewConnection();
 		protected:
 			struct Data : virtual public base::Object::PrivateData
 			{
 				friend class  Server;
 
 				Socket listenSocket;
-				Glib::RefPtr<Glib::IOSource> listenSource;
 
-				std::vector<Connection> connections;
-				base::signals::Signal<Connection &> onNewConnection;
-			
-				~Data();
-	
+				std::vector<Client> connections;
+				base::signals::Signal<Client &> onNewConnection;
+
 				bool onAccept(Glib::IOCondition condition);
 				void onConnectionClosed(int fd);
 				
 				protected:
-					virtual void close();
-					virtual Socket accept() = 0;
+					virtual Client accept() = 0;
 			};
 
 			Server();
@@ -50,7 +46,7 @@ namespace network
 			Data *d_data;
 	};
 	
-	inline base::signals::Signal<Connection &> &Server::onNewConnection()
+	inline base::signals::Signal<Client &> &Server::onNewConnection()
 	{
 		return d_data->onNewConnection;
 	}
