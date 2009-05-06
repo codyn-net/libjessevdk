@@ -64,7 +64,6 @@ namespace os
 				int fd;
 				Type::Values type;
 
-				Glib::RefPtr<Glib::IOSource> source;
 				sigc::connection sourceConnection;
 
 				base::signals::Signal<Glib::IOCondition> onIO;

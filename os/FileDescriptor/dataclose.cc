@@ -7,8 +7,8 @@ void FileDescriptor::Data::close()
 	if (sourceConnection)
 		sourceConnection.disconnect();
 	
-	fd = -1;
-
 	::close(pfd);
 	onClosed(pfd);
+
+	fd = -1;
 }

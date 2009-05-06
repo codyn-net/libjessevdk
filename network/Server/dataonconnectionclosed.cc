@@ -6,6 +6,11 @@ void Server::Data::onConnectionClosed(int fd)
 	{
 		if (iter->fd() == fd)
 		{
+			if (Debug::enabled(Debug::Domain::Network))
+			{
+				debug_network << "Disconnected " << iter->address().host() << ":" << iter->address().port() << endl;
+			}
+
 			connections.erase(iter);
 			break;
 		}
