@@ -6,13 +6,15 @@ int UdpServer::Data::recv(string &data)
 	ssize_t len;
 	
 	struct sockaddr_in addr;
+	struct sockaddr *add = reinterpret_cast<struct sockaddr *>(&addr);
+
 	socklen_t addrlen = sizeof(addr);
 	
-	len = ::recvfrom(this->fd, buffer, 1024 - 1, 0, reinterpret_cast<struct sockaddr *>(&addr), &addrlen);
+	len = ::recvfrom(fd, buffer, 1024 - 1, 0, add, &addrlen);
 	
 	if (len >= 0)
 	{
-		address = addr;
+		address = SocketAddress(add, addrlen);
 		buffer[len] = '\0';
 	}
 	

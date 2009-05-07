@@ -2,7 +2,7 @@
 
 UdpServer::UdpServer(size_t port)
 :
-	Connection(false)
+	Client(false)
 {
 	stringstream s;
 	s << port;

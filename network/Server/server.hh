@@ -21,7 +21,7 @@ namespace network
 		protected:
 			struct Data : virtual public base::Object::PrivateData
 			{
-				friend class  Server;
+				friend class Server;
 
 				Socket listenSocket;
 
@@ -33,6 +33,9 @@ namespace network
 				
 				protected:
 					virtual Client accept() = 0;
+				
+				private:
+					void onListenClosed(int fd);
 			};
 
 			Server();

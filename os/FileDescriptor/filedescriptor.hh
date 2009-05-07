@@ -71,13 +71,13 @@ namespace os
 				base::signals::Signal<DataArgs &> onData;
 			
 				std::string buffer;
-			
-				virtual void close();
+
 				~Data();
 				
 				private:
 					bool onIOSource(Glib::IOCondition condition);
-				protected:
+				protected:	
+					virtual void close();
 					virtual int recv(std::string &data);
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
 			};

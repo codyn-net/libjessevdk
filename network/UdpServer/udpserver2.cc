@@ -2,7 +2,7 @@
 
 UdpServer::UdpServer(string const &port)
 :
-	Connection(false) 
+	Client(false) 
 {
 	initialize("0.0.0.0", port);
 }

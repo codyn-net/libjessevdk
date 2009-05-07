@@ -41,8 +41,9 @@ bool Server::listen()
 		}
 		
 		d_data->listenSocket = socket;
-		
 		socket.onIO().add(*d_data, &Server::Data::onAccept);
+		socket.onClosed().add(*d_data, &Server::Data::onListenClosed);
+
 		return true;
 	} while (info.next());
 	

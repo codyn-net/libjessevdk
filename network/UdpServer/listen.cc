@@ -5,7 +5,7 @@ bool UdpServer::listen()
 	bool ret = Server::listen();
 	
 	if (ret && listenSocket())
-		setSocket(listenSocket());
+		assign(listenSocket());
 	
 	return ret;
 }

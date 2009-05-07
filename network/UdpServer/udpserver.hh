@@ -8,7 +8,7 @@
 
 namespace network
 {
-	class UdpServer : public Server, public Connection
+	class UdpServer : public Server, public Client
 	{
 		public:
 			struct DataArgs : public FileDescriptor::DataArgs
@@ -31,7 +31,7 @@ namespace network
 		private:
 			void initialize(std::string const &host, std::string const &port);
 
-			struct Data : public Server::Data, public Connection::Data
+			struct Data : public Server::Data, public Socket::Data
 			{
 				std::string host;
 				std::string port;

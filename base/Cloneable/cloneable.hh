@@ -153,6 +153,8 @@ namespace base
 			  * @author Jesse van den Kieboom
 			  */
 			bool isAssigned() const;
+		
+			operator bool() const;
 			
 			/** Greater than operator.
 			  * Proxy for wrapped object operator
@@ -335,6 +337,12 @@ namespace base
 	inline bool Cloneable<Base>::isAssigned() const
 	{
 		return d_base != 0;
+	}
+	
+	template <typename Base>
+	inline Cloneable<Base>::operator bool() const
+	{
+		return isAssigned();
 	}
 	
 	template <typename Base>

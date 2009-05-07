@@ -24,6 +24,8 @@ namespace os
 			static std::string dirname(std::string const &filename);
 			
 			static bool resolveBinary(std::string const &filename, std::string &path);
+			
+			static std::string uniqueName(std::string const &filename);
 		private:
 			/* Private functions */
 			FileSystem(); // NI

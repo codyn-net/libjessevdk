@@ -10,6 +10,8 @@
 #include <fstream>
 #include <cerrno>
 #include <vector>
+#include <sstream>
+
 #include "Environment/environment.hh"
 
 #ifdef OSX
