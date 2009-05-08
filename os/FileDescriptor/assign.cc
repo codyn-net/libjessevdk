@@ -6,5 +6,4 @@ void FileDescriptor::assign(int fd)
 		close();
 	
 	d_data->fd = fd;
-	determineType();
 }

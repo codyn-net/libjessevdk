@@ -11,4 +11,6 @@ Socket::Socket(bool createData)
 	
 	d_data = new Data();
 	addPrivateData(d_data);
+	
+	d_data->writeFunc = 0;
 }

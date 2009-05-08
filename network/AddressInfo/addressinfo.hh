@@ -22,6 +22,15 @@ namespace network
 		Data *d_data;
 		
 		public:
+			struct SocketType
+			{
+				enum
+				{
+					Stream = SOCK_STREAM,
+					Datagram = SOCK_DGRAM
+				};
+			};
+			
 			AddressInfo();
 			AddressInfo(int ret, struct addrinfo *addr);
 			AddressInfo(std::string const &host, std::string const &port);

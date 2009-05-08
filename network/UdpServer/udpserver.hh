@@ -35,11 +35,8 @@ namespace network
 			{
 				std::string host;
 				std::string port;
-				
-				SocketAddress address;
 
 				protected:
-					virtual int recv(std::string &data);
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
 					virtual Client accept();
 			};

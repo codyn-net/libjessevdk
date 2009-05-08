@@ -9,18 +9,10 @@ void FileDescriptor::write(string const &data)
 	
 	if (d_data->fd == -1 || !len)
 		return;
-	
+
 	do
 	{
-		if (d_data->type == Data::Type::Socket)
-		{
-			num = ::send(d_data->fd, ptr + written, len - written, MSG_NOSIGNAL);
-		}
-		else
-		{
-			num = ::write(d_data->fd, ptr + written, len - written);
-		}
-		
+		num = d_data->write(ptr + written, len - written);
 		written += num;
-	} while (num > 0 && len - written > 0);
+	} while (num > 0 && len - written > 0);	
 }

@@ -5,5 +5,5 @@ Client Client::Tcp(string const &host, size_t port)
 	stringstream istr;
 	
 	istr << port;
-	return connect(AddressInfo(host, istr.str()));
+	return Tcp(host, istr.str());
 }

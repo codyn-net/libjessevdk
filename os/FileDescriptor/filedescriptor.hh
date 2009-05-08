@@ -51,18 +51,8 @@ namespace os
 			struct Data : virtual public base::Object::PrivateData
 			{
 				friend class FileDescriptor;
-
-				struct Type
-				{
-					enum Values
-					{
-						Normal,
-						Socket
-					};
-				};
 				
 				int fd;
-				Type::Values type;
 
 				sigc::connection sourceConnection;
 
@@ -76,9 +66,13 @@ namespace os
 				
 				private:
 					bool onIOSource(Glib::IOCondition condition);
+					int recv(std::string &data);
 				protected:	
 					virtual void close();
-					virtual int recv(std::string &data);
+					
+					virtual ssize_t read(char *buffer, ssize_t len);					
+					virtual ssize_t write(char const *buffer, ssize_t len);
+
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
 			};
 
@@ -86,8 +80,6 @@ namespace os
 			virtual void setData(Data *data);
 		private:
 			Data *d_data;
-
-			void determineType();
 	};
 	
 	inline base::signals::Signal<Glib::IOCondition> &FileDescriptor::onIO()

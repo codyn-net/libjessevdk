@@ -31,8 +31,23 @@ namespace network
 		protected:
 			struct Data	: virtual public os::FileDescriptor::Data
 			{
+				friend class Socket;
+
 				AddressInfo info;
 				SocketAddress address;
+				
+				ssize_t (Socket::Data::*writeFunc)(char const *buffer, ssize_t len);
+				ssize_t (Socket::Data::*readFunc)(char *buffer, ssize_t len);
+				
+				protected:
+					virtual ssize_t write(char const *buffer, ssize_t len);
+					virtual ssize_t read(char *buffer, ssize_t len);
+				private:
+					ssize_t writeStream(char const *buffer, ssize_t len);
+					ssize_t writeDgram(char const *buffer, ssize_t len);
+
+					ssize_t readStream(char *buffer, ssize_t len);
+					ssize_t readDgram(char *buffer, ssize_t len);
 			};
 
 			Socket(bool createData);

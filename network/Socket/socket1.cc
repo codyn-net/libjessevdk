@@ -9,6 +9,33 @@ Socket::Socket(int socket)
 	
 	setData(d_data);
 	
+	struct sockaddr addr;
+	socklen_t len = sizeof(addr);
+	
+	if (getsockname(socket, &addr, &len) == 0)
+	{
+		struct sockaddr *ptr;
+		
+		if (addr.sa_family == AF_UNIX)
+		{
+			struct sockaddr_un ad;
+			len = sizeof(ad);
+			ptr = reinterpret_cast<struct sockaddr *>(&ad);
+			
+			if (getsockname(socket, ptr, &len) == 0)
+				d_data->address = SocketAddress(ptr, len);
+		}
+		else
+		{
+			struct sockaddr_in ad;
+			len = sizeof(ad);
+			ptr = reinterpret_cast<struct sockaddr *>(&ad);
+			
+			if (getsockname(socket, ptr, &len) == 0)
+				d_data->address = SocketAddress(ptr, len);
+		}
+	}
+	
 	assign(socket);
 	attach();
 }

@@ -171,6 +171,8 @@ namespace base
 			  */
 			template <typename Other>
 			bool operator>(Cloneable<Other> const &other) const;
+			
+			void clear();
 		private:
 			/* Private functions */
 			void destroy();
@@ -294,6 +296,8 @@ namespace base
 	{
 		if (d_base)
 			delete d_base;
+		
+		d_base = 0;
 	}
 
 	/* Operators */
@@ -357,6 +361,12 @@ namespace base
 	inline bool Cloneable<Base>::operator>(Cloneable<Other> const &other) const
 	{
 		return *d_base > *other;
+	}
+	
+	template <typename Base>
+	inline void Cloneable<Base>::clear()
+	{
+		destroy();
 	}
 }
 

@@ -1,6 +1,6 @@
 #include "client.ih"
 
-Client Client::connect(AddressInfo info)
+Client Client::resolve(AddressInfo info)
 {
 	if (!info)
 		return Client();
@@ -15,7 +15,7 @@ Client Client::connect(AddressInfo info)
 			continue;
 		}
 		
-		if (!dynamic_cast<Socket &>(client).connect())
+		if (info.socketType() == AddressInfo::SocketType::Stream && !dynamic_cast<Socket &>(client).connect())
 		{
 			debug_network << "Could not connect: " << strerror(errno) << endl;
 			continue;
