@@ -343,6 +343,8 @@ namespace signals
 			  * @author Jesse van den Kieboom
 			  */
 			bool isBlocked() const;
+			
+			size_t size() const;
 		private:
 			void sort(CallbackVec &vec);
 			bool remove(CallbackVec &vec, Cloneable<CallbackBase<TArgs> > const &callback);
@@ -633,6 +635,12 @@ namespace signals
 	{
 		d_blocked = other.d_blocked;
 		d_defaultHandler = other.d_defaultHandler;
+	}
+	
+	template <typename TArgs>
+	inline size_t Signal<TArgs>::size() const
+	{
+		return d_callbacks.size() + d_callbacksAfter.size();
 	}
 }
 }

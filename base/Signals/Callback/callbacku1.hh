@@ -109,7 +109,7 @@ namespace signals
 		struct caller_implementation1u<TArgs, TOtherArgs, bool>
 		{
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &, TUserData &), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &, TUserData const &), TUserData const &data, TArgs &args)
 			{
 				return (obj.*function)(dynamic_cast<TOtherArgs &>(args), data);
 			}
@@ -122,7 +122,7 @@ namespace signals
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &, TUserData), TUserData data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &, TUserData), TUserData const &data, TArgs &args)
 			{
 				TOtherArgs a = args;
 				return (obj.*function)(a, data);
@@ -160,25 +160,25 @@ namespace signals
 		struct caller_implementation1u<TArgs, TArgs &, bool>
 		{
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData &), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData const &), TUserData const &data, TArgs &args)
 			{
 				return (obj.*function)(args, data);
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData), TUserData const &data, TArgs &args)
 			{
 				return (obj.*function)(args, data);
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData &), TOtherUserData &data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData const &), TOtherUserData const &data, TArgs &args)
 			{
 				return (obj.*function)(args, data);
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData), TOtherUserData &data, TArgs &args)
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &, TUserData), TOtherUserData const &data, TArgs &args)
 			{
 				return (obj.*function)(args, data);
 			}
@@ -188,28 +188,88 @@ namespace signals
 		struct caller_implementation1u<TArgs, TArgs &, void>
 		{
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData &), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData const &), TUserData const &data, TArgs &args)
 			{
 				(obj.*function)(args, data);
 				return false;
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData>
-			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData), TUserData &data, TArgs &args)
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData), TUserData const &data, TArgs &args)
 			{
 				(obj.*function)(args, data);
 				return false;
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
-			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData &), TOtherUserData &data, TArgs &args)
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData const &), TOtherUserData const &data, TArgs &args)
 			{
 				(obj.*function)(args, data);
 				return false;
 			}
 			
 			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
-			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData), TOtherUserData &data, TArgs &args)
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs &, TUserData), TOtherUserData const &data, TArgs &args)
+			{
+				(obj.*function)(args, data);
+				return false;
+			}
+		};
+		
+		template <typename TArgs>
+		struct caller_implementation1u<TArgs, TArgs, bool>
+		{
+			template <typename TObject, typename TOtherObject, typename TUserData>
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs, TUserData const &), TUserData const &data, TArgs &args)
+			{
+				return (obj.*function)(args, data);
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData>
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs, TUserData), TUserData const &data, TArgs &args)
+			{
+				return (obj.*function)(args, data);
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs, TUserData const &), TOtherUserData const &data, TArgs &args)
+			{
+				return (obj.*function)(args, data);
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
+			static bool caller(TObject &obj, bool (TOtherObject::* const function)(TArgs, TUserData), TOtherUserData const &data, TArgs &args)
+			{
+				return (obj.*function)(args, data);
+			}
+		};
+		
+		template <typename TArgs>
+		struct caller_implementation1u<TArgs, TArgs, void>
+		{
+			template <typename TObject, typename TOtherObject, typename TUserData>
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs, TUserData const &), TUserData const &data, TArgs &args)
+			{
+				(obj.*function)(args, data);
+				return false;
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData>
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs, TUserData), TUserData const &data, TArgs &args)
+			{
+				(obj.*function)(args, data);
+				return false;
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs, TUserData const &), TOtherUserData const &data, TArgs &args)
+			{
+				(obj.*function)(args, data);
+				return false;
+			}
+			
+			template <typename TObject, typename TOtherObject, typename TUserData, typename TOtherUserData>
+			static bool caller(TObject &obj, void (TOtherObject::* const function)(TArgs, TUserData), TOtherUserData const &data, TArgs &args)
 			{
 				(obj.*function)(args, data);
 				return false;

@@ -116,7 +116,7 @@ namespace signals
 			}
 			
 			template <typename TOtherObject>
-			static bool caller(TObject &obj, bool (TOtherObject::* const function)())
+			static bool caller(TObject &obj, void (TOtherObject::* const function)())
 			{
 				(dynamic_cast<TOtherObject &>(obj).*function)();
 				return false;
