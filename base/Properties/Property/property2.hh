@@ -1,7 +1,7 @@
 #ifndef __BASE_PROPERTY2_H__
 #define __BASE_PROPERTY2_H__
 
-#include "propertycommon.hh"
+#include <base/Properties/Property/propertycommon.hh>
 
 namespace base
 {

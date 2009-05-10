@@ -1,8 +1,8 @@
 #ifndef __BASE_PROPERTYCB_H__
 #define __BASE_PROPERTYCB_H__
 
-#include "Signals/Signal/signal.hh"
-#include "property.hh"
+#include <base/Signals/Signal/signal.hh>
+#include <base/Properties/Property/property.hh>
 
 namespace base
 {

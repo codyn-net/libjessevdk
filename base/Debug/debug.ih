@@ -1,7 +1,0 @@
-#include "debug.hh"
-#include <iostream>
-#include "Environment/environment.hh"
-
-using namespace std;
-using namespace base;
-using namespace os;

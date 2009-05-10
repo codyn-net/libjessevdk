@@ -1,10 +1,10 @@
 #ifndef __BASE_PROPERTY_SERIAL_H__
 #define __BASE_PROPERTY_SERIAL_H__
 
-#include "property1.hh"
+#include <base/Properties/Property/property1.hh>
 #include <sstream>
 #include <iostream>
-#include "String/string.hh"
+#include <base/String/string.hh>
 
 namespace base
 {

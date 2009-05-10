@@ -5,9 +5,9 @@
 #include <exception>
 #include <vector>
 
-#include "Cloneable/cloneable.hh"
-#include "Object/object.hh"
-#include "Property/property.hh"
+#include <base/Cloneable/cloneable.hh>
+#include <base/Object/object.hh>
+#include <base/Properties/Property/property.hh>
 
 namespace base
 {

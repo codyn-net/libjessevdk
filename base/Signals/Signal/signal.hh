@@ -11,9 +11,9 @@
 #include <algorithm>
 #include <functional>
 
-#include "Cloneable/cloneable.hh"
-#include "Signals/CallbackBase/callbackbase.hh"
-#include "Signals/Callback/callback.hh"
+#include <base/Cloneable/cloneable.hh>
+#include <base/Signals/CallbackBase/callbackbase.hh>
+#include <base/Signals/Callback/callback.hh>
 
 namespace base
 {

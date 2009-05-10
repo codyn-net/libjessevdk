@@ -1,8 +1,8 @@
 #ifndef __BASE_PROPERTY_COMMON_H__
 #define __BASE_PROPERTY_COMMON_H__
 
-#include "Signals/Signal/signal.hh"
-#include "propertybase.hh"
+#include <base/Signals/Signal/signal.hh>
+#include <base/Properties/Property/propertybase.hh>
 
 #include <ostream>
 

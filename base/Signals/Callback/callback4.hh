@@ -7,7 +7,7 @@
 #define __BASE_SIGNALS_CALLBACK4_H__
 
 #include <typeinfo>
-#include "Signals/CallbackBase/callbackbase.hh"
+#include <base/Signals/CallbackBase/callbackbase.hh>
 
 namespace base
 {

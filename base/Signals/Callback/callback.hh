@@ -6,16 +6,16 @@
 #ifndef __BASE_SIGNALS_CALLBACK_H__
 #define __BASE_SIGNALS_CALLBACK_H__
 
-#include "../CallbackBase/callbackbase.hh"
+#include <base/Signals/CallbackBase/callbackbase.hh>
 
-#include "callbacku1.hh"
-#include "callbacku2.hh"
-#include "callbacku3.hh"
-#include "callbacku4.hh"
+#include <base/Signals/Callback/callbacku1.hh>
+#include <base/Signals/Callback/callbacku2.hh>
+#include <base/Signals/Callback/callbacku3.hh>
+#include <base/Signals/Callback/callbacku4.hh>
 
-#include "callback1.hh"
-#include "callback2.hh"
-#include "callback3.hh"
-#include "callback4.hh"
+#include <base/Signals/Callback/callback1.hh>
+#include <base/Signals/Callback/callback2.hh>
+#include <base/Signals/Callback/callback3.hh>
+#include <base/Signals/Callback/callback4.hh>
 
 #endif /* __BASE_SIGNALS_CALLBACK_H__ */

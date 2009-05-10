@@ -1,7 +1,7 @@
 #ifndef __BASE_PROPERTY_SERIAL2_H__
 #define __BASE_PROPERTY_SERIAL2_H__
 
-#include "property1.hh"
+#include <base/Properties/Property/property1.hh>
 #include <sstream>
 #include <iostream>
 

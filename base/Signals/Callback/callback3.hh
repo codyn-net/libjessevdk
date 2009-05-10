@@ -6,7 +6,7 @@
 #ifndef __BASE_SIGNALS_CALLBACK3_H__
 #define __BASE_SIGNALS_CALLBACK3_H__
 
-#include "Signals/CallbackBase/callbackbase.hh"
+#include <base/Signals/CallbackBase/callbackbase.hh>
 
 namespace base
 {
