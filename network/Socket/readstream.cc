@@ -2,6 +2,12 @@
 
 ssize_t Socket::Data::readStream(char *buffer, ssize_t len) 
 {
-	cout << "Reading stream style" << endl;
-	return ::recv(fd, buffer, len, 0);
+	ssize_t ret = ::recv(fd, buffer, len, 0);
+
+	if (ret > 0 && Debug::enabled(Debug::Domain::Network))
+	{
+		debug_network << "Received stream style: " << address.host() << ":" << address.port() << endl;
+	}
+
+	return ret;
 }

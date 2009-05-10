@@ -25,9 +25,13 @@ namespace network
 			UdpServer(std::string const &host, std::string const &port);
 		
 			virtual bool listen();
+			void enableBroadcast();
 		protected:
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);
+			virtual Socket &socketFromInfo(AddressInfo &info);
+			
+			virtual void installIOHandler();
 		private:
 			void initialize(std::string const &host, std::string const &port);
 
@@ -35,6 +39,7 @@ namespace network
 			{
 				std::string host;
 				std::string port;
+				bool broadcast;
 
 				protected:
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);

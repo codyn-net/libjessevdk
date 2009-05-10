@@ -2,5 +2,5 @@
 
 AddressInfo UnixServer::listenAddressInfo() 
 {
-	return AddressInfo(d_data->filename);
+	return AddressInfo::Unix(d_data->filename);
 }

@@ -1,9 +1,12 @@
 #include "addressinfo.ih"
 
-void AddressInfo::resolve(std::string const &host, std::string const &port, struct addrinfo hint)
+AddressInfo AddressInfo::resolve(std::string const &host, std::string const &port, struct addrinfo hint)
 {
 	struct addrinfo *addr;
-	int ret = getaddrinfo(host.c_str(), port.c_str(), &hint, &addr);
-	
-	initialize(ret, addr);
+
+	if (host == "")
+		hint.ai_flags |= AI_PASSIVE;
+
+	int ret = getaddrinfo(host == "" ? 0 : host.c_str(), port.c_str(), &hint, &addr);
+	return AddressInfo(ret, addr);
 }

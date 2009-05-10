@@ -1,6 +1,6 @@
 #include "socketaddress.ih"
-
-string const &SocketAddress::port() const
+#include <errno.h>
+string const &SocketAddress::port(bool numeric) const
 {
 	if (d_data->cached & Data::Cached::Port)
 		return d_data->port;
@@ -12,8 +12,8 @@ string const &SocketAddress::port() const
 	                      d_data->size,
 	                      0, 0,
 	                      port, sizeof(port),
-	                      0);
-
+	                      numeric ? NI_NUMERICSERV : 0);
+	
 	if (d_data->address->sa_family == AF_UNIX && d_data->size == 2)
 		d_data->port = "";
 	else

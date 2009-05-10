@@ -1,6 +1,6 @@
 #include "socketaddress.ih"
 
-string const &SocketAddress::host() const
+string const &SocketAddress::host(bool numeric) const
 {
 	if (d_data->cached & Data::Cached::Host)
 		return d_data->host;
@@ -12,7 +12,7 @@ string const &SocketAddress::host() const
 	                      d_data->size,
 	                      host, sizeof(host),
 	                      0, 0,
-	                      0);
+	                      numeric ? NI_NUMERICHOST : 0);
 
 	d_data->host = ret == 0 ? host : "";
 	d_data->cached |= Data::Cached::Host;

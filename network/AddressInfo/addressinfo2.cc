@@ -1,15 +1,18 @@
 #include "addressinfo.ih"
 
-AddressInfo::AddressInfo(string const &host, string const &name)
+AddressInfo::AddressInfo(int ret, struct addrinfo *addr)
 {
-	struct addrinfo hint;
+	d_data = new Data();
+	addPrivateData(d_data);
 
-	memset(&hint, 0, sizeof(hint));
-	
-	hint.ai_flags = 0;
-	hint.ai_family = AF_UNSPEC;
-	hint.ai_socktype = SOCK_STREAM;
-	hint.ai_protocol = IPPROTO_TCP;
-	
-	resolve(host, name, hint);
+	if (ret == -1 || !addr)
+	{
+		d_data->address = 0;
+		d_data->current = 0;
+	}
+	else
+	{
+		d_data->address = addr;
+		d_data->current = addr;
+	}
 }

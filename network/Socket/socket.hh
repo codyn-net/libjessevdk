@@ -14,13 +14,17 @@ namespace network
 			{
 				enum Values
 				{
-					Reuse = SO_REUSEADDR
+					Reuse = SO_REUSEADDR,
+					Broadcast = SO_BROADCAST,
+					KeepAlive = SO_KEEPALIVE
 				};
 			};
 			
 			Socket(int socket = -1);
 			Socket(AddressInfo info);
 			Socket(int socket, struct sockaddr *address, socklen_t size);
+			
+			void setInfo(AddressInfo &info);
 			
 			bool bind();
 			bool setOption(Options::Values option);

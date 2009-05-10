@@ -1,6 +1,10 @@
 #include "addressinfo.ih"
 
-AddressInfo::AddressInfo(string const &host, string const &name, struct addrinfo hint)
+AddressInfo::AddressInfo()
 {
-	resolve(host, name, hint);
+	d_data = new Data();
+	addPrivateData(d_data);
+	
+	d_data->address = 0;
+	d_data->current = 0;
 }

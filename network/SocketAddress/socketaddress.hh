@@ -45,8 +45,8 @@ namespace network
 			/* Public functions */
 			int family() const;
 
-			std::string const &port() const;
-			std::string const &host() const;
+			std::string const &port(bool numeric = false) const;
+			std::string const &host(bool numeric = false) const;
 			
 			operator sockaddr const *() const;
 			size_t length() const;

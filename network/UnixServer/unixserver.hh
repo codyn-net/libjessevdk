@@ -21,7 +21,7 @@ namespace network
 		
 		public:
 			/* Constructor/destructor */
-			UnixServer(std::string const &filename);
+			UnixServer(std::string const &filename = "");
 
 			/* Public functions */
 			virtual bool listen();

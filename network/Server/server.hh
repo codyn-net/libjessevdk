@@ -43,6 +43,9 @@ namespace network
 
 			virtual AddressInfo listenAddressInfo() = 0;
 			virtual bool listenOnSocket(Socket &socket) = 0;
+			virtual void installIOHandler();
+			virtual void installClosedHandler();
+			virtual Socket &socketFromInfo(AddressInfo &info);
 			
 			Socket &listenSocket();
 		private:

@@ -9,7 +9,7 @@ bool Server::listen()
 
 	do
 	{
-		Socket socket(info);
+		Socket &socket = socketFromInfo(info);
 		
 		if (!socket)
 		{
@@ -37,12 +37,13 @@ bool Server::listen()
 		
 		if (Debug::enabled(Debug::Domain::Network))
 		{
-			debug_network << "Listening on " << info.socketAddress().host() << ":" << info.socketAddress().port() << endl;
+			debug_network << "Listening on " << info.socketAddress().host(true) << ":" << info.socketAddress().port(true) << endl;
 		}
 		
 		d_data->listenSocket = socket;
-		socket.onIO().add(*d_data, &Server::Data::onAccept);
-		socket.onClosed().add(*d_data, &Server::Data::onListenClosed);
+		
+		installIOHandler();
+		installClosedHandler();
 
 		return true;
 	} while (info.next());

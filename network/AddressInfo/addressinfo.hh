@@ -32,11 +32,6 @@ namespace network
 			};
 			
 			AddressInfo();
-			AddressInfo(int ret, struct addrinfo *addr);
-			AddressInfo(std::string const &host, std::string const &port);
-			AddressInfo(std::string const &host, std::string const &port, struct addrinfo hint);
-			
-			AddressInfo(std::string const &filename);
 			
 			operator bool() const;
 			bool next();
@@ -47,9 +42,19 @@ namespace network
 			int protocol() const;
 			
 			SocketAddress socketAddress() const;
+			
+			static AddressInfo Unix(std::string const &filename);
+			
+			static AddressInfo Tcp(std::string const &host, std::string const &port);
+			static AddressInfo Tcp(std::string const &port);
+
+			static AddressInfo Udp(std::string const &host, std::string const &port);
+			static AddressInfo Udp(std::string const &port);
 		private:
-			void resolve(std::string const &host, std::string const &port, struct addrinfo hint);
-			void initialize(int ret, struct addrinfo *addr);
+			AddressInfo(int ret, struct addrinfo *addr);
+			
+			static addrinfo hint(int socktype, int protocol, int flags = 0);
+			static AddressInfo resolve(std::string const &host, std::string const &port, struct addrinfo hint);
 	};
 	
 	inline AddressInfo::operator bool() const
@@ -75,7 +80,7 @@ namespace network
 	inline SocketAddress AddressInfo::socketAddress() const
 	{
 		return d_data->current ? SocketAddress(d_data->current->ai_addr, d_data->current->ai_addrlen) : SocketAddress();
-	}
+	}	
 }
 
 #endif /* __NETWORK_ADDRESS_INFO_H__ */

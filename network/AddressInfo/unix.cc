@@ -1,11 +1,10 @@
 #include "addressinfo.ih"
 
-AddressInfo::AddressInfo(string const &filename) 
+AddressInfo AddressInfo::Unix(string const &filename) 
 {
 	if (!FileSystem::directoryExists(FileSystem::dirname(filename)))
 	{
-		initialize(-1, 0);
-		return;
+		return AddressInfo(-1, 0);
 	}
 	
 	struct sockaddr_un *addr = new sockaddr_un();
@@ -24,5 +23,5 @@ AddressInfo::AddressInfo(string const &filename)
 	info->ai_addr = (sockaddr *)addr;
 	info->ai_next = 0;
 
-	initialize(0, info);
+	return AddressInfo(0, info);
 }

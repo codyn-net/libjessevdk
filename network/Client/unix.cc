@@ -2,5 +2,5 @@
 
 Client Client::Unix(string const &filename) 
 {
-	return resolve(AddressInfo(filename));
+	return resolve(AddressInfo::Unix(filename));
 }

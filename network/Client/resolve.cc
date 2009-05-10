@@ -23,7 +23,7 @@ Client Client::resolve(AddressInfo info)
 		
 		if (Debug::enabled(Debug::Domain::Network))
 		{
-			debug_network << "Connected to " << info.socketAddress().host() << ":" << info.socketAddress().port()  << endl;
+			debug_network << "Connected to " << info.socketAddress().host(true) << ":" << info.socketAddress().port(true)  << endl;
 		}
 
 		return client;
