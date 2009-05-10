@@ -33,6 +33,8 @@ namespace os
 			void assign(int fd);
 			
 			void attach();
+			void detach();
+
 			int fd() const;
 
 			void write(std::string const &data);
@@ -61,6 +63,8 @@ namespace os
 				base::signals::Signal<DataArgs &> onData;
 			
 				std::string buffer;
+				
+				void writeAll(std::string const &data);
 
 				~Data();
 				

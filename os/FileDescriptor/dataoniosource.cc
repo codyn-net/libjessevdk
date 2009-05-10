@@ -31,7 +31,7 @@ bool FileDescriptor::Data::onIOSource(Glib::IOCondition condition)
 	
 	Cloneable<DataArgs> args = createArgs(fd, &(this->buffer));
 	this->buffer = "";
-
+	
 	onData(*args);
 	return true;
 }
