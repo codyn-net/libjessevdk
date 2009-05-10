@@ -2,18 +2,19 @@ package messages.worker;
 
 message WorkerRequest {
 	required int32 id = 1;
-	required string name = 2;
+	required string dispatcher = 2;
 
 	message Dispatch {
-		required string fitness = 1;
-		repeated double solution = 2;
+		required string job = 1;
+		required string fitness = 2;
+		repeated double solution = 3;
 		
 		message KeyValue {
 			required string key = 1;
 			required string value = 2;
 		}
-
-		repeated KeyValue settings = 3;
+		
+		repeated KeyValue settings = 4;
 	}
 	
 	required Dispatch dispatch = 3;
@@ -29,4 +30,8 @@ message WorkerResponse {
 	required int32 id = 1;
 	required Status status = 2;
 	repeated double fitness = 3;
+}
+
+message CancelRequest {
+	required int32 id = 1;
 }
