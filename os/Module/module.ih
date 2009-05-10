@@ -1,6 +1,6 @@
 #include "module.hh"
-#include "FileSystem/filesystem.hh"
-#include "String/string.hh"
+#include <os/FileSystem/filesystem.hh>
+#include <base/String/string.hh>
 
 using namespace std;
 using namespace base;

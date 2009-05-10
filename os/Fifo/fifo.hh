@@ -1,7 +1,7 @@
 #ifndef __OS_FIFO_H__
 #define __OS_FIFO_H__
 
-#include "FileDescriptor/filedescriptor.hh"
+#include <os/FileDescriptor/filedescriptor.hh>
 #include <string>
 #include <sys/stat.h>
 #include <fcntl.h>

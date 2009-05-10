@@ -2,7 +2,7 @@
 #define __OS_SIGNALS_H__
 
 #include <signal.h>
-#include "base/Signals/Signal/signal.hh"
+#include <base/Signals/Signal/signal.hh>
 
 namespace os
 {

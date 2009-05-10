@@ -1,8 +1,8 @@
 #ifndef __OS_PIPE_H__
 #define __OS_PIPE_H__
 
-#include "FileDescriptor/filedescriptor.hh"
-#include "Object/object.hh"
+#include <os/FileDescriptor/filedescriptor.hh>
+#include <base/Object/object.hh>
 
 namespace os
 {

@@ -1,11 +1,11 @@
-#ifndef __BASE_MODULE_H__
-#define __BASE_MODULE_H__
+#ifndef __OS_MODULE_H__
+#define __OS_MODULE_H__
 
-#include "Object/object.hh"
+#include <base/Object/object.hh>
 #include <string>
 #include <dlfcn.h>
 
-namespace base
+namespace os
 {
 	class Module : base::Object
 	{
@@ -72,4 +72,4 @@ namespace base
 	
 }
 
-#endif /* __BASE_MODULE_H__ */
+#endif /* __OS_MODULE_H__ */
