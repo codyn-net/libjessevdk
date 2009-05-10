@@ -1,9 +1,9 @@
 #ifndef __NETWORK_SOCKET_H__
 #define __NETWORK_SOCKET_H__
 
-#include "Object/object.hh"
-#include "AddressInfo/addressinfo.hh"
-#include "FileDescriptor/filedescriptor.hh"
+#include <base/Object/object.hh>
+#include <network/AddressInfo/addressinfo.hh>
+#include <os/FileDescriptor/filedescriptor.hh>
 
 namespace network
 {

@@ -8,10 +8,10 @@ bool Server::Data::onAccept(Glib::IOCondition condition)
 	
 	if (client)
 	{
-		if (Debug::enabled(Debug::Domain::Network))
+		/*if (Debug::enabled(Debug::Domain::Network))
 		{
 			debug_network << "Accepted connection from " << client.address().host() << ":" << client.address().port() << endl;
-		}
+		}*/
 		
 		connections.push_back(client);
 		client.onClosed().add(*this, &Server::Data::onConnectionClosed);

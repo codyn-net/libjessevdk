@@ -14,10 +14,10 @@ ssize_t Socket::Data::readDgram(char *buffer, ssize_t len)
 	{
 		address = SocketAddress(add, addrlen);
 
-		if (Debug::enabled(Debug::Domain::Network))
+		/*if (Debug::enabled(Debug::Domain::Network))
 		{
 			debug_network << "Received datagram style (" << ret << "): " << address.host() << ":" << address.port() << endl;
-		}
+		}*/
 	}
 	
 	return ret;

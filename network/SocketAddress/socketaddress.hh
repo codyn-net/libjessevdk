@@ -1,7 +1,7 @@
 #ifndef __NETWORK_SOCKET_ADDRESS_H__
 #define __NETWORK_SOCKET_ADDRESS_H__
 
-#include "Object/object.hh"
+#include <base/Object/object.hh>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>

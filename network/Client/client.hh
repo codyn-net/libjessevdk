@@ -1,8 +1,8 @@
 #ifndef __NETWORK_CLIENT_H__
 #define __NETWORK_CLIENT_H__
 
-#include "AddressInfo/addressinfo.hh"
-#include "Socket/socket.hh"
+#include <network/AddressInfo/addressinfo.hh>
+#include <network/Socket/socket.hh>
 
 #include <string>
 

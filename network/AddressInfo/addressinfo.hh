@@ -1,11 +1,11 @@
 #ifndef __NETWORK_ADDRESS_INFO_H__
 #define __NETWORK_ADDRESS_INFO_H__
 
-#include "Object/object.hh"
+#include <base/Object/object.hh>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netdb.h>
-#include "SocketAddress/socketaddress.hh"
+#include <network/SocketAddress/socketaddress.hh>
 
 namespace network
 {

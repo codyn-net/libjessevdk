@@ -1,7 +1,7 @@
 #ifndef __NETWORK_UDP_SERVER_HH__
 #define __NETWORK_UDP_SERVER_HH__
 
-#include "Server/server.hh"
+#include <network/Server/server.hh>
 #include <glibmm.h>
 #include <string>
 #include <vector>

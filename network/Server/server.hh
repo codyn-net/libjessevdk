@@ -1,9 +1,9 @@
 #ifndef __NETWORK_SERVER_HH__
 #define __NETWORK_SERVER_HH__
 
-#include "Object/object.hh"
-#include "Socket/socket.hh"
-#include "Client/client.hh"
+#include <base/Object/object.hh>
+#include <network/Socket/socket.hh>
+#include <network/Client/client.hh>
 
 #include <glibmm.h>
 #include <string>
