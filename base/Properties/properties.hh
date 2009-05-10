@@ -84,6 +84,8 @@ namespace base
 		protected:			
 			template <typename Type>
 			void readOnly(Property<Type> const &value);
+			
+			PropertyBase &getProperty(std::string const &name);
 		private:
 			template <typename Type>
 			Property<Type> &registerProperty(std::string const &name, Type &storage, Serializable<true>);
@@ -101,23 +103,28 @@ namespace base
 	template <typename Type>
 	Property<Type> &Properties::property(std::string const &name)
 	{
-		return dynamic_cast<Property<Type> &>(*(data<Data>()->properties[name]));
+		return dynamic_cast<Property<Type> &>(property(name));
 	}
 	
 	template <typename Type>
 	Property<Type> const &Properties::property(std::string const &name) const
 	{
-		return dynamic_cast<Property<Type> const &>(*(data<Data>()->properties[name]));
+		return dynamic_cast<Property<Type> const &>(property(name));
+	}
+	
+	inline PropertyBase &Properties::getProperty(std::string const &name)
+	{
+		return *(data<Data>()->properties)[name];
 	}
 
 	inline PropertyBase const &Properties::property(std::string const &name) const
 	{
-		return *(data<Data>()->properties.find(name)->second);
+		return const_cast<Properties *>(this)->getProperty(name);
 	}
 
 	inline PropertyBase &Properties::property(std::string const &name)
 	{
-		return *(data<Data>()->properties)[name];
+		return getProperty(name);
 	}
 
 	template <typename Type>
@@ -190,7 +197,7 @@ namespace base
 	template <typename Type>
 	void Properties::setProperty(std::string const &name, Type const &value)
 	{
-		PropertyBase &prop = *(data<Data>()->properties)[name];
+		PropertyBase &prop = property(name);
 		
 		try
 		{
