@@ -1,5 +1,5 @@
 
-include Makefile.am.in
+include Makefile.am.inc
 	
 # pkg-config stuff
 pkgconfigdir = $(libdir)/pkgconfig
