@@ -33,16 +33,20 @@ namespace messages
 				break;
 			}
 	
-			if (s.str().length() < num)
-			{
-				break;
-			}
-		
 			T message;
-		
-			message.ParseFromString(s.str().substr(0, num));
-			data = s.str().substr(num);
-		
+			char *buffer = new char[num + 1];
+
+			if (!s.ignore(1, ' '))
+				break;
+
+			if (!s.read(buffer, num))
+				break;
+
+			buffer[num] = '\0';
+			message.ParseFromString(buffer);
+			delete[] buffer;
+
+			data = data.substr(s.tellg());
 			messages.push_back(message);
 		}
 
