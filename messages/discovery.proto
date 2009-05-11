@@ -1,6 +1,0 @@
-package messages.discovery;
-
-message Greeting {
-	required string port = 1;
-	optional string host = 2;
-}

@@ -11,20 +11,20 @@ Client Client::resolve(AddressInfo info)
 		
 		if (!client)
 		{
-			//debug_network << "Could not create socket: " << strerror(errno) << endl;
+			debug_network << "Could not create socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
 		if (info.socketType() == AddressInfo::SocketType::Stream && !dynamic_cast<Socket &>(client).connect())
 		{
-			//debug_network << "Could not connect: " << strerror(errno) << endl;
+			debug_network << "Could not connect: " << strerror(errno) << endl;
 			continue;
 		}
 		
-		/*if (Debug::enabled(Debug::Domain::Network))
+		if (Debug::enabled(Debug::Domain::Network))
 		{
 			debug_network << "Connected to " << info.socketAddress().host(true) << ":" << info.socketAddress().port(true)  << endl;
-		}*/
+		}
 
 		return client;
 	} while (info.next());

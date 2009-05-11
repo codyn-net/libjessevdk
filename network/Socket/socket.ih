@@ -1,6 +1,7 @@
 #include "socket.hh"
 
 #include <sys/un.h>
+#include <base/Debug/debug.hh>
 
 using namespace network;
 using namespace base;

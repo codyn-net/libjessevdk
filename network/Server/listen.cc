@@ -13,33 +13,33 @@ bool Server::listen()
 		
 		if (!socket)
 		{
-			//debug_network << "Could not create socket: " << strerror(errno) << endl;
+			debug_network << "Could not create socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
 		if (!socket.setOption(Socket::Options::Reuse))
 		{
-			//debug_network << "Could not reuse socket: " << strerror(errno) << endl;
+			debug_network << "Could not reuse socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
 		if (!socket.bind())
 		{
-			//debug_network << "Could not bind socket: " << strerror(errno) << endl;
+			debug_network << "Could not bind socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
 		if (!listenOnSocket(socket))
 		{
-			//debug_network << "Could not listen on socket: "  << strerror(errno) << endl;
+			debug_network << "Could not listen on socket: "  << strerror(errno) << endl;
 			continue;
 		}
 		
-		/*if (Debug::enabled(Debug::Domain::Network))
+		if (Debug::enabled(Debug::Domain::Network))
 		{
 			debug_network << "Listening on " << info.socketAddress().host(true) << ":" << info.socketAddress().port(true) << endl;
 		}
-		*/
+		
 		d_data->listenSocket = socket;
 		
 		installIOHandler();

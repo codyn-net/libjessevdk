@@ -10,7 +10,6 @@ namespace os
 	{
 		static volatile sig_atomic_t s_stopping;
 		static volatile sig_atomic_t s_fatalError;
-		static volatile sig_atomic_t s_interrupted;
 		
 		public:
 			static base::signals::Signal<> onInterrupt;
@@ -26,7 +25,6 @@ namespace os
 			static void setFatalError(bool val);
 			
 			static size_t interrupted();
-			static void addInterrupted();
 		private:
 			/* Private functions */
 			Signals(); // NI
@@ -50,16 +48,6 @@ namespace os
 	inline void Signals::setFatalError(bool val)
 	{
 		s_fatalError = val;
-	}
-	
-	inline size_t Signals::interrupted()
-	{
-		return s_interrupted;
-	}
-	
-	inline void Signals::addInterrupted()
-	{
-		++s_interrupted;
 	}
 }
 

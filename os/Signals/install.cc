@@ -17,14 +17,6 @@ static void termination_handler(int signum)
 			exit(EXIT_FAILURE);
 			break;
 		case SIGINT:
-			Signals::addInterrupted();
-
-			if (Signals::interrupted() == 5)
-			{
-				cerr << endl << "** User pressed ^C five times" << endl;
-				exit(EXIT_FAILURE);
-			}
-			
 			Signals::onInterrupt();
 
 			break;
