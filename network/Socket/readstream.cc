@@ -6,7 +6,7 @@ ssize_t Socket::Data::readStream(char *buffer, ssize_t len)
 
 	if (ret > 0 && Debug::enabled(Debug::Domain::Network))
 	{
-		debug_network << "Received stream style: " << address.host() << ":" << address.port() << endl;
+		debug_network << "Received stream style (" << ret << "): " << address.host() << ":" << address.port() << endl;
 	}
 
 	return ret;
