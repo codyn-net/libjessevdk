@@ -9,7 +9,7 @@ bool FileDescriptor::Data::onIOSource(Glib::IOCondition condition)
 	}
 	
 	if (onIO(condition))
-		return false;
+		return true;
 	
 	/* try to read something */
 	string buffer;

@@ -2,16 +2,16 @@
 
 void FileDescriptor::Data::close()
 {
-	if (fd == -1)
+	if (fd == -1 || closing)
 		return;
 
-	int pfd = fd;
+	closing = true;
 
 	if (sourceConnection)
 		sourceConnection.disconnect();
 	
-	::close(pfd);
+	::close(fd);
+	onClosed(fd);
+	
 	fd = -1;
-
-	onClosed(pfd);
 }

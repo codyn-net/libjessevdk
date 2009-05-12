@@ -55,6 +55,7 @@ namespace os
 				friend class FileDescriptor;
 				
 				int fd;
+				bool closing;
 
 				sigc::connection sourceConnection;
 
@@ -65,7 +66,8 @@ namespace os
 				std::string buffer;
 				
 				void writeAll(std::string const &data);
-
+				
+				Data();
 				~Data();
 				
 				private:

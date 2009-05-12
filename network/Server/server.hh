@@ -31,6 +31,8 @@ namespace network
 				bool onAccept(Glib::IOCondition condition);
 				void onConnectionClosed(int fd);
 				
+				~Data();
+				
 				protected:
 					virtual Client accept() = 0;
 				
