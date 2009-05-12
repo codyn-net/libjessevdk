@@ -26,6 +26,11 @@ namespace os
 			static bool resolveBinary(std::string const &filename, std::string &path);
 			
 			static std::string uniqueName(std::string const &filename);
+			
+			static bool isAbsolute(std::string const &path);
+			static std::string workingDirectory();
+			
+			static bool mkdirs(std::string const &path);
 		private:
 			/* Private functions */
 			FileSystem(); // NI
