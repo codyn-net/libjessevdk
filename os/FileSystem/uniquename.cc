@@ -13,7 +13,7 @@ string FileSystem::uniqueName(string const &filename)
 	while (fileExists(path))
 	{
 		stringstream s;
-		s << original << "." << i;
+		s << original << "." << i++;
 
 		path = s.str();
 	}
