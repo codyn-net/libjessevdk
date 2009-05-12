@@ -11,15 +11,25 @@ vector<string> String::split(string const &delim) const
 		
 		if (next == string::npos)
 		{
-			result.push_back(substr(pos, size() - pos));
+			string part = substr(pos, size() - pos);
+			
+			if (part != "")
+				result.push_back(part);
 			break;
 		}
 		else
 		{
-			result.push_back(substr(pos, next - pos));
+			string part = substr(pos, next - pos);
+
+			if (part != "")
+				result.push_back(part);
+
 			pos = next + delim.size();
 		}
 	}
+	
+	if (result.size() == 0)
+		result.push_back("");
 	
 	return result;
 }
