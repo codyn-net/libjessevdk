@@ -26,8 +26,8 @@ bool FileDescriptor::Data::onIOSource(Glib::IOCondition condition)
 		close();
 		return false;
 	}
-	
-	this->buffer += buffer;
+
+	this->buffer.append(buffer);
 	
 	Cloneable<DataArgs> args = createArgs(fd, &(this->buffer));
 	this->buffer = "";

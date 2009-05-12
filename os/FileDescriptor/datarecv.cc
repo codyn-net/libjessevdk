@@ -10,6 +10,8 @@ int FileDescriptor::Data::recv(string &data)
 	if (len >= 0)
 		buffer[len] = '\0';
 
-	data = buffer;	
+	data.clear();
+	data.append(buffer, len);
+
 	return len;
 }
