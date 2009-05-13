@@ -20,12 +20,13 @@ namespace network
 			static Client Udp(std::string const &host, std::string const &port);
 			static Client Udp(std::string const &host, size_t port);
 
-			Client(AddressInfo info);
 			Client(int fd = -1);
 			Client(int fd, struct sockaddr *address, socklen_t size);
+		protected:
+			static Client resolve(AddressInfo info);
 		private:
 			/* Private functions */
-			static Client resolve(AddressInfo info);
+			Client(AddressInfo info);
 	};
 }
 
