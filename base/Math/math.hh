@@ -1,6 +1,8 @@
 #ifndef __BASE_MATH_H__
 #define __BASE_MATH_H__
 
+#include <base/Math/random.hh>
+
 namespace base
 {
 	class Math
