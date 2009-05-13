@@ -50,6 +50,9 @@ namespace network
 
 			static AddressInfo Udp(std::string const &host, std::string const &port);
 			static AddressInfo Udp(std::string const &port);
+			
+			static AddressInfo Parse(std::string const &connection);
+			static void Split(std::string const &connection, std::string &protocol, std::string &host, std::string &port);
 		private:
 			AddressInfo(int ret, struct addrinfo *addr);
 			
