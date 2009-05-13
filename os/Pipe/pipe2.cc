@@ -2,6 +2,9 @@
 
 Pipe::Pipe(int readEnd, int writeEnd) 
 {
+	d_data = new Data();
+	addPrivateData(d_data);
+
 	d_data->readEnd.assign(readEnd);
 	d_data->writeEnd.assign(writeEnd);
 	
