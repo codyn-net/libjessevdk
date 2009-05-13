@@ -25,6 +25,14 @@ namespace network
 			TcpServer(std::string const &port);
 			TcpServer(std::string const &host, size_t port);
 			TcpServer(std::string const &host, std::string const &port);
+			
+			void set(std::string const &host, std::string const &port);
+			void set(std::string const &host, size_t port);
+
+			void set(std::string const &port);
+			void set(size_t port);
+			
+			virtual std::string connection();
 		
 		protected:
 			virtual AddressInfo listenAddressInfo();

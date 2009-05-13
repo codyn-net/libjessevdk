@@ -21,5 +21,9 @@ void Socket::setInfo(AddressInfo &info)
 			d_data->writeFunc = &Data::writeStream;
 			d_data->readFunc = &Data::readStream;
 		}
-	}	
+	}
+	else
+	{
+		assign(-1);
+	}
 }

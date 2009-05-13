@@ -10,7 +10,7 @@ Socket::Socket(AddressInfo info)
 
 	d_data->writeFunc = 0;
 	d_data->readFunc = 0;
-		
+
 	setData(d_data);
 	setInfo(info);
 }

@@ -2,7 +2,7 @@
 
 ssize_t Socket::Data::readDgram(char *buffer, ssize_t len) 
 {
-	struct sockaddr_in addr;
+	struct sockaddr_storage addr;
 	struct sockaddr *add = reinterpret_cast<struct sockaddr *>(&addr);
 	ssize_t ret;
 

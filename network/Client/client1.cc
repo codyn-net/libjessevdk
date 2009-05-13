@@ -1,6 +1,6 @@
 #include "client.ih"
 
-Client::Client(AddressInfo &info) 
+Client::Client(AddressInfo info) 
 :
 	Socket(info)
 {

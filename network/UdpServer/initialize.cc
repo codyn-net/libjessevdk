@@ -6,8 +6,8 @@ void UdpServer::initialize(string const &host, string const &port)
 	addPrivateData(d_data);
 	
 	d_data->broadcast = false;
-	d_data->host = host;
-	d_data->port = port;
+	
+	set(host, port);
 
 	Client::setData(d_data);
 	Server::setData(d_data);

@@ -23,8 +23,16 @@ namespace network
 			UdpServer(std::string const &port);
 			UdpServer(std::string const &host, size_t port);
 			UdpServer(std::string const &host, std::string const &port);
-		
+
+			void set(std::string const &host, std::string const &port);
+			void set(std::string const &host, size_t port);
+
+			void set(std::string const &port);
+			void set(size_t port);
+
 			virtual bool listen();
+			virtual std::string connection();
+
 			void enableBroadcast();
 		protected:
 			virtual AddressInfo listenAddressInfo();

@@ -27,8 +27,8 @@ Socket::Socket(int socket)
 		}
 		else
 		{
-			struct sockaddr_in ad;
-			len = sizeof(ad);
+			struct sockaddr_storage ad;
+			len = sizeof(sockaddr_storage);
 			ptr = reinterpret_cast<struct sockaddr *>(&ad);
 			
 			if (getsockname(socket, ptr, &len) == 0)

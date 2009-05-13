@@ -17,6 +17,9 @@ namespace network
 			virtual bool listen();
 			void close();
 
+			virtual std::string connection() = 0;
+
+			operator bool() const;
 			base::signals::Signal<Client &> &onNewConnection();
 		protected:
 			struct Data : virtual public base::Object::PrivateData
@@ -35,16 +38,16 @@ namespace network
 				
 				protected:
 					virtual Client accept() = 0;
-				
 				private:
 					void onListenClosed(int fd);
 			};
 
 			Server();
 			void setData(Data *data);
-
+				
 			virtual AddressInfo listenAddressInfo() = 0;
 			virtual bool listenOnSocket(Socket &socket) = 0;
+
 			virtual void installIOHandler();
 			virtual void installClosedHandler();
 			virtual Socket &socketFromInfo(AddressInfo &info);
@@ -54,6 +57,11 @@ namespace network
 			Data *d_data;
 	};
 	
+	inline Server::operator bool() const
+	{
+		return d_data->listenSocket;
+	}
+
 	inline base::signals::Signal<Client &> &Server::onNewConnection()
 	{
 		return d_data->onNewConnection;

@@ -25,6 +25,9 @@ namespace network
 
 			/* Public functions */
 			virtual bool listen();
+			virtual std::string connection();
+			
+			void set(std::string const &filename);
 		protected:
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);
