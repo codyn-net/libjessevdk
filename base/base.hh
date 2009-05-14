@@ -12,6 +12,7 @@
 #include <base/Signals/CallbackBase/callbackbase.hh>
 #include <base/String/string.hh>
 #include <base/Timer/timer.hh>
+#include <base/Functional/functional.hh>
 
 #endif /* __BASE_BASE_H__ */
 
