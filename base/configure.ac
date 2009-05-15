@@ -1,4 +1,4 @@
-AC_INIT(jessevdk-base, 0.1)
+AC_INIT(libjessevdk-base, 0.1)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -13,10 +13,10 @@ AC_HEADER_STDC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
-JESSEVDK_BASE_API_VERSION=0.1
-AC_SUBST(JESSEVDK_BASE_API_VERSION)
+LIBJESSEVDK_BASE_API_VERSION=0.1
+AC_SUBST(LIBJESSEVDK_BASE_API_VERSION)
 
-pkgincludedir="$includedir/jessevdk-$JESSEVDK_BASE_API_VERSION/base"
+pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_BASE_API_VERSION/base"
 AC_SUBST(pkgincludedir)
 
 pkgbasedir=""
@@ -30,5 +30,5 @@ AC_SUBST(PACKAGE_BASE_LIBS)
 
 AC_OUTPUT(
 
-jessevdk-base.pc
+libjessevdk-base.pc
 )
