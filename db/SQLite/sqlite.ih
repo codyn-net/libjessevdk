@@ -1,0 +1,8 @@
+#include "sqlite.hh"
+#include <base/String/string.hh>
+
+#include <sstream>
+
+using namespace std;
+using namespace db;
+using namespace base;
