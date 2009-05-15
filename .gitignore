@@ -19,3 +19,5 @@ aclocal.m4
 depcomp
 install-sh
 *.o
+*.pc
+config.log
