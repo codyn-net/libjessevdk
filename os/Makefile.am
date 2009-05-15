@@ -4,10 +4,10 @@ include Makefile.am.inc
 # pkg-config stuff
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = \
-	jessevdk-os-@JESSEVDK_OS_API_VERSION@.pc
+	libjessevdk-os-@LIBJESSEVDK_OS_API_VERSION@.pc
 
-jessevdk-os-@JESSEVDK_OS_API_VERSION@.pc: jessevdk-os.pc
-	cp jessevdk-os.pc jessevdk-os-@JESSEVDK_OS_API_VERSION@.pc
+libjessevdk-os-@LIBJESSEVDK_OS_API_VERSION@.pc: libjessevdk-os.pc
+	cp libjessevdk-os.pc libjessevdk-os-@LIBJESSEVDK_OS_API_VERSION@.pc
 
 headerdir = $(pkgincludedir)
 header_DATA = 	\
@@ -15,7 +15,7 @@ header_DATA = 	\
 	
 EXTRA_DIST = \
 	$(header_DATA) \
-	jessevdk-os.pc.in
+	libjessevdk-os.pc.in
 
 CLEANFILES = 	\
 	$(pkgconfig_DATA)

@@ -1,4 +1,4 @@
-AC_INIT(jessevdk-os, 0.1)
+AC_INIT(libjessevdk-os, 0.1)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -13,17 +13,17 @@ AC_HEADER_STDC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
-JESSEVDK_OS_API_VERSION=0.1
-AC_SUBST(JESSEVDK_OS_API_VERSION)
+LIBJESSEVDK_OS_API_VERSION=0.1
+AC_SUBST(LIBJESSEVDK_OS_API_VERSION)
 
-pkgincludedir="$includedir/jessevdk-$JESSEVDK_OS_API_VERSION/os"
+pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_OS_API_VERSION/os"
 AC_SUBST(pkgincludedir)
 
 pkgbasedir=""
 AC_SUBST(pkgbasedir)
 
 PKG_CHECK_MODULES(PACKAGE_OS, [
-	jessevdk-base-0.1
+	libjessevdk-base-0.1
 	glibmm-2.4
 ])
 
@@ -32,5 +32,5 @@ AC_SUBST(PACKAGE_OS_LIBS)
 
 AC_OUTPUT(
 
-jessevdk-os.pc
+libjessevdk-os.pc
 )
