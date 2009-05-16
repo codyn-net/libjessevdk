@@ -1,7 +1,7 @@
 #ifndef __MATH_SSE_IMPLEMENTATION_H__
 #define __MATH_SSE_IMPLEMENTATION_H__
 
-#include "../vec.hh"
+#include <math/vec.hh>
 
 namespace math
 {

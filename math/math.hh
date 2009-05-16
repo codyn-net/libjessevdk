@@ -1,13 +1,13 @@
 #ifndef __MATH_MATH_H__
 #define __MATH_MATH_H__
 
-#include "vec.hh"
-#include "mat.hh"
+#include <math/vec.hh>
+#include <math/mat.hh>
 
 #ifdef ENABLE_SSE
-#include "sse/float4.hh"
-#include "sse/float4impl.hh"
-#include "sse/float4implsse.hh"
+#include <math/sse/float4.hh>
+#include <math/sse/float4impl.hh>
+#include <math/sse/float4implsse.hh>
 #endif
 
 namespace math

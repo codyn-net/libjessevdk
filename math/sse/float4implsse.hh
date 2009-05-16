@@ -1,7 +1,7 @@
 #ifndef __MATH_SSE_FLOAT4_IMPL_SSE_H__
 #define __MATH_SSE_FLOAT4_IMPL_SSE_H__
 
-#include "float4impl.hh"
+#include <math/sse/float4impl.hh>
 
 namespace math
 {

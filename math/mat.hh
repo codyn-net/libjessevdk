@@ -4,9 +4,9 @@
 #include <ostream>
 #include <iostream>
 
-#include "operators.hh"
-#include "types.hh"
-#include "vec.hh"
+#include <math/operators.hh>
+#include <math/types.hh>
+#include <math/vec.hh>
 
 namespace math
 {

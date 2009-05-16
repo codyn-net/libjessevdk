@@ -1,9 +1,10 @@
 #ifndef __MATH_SSE_FLOAT4_H__
 #define __MATH_SSE_FLOAT4_H__
 
+#ifdef ENABLE_SSE
 #include <xmmintrin.h>
-#include "../vec.hh"
-#include "implementation.hh"
+#include <math/vec.hh>
+#include <math/sse/implementation.hh>
 
 namespace math
 {
@@ -186,6 +187,8 @@ namespace math
 		}
 	};
 }
+
+#endif
 
 #endif /* __MATH_SSE_FLOAT4_H__ */
 

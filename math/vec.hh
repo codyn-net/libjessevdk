@@ -7,8 +7,8 @@
 #include <cmath>
 #include <ostream>
 
-#include "operators.hh"
-#include "types.hh"
+#include <math/operators.hh>
+#include <math/types.hh>
 
 namespace math
 {
