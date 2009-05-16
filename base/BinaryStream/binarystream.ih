@@ -1,0 +1,4 @@
+#include "binarystream.hh"
+
+using namespace base;
+using namespace std;
