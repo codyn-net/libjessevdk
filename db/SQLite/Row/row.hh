@@ -76,6 +76,12 @@ namespace db
 	}
 	
 	template <>
+	inline size_t Row::get<size_t>(size_t column) const
+	{
+		return static_cast<size_t>(sqlite3_column_int(d_data->statement, column));
+	}
+	
+	template <>
 	inline double Row::get<double>(size_t column) const
 	{
 		return sqlite3_column_double(d_data->statement, column);
