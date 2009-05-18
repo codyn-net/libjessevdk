@@ -3,6 +3,7 @@
 
 #include <base/BinaryStream/binarystream.hh>
 #include <base/Cloneable/cloneable.hh>
+#include <base/CommandLine/commandline.hh>
 #include <base/Debug/debug.hh>
 #include <base/Enum/enum.hh>
 #include <base/Flags/flags.hh>
