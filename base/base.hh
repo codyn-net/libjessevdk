@@ -1,6 +1,7 @@
 #ifndef __BASE_BASE_H__
 #define __BASE_BASE_H__
 
+#include <base/Algorithms/algorithms.hh>
 #include <base/BinaryStream/binarystream.hh>
 #include <base/Cloneable/cloneable.hh>
 #include <base/CommandLine/commandline.hh>
