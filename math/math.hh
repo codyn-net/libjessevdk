@@ -3,6 +3,8 @@
 
 #include <math/vec.hh>
 #include <math/mat.hh>
+#include <cmath>
+#include <math/Random/random.hh>
 
 #ifdef ENABLE_SSE
 #include <math/sse/float4.hh>
@@ -30,6 +32,29 @@ namespace math
 	typedef mat4<int> int4x4;
 	
 	void initialize(bool usesse = true);
-}
 
+	template <typename T>
+	T max(T const &a, T const &b)
+	{
+		return a > b ? a : b;
+	}
+	
+	template <typename T>
+	T min(T const &a, T const &b)
+	{
+		return a < b ? a : b;
+	}
+	
+	template <typename Container>
+	static typename Container::value_type euclidean(Container const &container)
+	{
+		typename Container::const_iterator iter;
+		typename Container::value_type sum;
+		
+		for (iter = container.begin(); iter != container.end(); ++iter)
+			sum += *iter * *iter;
+		
+		return ::sqrt(sum);
+	}
+}
 #endif /* __MATH_MATH_H__ */
