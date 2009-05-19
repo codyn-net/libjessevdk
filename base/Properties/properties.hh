@@ -58,7 +58,7 @@ namespace base
 			
 			template <typename Type>
 			void setProperty(std::string const &name, Type const &value);
-			bool hasProperty(std::string const &name) const;
+			virtual bool hasProperty(std::string const &name);
 
 			template <typename Type>
 			Property<Type> &addProperty(std::string const &name, Property<Type> const &property);
@@ -85,7 +85,7 @@ namespace base
 			template <typename Type>
 			void readOnly(Property<Type> const &value);
 			
-			PropertyBase &getProperty(std::string const &name);
+			virtual PropertyBase &getProperty(std::string const &name);
 		private:
 			template <typename Type>
 			Property<Type> &registerProperty(std::string const &name, Type &storage, Serializable<true>);
