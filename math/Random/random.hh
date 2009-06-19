@@ -4,6 +4,7 @@
 #include <limits.h>
 #include <time.h>
 #include <base/Object/object.hh>
+#include <cmath>
 
 namespace math
 {
@@ -28,6 +29,11 @@ namespace math
 			operator T();
 
 			T range(T min, T max);
+			
+			int intRange(T min, T max);
+			
+			template <typename Iterator>
+			void shuffle(Iterator begin, Iterator end);
 	};
 	
 	typedef RandomBase<> Random;
@@ -80,6 +86,31 @@ namespace math
 	{
 		return generate() * (max - min) + min;
 	}	
+	
+	template <typename T, size_t StateSize>
+	inline int RandomBase<T, StateSize>::intRange(T min, T max)
+	{
+		return static_cast<int>(::round(generate() * (max - min) + min));
+	}
+	
+	template <typename T, size_t StateSize>
+	template <typename Iterator>
+	void RandomBase<T, StateSize>::shuffle(Iterator begin, Iterator end)
+	{
+		Iterator iter;
+		size_t num = end - begin;
+		
+		for (iter = begin; iter != end; ++iter)
+		{
+			int i = intRange(0, num - 1);
+			typename Iterator::value_type value;
+			
+			/* Swap values */
+			value = *iter;
+			*iter = *(begin + i);
+			*(begin + i) = value;
+		}
+	}
 }
 
 #endif /* __MATH_RANDOM_H__ */
