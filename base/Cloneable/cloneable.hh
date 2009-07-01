@@ -7,6 +7,8 @@
 #ifndef __BASE_CLONEABLE_H__
 #define __BASE_CLONEABLE_H__
 
+#include <exception>
+
 namespace base
 {
 	/** Cloneable class.
@@ -22,6 +24,10 @@ namespace base
 		Base *d_base;
 
 		public:
+			class bad_assigned : public std::exception
+			{
+			};
+			
 			/** Default constructor.
 			  * Creates a new empty cloneable
 			  * @author Jesse van den Kieboom
@@ -304,6 +310,9 @@ namespace base
 	template <typename Base>
 	inline Base &Cloneable<Base>::operator*()
 	{
+		if (!d_base)
+			throw bad_assigned();
+
 		return *d_base;
 	}
 
@@ -316,6 +325,9 @@ namespace base
 	template <typename Base>
 	inline Base const &Cloneable<Base>::operator*() const
 	{
+		if (!d_base)
+			throw bad_assigned();
+
 		return *d_base;
 	}
 
@@ -328,6 +340,9 @@ namespace base
 	template <typename Base>
 	inline Cloneable<Base>::operator Base&()
 	{
+		if (!d_base)
+			throw bad_assigned();
+
 		return *d_base;
 	}
 	
@@ -353,6 +368,9 @@ namespace base
 	template <typename Other>
 	inline bool Cloneable<Base>::operator>(Other const &other) const
 	{
+		if (!d_base)
+			throw bad_assigned();
+
 		return *d_base > other;
 	}
 	
@@ -360,6 +378,9 @@ namespace base
 	template <typename Other>
 	inline bool Cloneable<Base>::operator>(Cloneable<Other> const &other) const
 	{
+		if (!d_base)
+			throw bad_assigned();
+
 		return *d_base > *other;
 	}
 	
