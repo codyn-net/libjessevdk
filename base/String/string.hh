@@ -25,6 +25,8 @@ namespace base
 			bool startsWith(std::string const &other);
 			
 			String &replace(std::string const &search, std::string const &replace);
+			
+			String operator*(size_t num) const;
 	};
 
 	template <typename Container>
