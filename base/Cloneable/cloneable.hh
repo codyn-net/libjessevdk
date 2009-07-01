@@ -273,14 +273,28 @@ namespace base
 	template <typename Base>
 	Cloneable<Base>& Cloneable<Base>::operator=(Cloneable<Base> const &other)
 	{
-		return assign(*other);
+		if (other)
+		{
+			return assign(*other);
+		}
+		else
+		{
+			return assign(static_cast<Base *>(0));
+		}
 	}
 
 	template <typename Base>
 	template <typename Other>
 	Cloneable<Base>& Cloneable<Base>::operator=(Cloneable<Other> const &other)
 	{
-		return assign(*other);
+		if (other)
+		{
+			return assign(*other);
+		}
+		else
+		{
+			return assign(static_cast<Other *>(0));
+		}
 	}
 
 	template <typename Base>
