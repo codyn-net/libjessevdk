@@ -32,13 +32,14 @@ AC_SUBST(PACKAGE_OS_LIBS)
 
 AC_OUTPUT(
 Makefile
-Environment/Makefile
-Fifo/Makefile
-FileDescriptor/Makefile
-FileSystem/Makefile
-Module/Makefile
-Pipe/Makefile
-Signals/Makefile
+os/Environment/Makefile
+os/Fifo/Makefile
+os/FileDescriptor/Makefile
+os/FileSystem/Makefile
+os/Module/Makefile
+os/Pipe/Makefile
+os/Signals/Makefile
+os/Makefile
 
 libjessevdk-os.pc
 )

@@ -5,7 +5,7 @@ includedir=@includedir@
 
 Name: libjessevdk-math
 Description: C++ math library
-Requires:
+Requires: libjessevdk-base-0.1
 Version: @VERSION@
 Libs: -L${libdir} -ljessevdk-math-@LIBJESSEVDK_MATH_API_VERSION@
-Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_MATH_API_VERSION@
+Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_MATH_API_VERSION@/math

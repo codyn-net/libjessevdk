@@ -8,4 +8,4 @@ Description: libjessevdk C++ os library
 Requires: glibmm-2.4 libjessevdk-base-0.1
 Version: @VERSION@
 Libs: -L${libdir} -ljessevdk-os-@LIBJESSEVDK_OS_API_VERSION@
-Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_OS_API_VERSION@
+Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_OS_API_VERSION@/os

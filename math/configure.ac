@@ -19,11 +19,12 @@ AC_SUBST(LIBJESSEVDK_MATH_API_VERSION)
 pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_MATH_API_VERSION/math"
 AC_SUBST(pkgincludedir)
 
-pkgbasedir=""
-AC_SUBST(pkgbasedir)
+PKG_CHECK_MODULES(PACKAGE_MATH, [
+	libjessevdk-base-0.1
+])
 
-# PKG_CHECK_MODULES(PACKAGE_MATH, [
-# ])
+AC_SUBST(PACKAGE_MATH_CFLAGS)
+AC_SUBST(PACKAGE_MATH_LIBS)
 
 AC_ARG_ENABLE([sse],
 	AS_HELP_STRING([--enable-sse],[Enable SSE support]),
@@ -42,8 +43,9 @@ AC_SUBST(PACKAGE_MATH_LIBS)
 
 AC_OUTPUT(
 Makefile
-Random/Makefile
-sse/Makefile
+math/Random/Makefile
+math/sse/Makefile
+math/Makefile
 
 libjessevdk-math.pc
 )

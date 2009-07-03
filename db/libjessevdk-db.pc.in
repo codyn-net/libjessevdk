@@ -8,4 +8,4 @@ Description: C++ db library
 Requires: libjessevdk-base-0.1 sqlite3
 Version: @VERSION@
 Libs: -L${libdir} -ljessevdk-db-@LIBJESSEVDK_DB_API_VERSION@
-Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_DB_API_VERSION@
+Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_DB_API_VERSION@/db

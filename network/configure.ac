@@ -33,14 +33,15 @@ AC_SUBST(PACKAGE_NETWORK_LIBS)
 
 AC_OUTPUT(
 Makefile
-AddressInfo/Makefile
-Client/Makefile
-Server/Makefile
-Socket/Makefile
-SocketAddress/Makefile
-TcpServer/Makefile
-UdpServer/Makefile
-UnixServer/Makefile
+network/AddressInfo/Makefile
+network/Client/Makefile
+network/Server/Makefile
+network/Socket/Makefile
+network/SocketAddress/Makefile
+network/TcpServer/Makefile
+network/UdpServer/Makefile
+network/UnixServer/Makefile
+network/Makefile
 
 libjessevdk-network.pc
 )
