@@ -32,6 +32,15 @@ AC_SUBST(PACKAGE_NETWORK_CFLAGS)
 AC_SUBST(PACKAGE_NETWORK_LIBS)
 
 AC_OUTPUT(
+Makefile
+AddressInfo/Makefile
+Client/Makefile
+Server/Makefile
+Socket/Makefile
+SocketAddress/Makefile
+TcpServer/Makefile
+UdpServer/Makefile
+UnixServer/Makefile
 
 libjessevdk-network.pc
 )

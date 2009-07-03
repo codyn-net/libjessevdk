@@ -31,6 +31,9 @@ AC_SUBST(PACKAGE_DB_CFLAGS)
 AC_SUBST(PACKAGE_DB_LIBS)
 
 AC_OUTPUT(
+Makefile
+SQLite/Row/Makefile
+SQLite/Makefile
 
 libjessevdk-db.pc
 )

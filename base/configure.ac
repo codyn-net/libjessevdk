@@ -29,6 +29,25 @@ PACKAGE_BASE_LIBS=
 AC_SUBST(PACKAGE_BASE_LIBS)
 
 AC_OUTPUT(
+Makefile
+Algorithms/Makefile
+BinaryStream/Makefile
+Cloneable/Makefile
+CommandLine/Makefile
+Debug/Makefile
+Enum/Makefile
+Exceptions/Makefile
+Flags/Makefile
+Functional/Makefile
+Object/Makefile
+Properties/Property/Makefile
+Properties/Makefile
+Signals/Callback/Makefile
+Signals/CallbackBase/Makefile
+Signals/Signal/Makefile
+Signals/Makefile
+String/Makefile
+Timer/Makefile
 
 libjessevdk-base.pc
 )

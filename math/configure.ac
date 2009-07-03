@@ -42,6 +42,7 @@ AC_SUBST(PACKAGE_MATH_LIBS)
 
 AC_OUTPUT(
 Makefile
+Random/Makefile
 sse/Makefile
 
 libjessevdk-math.pc
