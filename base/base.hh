@@ -7,6 +7,7 @@
 #include <base/CommandLine/commandline.hh>
 #include <base/Debug/debug.hh>
 #include <base/Enum/enum.hh>
+#include <base/Exceptions/exceptions.hh>
 #include <base/Flags/flags.hh>
 #include <base/Object/object.hh>
 #include <base/Properties/properties.hh>
