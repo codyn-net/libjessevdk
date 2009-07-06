@@ -7,11 +7,13 @@ int FileDescriptor::Data::recv(string &data)
 	
 	len = this->read(buffer, 1024 - 1);
 	
-	if (len >= 0)
-		buffer[len] = '\0';
-
 	data.clear();
-	data.append(buffer, len);
+
+	if (len >= 0)
+	{
+		buffer[len] = '\0';
+		data.append(buffer, len);
+	}
 
 	return len;
 }
