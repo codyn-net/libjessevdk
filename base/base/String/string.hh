@@ -14,7 +14,7 @@ namespace base
 			String(char const *s);
 			String(std::string const &s);
 
-			std::vector<std::string> split(std::string const &delim) const;
+			std::vector<std::string> split(std::string const &delim, size_t mmax = 0) const;
 		
 			operator char const *() const;
 		
