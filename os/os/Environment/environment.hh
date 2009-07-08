@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 namespace os
 {
@@ -13,7 +14,8 @@ namespace os
 			static bool variable(std::string const &name);
 			static std::vector<std::string> path(std::string const &name);
 			
-			static std::vector<std::string> all();
+			static std::map<std::string, std::string> all();
+			static std::vector<std::string> convert(std::map<std::string, std::string> const &environment);
 		private:
 			/* Private functions */
 			Environment(); // NI

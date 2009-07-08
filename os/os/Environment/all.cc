@@ -1,14 +1,19 @@
 #include "environment.ih"
 extern char **environ;
 
-vector<string> Environment::all() 
+map<string, string> Environment::all() 
 {
 	char **ptr;
-	vector<string> ret;
+	map<string, string> ret;
 	
 	for (ptr = environ; ptr && *ptr; ++ptr)
 	{
-		ret.push_back(*ptr);
+		vector<string> parts = String(*ptr).split("=", 2);
+		
+		if (parts.size() == 2)
+		{
+			ret[parts[0]] = parts[1];
+		}
 	}
 	
 	return ret;
