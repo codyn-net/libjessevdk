@@ -47,7 +47,7 @@ namespace os
 			
 			base::signals::Signal<Glib::IOCondition> &onIO();
 			base::signals::Signal<int> &onClosed();
-			base::signals::Signal<DataArgs &> &onData();
+			base::signals::Signal<DataArgs> &onData();
 
 		protected:
 			struct Data : virtual public base::Object::PrivateData
@@ -61,7 +61,7 @@ namespace os
 
 				base::signals::Signal<Glib::IOCondition> onIO;
 				base::signals::Signal<int> onClosed;
-				base::signals::Signal<DataArgs &> onData;
+				base::signals::Signal<DataArgs> onData;
 			
 				std::string buffer;
 				
@@ -98,7 +98,7 @@ namespace os
 		return d_data->onClosed;
 	}
 	
-	inline base::signals::Signal<FileDescriptor::DataArgs &> &FileDescriptor::onData()
+	inline base::signals::Signal<FileDescriptor::DataArgs> &FileDescriptor::onData()
 	{
 		return d_data->onData;
 	}

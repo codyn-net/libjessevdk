@@ -25,7 +25,7 @@ namespace base
 				bool disposing;
 				size_t refCount;
 		
-				signals::Signal<Object &> onDestroy;
+				signals::Signal<Object> onDestroy;
 
 				Data();
 				void destroy(Object &parent);
@@ -128,7 +128,7 @@ namespace base
 			bool operator!=(Object const &other) const;
 			
 			/* signals */
-			signals::Signal<Object &> &onDestroy();
+			signals::Signal<Object> &onDestroy();
 			bool dispose();
 			bool disposing() const;
 		protected:			
@@ -216,7 +216,7 @@ namespace base
 		return !(*this == other);
 	}
 	
-	inline signals::Signal<Object &> &Object::onDestroy()
+	inline signals::Signal<Object> &Object::onDestroy()
 	{
 		return d_data->onDestroy;
 	}

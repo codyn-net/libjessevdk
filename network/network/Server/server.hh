@@ -20,7 +20,7 @@ namespace network
 			virtual std::string connection() = 0;
 
 			operator bool() const;
-			base::signals::Signal<Client &> &onNewConnection();
+			base::signals::Signal<Client> &onNewConnection();
 		protected:
 			struct Data : virtual public base::Object::PrivateData
 			{
@@ -29,7 +29,7 @@ namespace network
 				Socket listenSocket;
 
 				std::vector<Client> connections;
-				base::signals::Signal<Client &> onNewConnection;
+				base::signals::Signal<Client> onNewConnection;
 
 				bool onAccept(Glib::IOCondition condition);
 				void onConnectionClosed(int fd);
@@ -62,7 +62,7 @@ namespace network
 		return d_data->listenSocket;
 	}
 
-	inline base::signals::Signal<Client &> &Server::onNewConnection()
+	inline base::signals::Signal<Client> &Server::onNewConnection()
 	{
 		return d_data->onNewConnection;
 	}
