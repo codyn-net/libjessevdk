@@ -34,6 +34,7 @@ namespace network
 			virtual std::string connection();
 
 			void enableBroadcast();
+			void enableMulticast();
 		protected:
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);
@@ -42,12 +43,16 @@ namespace network
 			virtual void installIOHandler();
 		private:
 			void initialize(std::string const &host, std::string const &port);
-
+			void setupBroadcast(Socket &socket);
+			void setupMulticast(Socket &socket);
+			
 			struct Data : public Server::Data, public Socket::Data
 			{
 				std::string host;
 				std::string port;
+				
 				bool broadcast;
+				bool multicast;
 
 				protected:
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
