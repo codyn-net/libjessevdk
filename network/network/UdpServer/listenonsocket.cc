@@ -3,7 +3,7 @@
 bool UdpServer::listenOnSocket(Socket &socket) 
 {
 	/* UDP servers don't listen */
-	if (d_data->multicast)
+	if (AddressInfo::isMulticast(d_data->host))
 	{
 		setupMulticast(socket);
 	}

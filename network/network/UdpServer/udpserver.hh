@@ -34,7 +34,8 @@ namespace network
 			virtual std::string connection();
 
 			void enableBroadcast();
-			void enableMulticast();
+			
+			bool isMulticast() const;
 		protected:
 			virtual AddressInfo listenAddressInfo();
 			virtual bool listenOnSocket(Socket &socket);
@@ -52,7 +53,6 @@ namespace network
 				std::string port;
 				
 				bool broadcast;
-				bool multicast;
 
 				protected:
 					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);

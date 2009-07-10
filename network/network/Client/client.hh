@@ -25,12 +25,12 @@ namespace network
 
 			Client(int fd = -1);
 			Client(int fd, struct sockaddr *address, socklen_t size);
+			Client(AddressInfo info);
 		protected:
 			static Client resolve(AddressInfo info);
 			Client(bool createData);
 		private:
 			/* Private functions */
-			Client(AddressInfo info);
 	};
 }
 

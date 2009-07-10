@@ -23,6 +23,10 @@ AddressInfo AddressInfo::Parse(string const &connection)
 	{
 		return AddressInfo::Udp(host, port);
 	}
+	else if (protocol == "multicast")
+	{
+		return AddressInfo::Udp(host, port);
+	}
 	
 	return AddressInfo();
 }

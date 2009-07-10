@@ -53,6 +53,9 @@ namespace network
 			
 			static AddressInfo Parse(std::string const &connection);
 			static void Split(std::string const &connection, std::string &protocol, std::string &host, std::string &port);
+			
+			static bool isMulticast(std::string const &host);
+			static bool isIPAddress(std::string const &addr);
 		private:
 			AddressInfo(int ret, struct addrinfo *addr);
 			
