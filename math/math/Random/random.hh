@@ -20,6 +20,11 @@ namespace math
 		Data *d_data;
 
 		public:
+			enum
+			{
+				state_size = StateSize
+			};
+			
 			RandomBase();
 			RandomBase(unsigned int seed);
 
@@ -31,6 +36,9 @@ namespace math
 			T range(T min, T max);
 			
 			int intRange(T min, T max);
+			
+			char const *state() const;
+			size_t stateSize() const;
 			
 			template <typename Iterator>
 			void shuffle(Iterator begin, Iterator end);
@@ -91,6 +99,18 @@ namespace math
 	inline int RandomBase<T, StateSize>::intRange(T min, T max)
 	{
 		return static_cast<int>(::round(generate() * (max - min) + min));
+	}
+	
+	template <typename T, size_t StateSize>
+	inline char const *RandomBase<T, StateSize>::state() const
+	{
+		return d_data->state;
+	}
+	
+	template <typename T, size_t StateSize>
+	inline size_t RandomBase<T, StateSize>::stateSize() const
+	{
+		return StateSize;
 	}
 	
 	template <typename T, size_t StateSize>
