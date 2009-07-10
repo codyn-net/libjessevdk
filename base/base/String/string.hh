@@ -27,6 +27,8 @@ namespace base
 			String &replace(std::string const &search, std::string const &replace);
 			
 			String operator*(size_t num) const;
+			
+			static String hex(char const *s, size_t num);
 	};
 
 	template <typename Container>
