@@ -10,4 +10,6 @@ Client Client::Multicast(string const &host, string const &port, size_t ttl)
 		
 		setsockopt(ret, IPPROTO_IP, IP_MULTICAST_TTL, &val, sizeof(val));
 	}
+	
+	return ret;
 }
