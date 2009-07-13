@@ -32,6 +32,7 @@ namespace db
 			Row &next();
 			
 			operator bool() const;
+			bool done() const;
 			
 			template <typename T>
 			T get(std::string const &key) const;
@@ -50,6 +51,11 @@ namespace db
 	inline Row::operator bool() const
 	{
 		return d_data->statement != 0 || d_data->lastStatement == SQLITE_DONE;
+	}
+	
+	inline bool Row::done() const
+	{
+		return d_data->statement == 0 || d_data->lastStatement == SQLITE_DONE;
 	}
 	
 	inline std::string const &Row::error() const
