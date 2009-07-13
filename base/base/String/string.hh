@@ -28,6 +28,10 @@ namespace base
 			
 			String operator*(size_t num) const;
 			
+			operator double () const;
+			template <typename T>
+			T convert() const;
+			
 			static String hex(char const *s, size_t num);
 	};
 
@@ -66,6 +70,18 @@ namespace base
 	inline String::operator char const *() const
 	{
 		return c_str();
+	}
+	
+	template <typename T>
+	T String::convert() const
+	{
+		std::stringstream s;
+		s << *this;
+		
+		T ret;
+		s >> ret;
+		
+		return ret;
 	}
 }
 
