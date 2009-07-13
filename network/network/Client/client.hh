@@ -20,8 +20,8 @@ namespace network
 			static Client Udp(std::string const &host, std::string const &port);
 			static Client Udp(std::string const &host, size_t port);
 			
-			static Client Multicast(std::string const &host, std::string const &port);
-			static Client Multicast(std::string const &host, size_t port);
+			static Client Multicast(std::string const &host, std::string const &port, size_t ttl = 1);
+			static Client Multicast(std::string const &host, size_t port, size_t ttl = 1);
 
 			Client(int fd = -1);
 			Client(int fd, struct sockaddr *address, socklen_t size);
