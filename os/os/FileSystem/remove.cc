@@ -18,19 +18,24 @@ bool FileSystem::remove(string const &path, bool recursive)
 	
 				while ((dent = readdir(d)))
 				{
+					if (string(dent->d_name) == "." || string(dent->d_name) == "..")
+					{
+						continue;
+					}
+						
 					string s = Glib::build_filename(path, dent->d_name);
-
+					
 					if (!remove(s, true))
 					{
 						return false;
 					}
 				}
+
+				closedir(d);
 			}
-			
-			closedir(d);
 		}
 		
-		return ::unlink(path.c_str()) == 0;
+		return ::rmdir(path.c_str()) == 0;
 	}
 	else
 	{
