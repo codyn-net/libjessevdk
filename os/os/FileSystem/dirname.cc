@@ -9,6 +9,6 @@ string FileSystem::dirname(string const &filename)
 	char *copy = ::dirname(buf);
 	string result(copy);
 	
-	free(buf);
+	delete[] buf;
 	return result;
 }
