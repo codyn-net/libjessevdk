@@ -11,9 +11,10 @@
 #include <cerrno>
 #include <vector>
 #include <sstream>
+#include <dirent.h>
 
 #include <base/String/string.hh>
-
+#include <glibmm.h>
 #include <os/Environment/environment.hh>
 
 #ifdef OSX

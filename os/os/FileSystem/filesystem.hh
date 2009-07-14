@@ -31,6 +31,8 @@ namespace os
 			static std::string workingDirectory();
 			
 			static bool mkdirs(std::string const &path);
+			
+			static bool remove(std::string const &path, bool recursive = false);
 		private:
 			/* Private functions */
 			FileSystem(); // NI
