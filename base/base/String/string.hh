@@ -28,6 +28,10 @@ namespace base
 			
 			String operator*(size_t num) const;
 			
+			String strip() const;
+			String rstrip() const;
+			String lstrip() const;
+			
 			operator double () const;
 			template <typename T>
 			T convert() const;
