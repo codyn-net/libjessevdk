@@ -23,7 +23,7 @@ vector<string> String::split(string const &delim, size_t mmax) const
 		{
 			string part = substr(pos, next - pos);
 
-			if (part != "")
+			if (part != "" || result.size() == 0)
 				result.push_back(part);
 
 			pos = next + delim.size();
