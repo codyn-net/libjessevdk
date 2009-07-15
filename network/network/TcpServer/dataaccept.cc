@@ -7,7 +7,7 @@ Client TcpServer::Data::accept()
 	
 	struct sockaddr *ad = reinterpret_cast<struct sockaddr *>(&addr);
 	
-	int fd = ::accept(listenSocket, ad, &len);
+	int fd = ::accept(*listenSocket, ad, &len);
 	
 	return Client(fd, ad, len);
 }
