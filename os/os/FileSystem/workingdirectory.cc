@@ -2,5 +2,5 @@
 
 string FileSystem::workingDirectory() 
 {
-	return get_current_dir_name();
+	return Glib::get_current_dir();
 }
