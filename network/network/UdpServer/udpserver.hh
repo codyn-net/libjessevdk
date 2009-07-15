@@ -36,26 +36,48 @@ namespace network
 			void enableBroadcast();
 			
 			bool isMulticast() const;
+			
+			// Relay signals from the socket
+			base::signals::Signal<Glib::IOCondition> &onIO();
+			base::signals::Signal<int> &onClosed();
+			base::signals::Signal<os::FileDescriptor::DataArgs> &onData();
 		protected:
 			virtual AddressInfo listenAddressInfo();
-			virtual bool listenOnSocket(Socket &socket);
-			virtual Socket &socketFromInfo(AddressInfo &info);
+			virtual bool listenOnSocket(network::Socket &socket);
+			virtual base::Cloneable<Socket> socketFromInfo(AddressInfo &info);
 			
 			virtual void installIOHandler();
 		private:
-			void initialize(std::string const &host, std::string const &port);
-			void setupBroadcast(Socket &socket);
-			void setupMulticast(Socket &socket);
+			class Socket : public network::Socket
+			{
+				struct Data : public network::Socket::Data
+				{
+					protected:
+						virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
+				};
+
+				Data *d_data;
+
+				public:
+					Socket(AddressInfo &info);
+					Socket(int fd = -1);
+					
+					Socket *clone() const;
+			};
 			
-			struct Data : public Server::Data, public Socket::Data
+			void initialize(std::string const &host, std::string const &port);
+			void setupBroadcast(network::Socket &socket);
+			void setupMulticast(network::Socket &socket);
+			
+			struct Data : public Server::Data
 			{
 				std::string host;
 				std::string port;
 				
 				bool broadcast;
+				Socket socket;
 
 				protected:
-					virtual base::Cloneable<FileDescriptor::DataArgs> createArgs(int fd, std::string *buffer);
 					virtual Client accept();
 			};
 		
@@ -63,6 +85,6 @@ namespace network
 	};
 }
 
-#endif /* __NETWORK_TCP_SERVER_HH__ */
+#endif /* __NETWORK_UDP_SERVER_HH__ */
 
 // vi:ts=4

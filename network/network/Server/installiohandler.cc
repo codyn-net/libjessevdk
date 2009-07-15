@@ -2,5 +2,5 @@
 
 void Server::installIOHandler() 
 {
-	d_data->listenSocket.onIO().add(*d_data, &Server::Data::onAccept);	
+	d_data->listenSocket->onIO().add(*d_data, &Server::Data::onAccept);	
 }

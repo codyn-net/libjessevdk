@@ -1,7 +1,7 @@
 #include "udpserver.ih"
 
-Socket &UdpServer::socketFromInfo(AddressInfo &info) 
+Cloneable<Socket> UdpServer::socketFromInfo(AddressInfo &info) 
 {
-	setInfo(info);
-	return *this;
+	d_data->socket = UdpServer::Socket(info);
+	return d_data->socket;
 }

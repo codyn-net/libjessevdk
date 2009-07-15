@@ -48,6 +48,8 @@ namespace network
 			std::string const &port(bool numeric = false) const;
 			std::string const &host(bool numeric = false) const;
 			
+			operator std::string () const;
+			
 			operator sockaddr const *() const;
 			size_t length() const;
 		private:
@@ -63,6 +65,11 @@ namespace network
 	inline SocketAddress::operator sockaddr const *() const
 	{
 		return d_data->address;
+	}
+	
+	inline SocketAddress::operator std::string () const
+	{
+		return host() + ":" + port();
 	}
 	
 	inline size_t SocketAddress::length() const

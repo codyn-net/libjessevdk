@@ -30,6 +30,8 @@ namespace os
 
 			FileDescriptor(int fd = -1);
 			
+			FileDescriptor *clone() const;
+			
 			void assign(int fd);
 			
 			void attach();

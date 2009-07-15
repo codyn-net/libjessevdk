@@ -26,7 +26,7 @@ namespace network
 			{
 				friend class Server;
 
-				Socket listenSocket;
+				base::Cloneable<Socket> listenSocket;
 
 				std::vector<Client> connections;
 				base::signals::Signal<Client> onNewConnection;
@@ -50,7 +50,7 @@ namespace network
 
 			virtual void installIOHandler();
 			virtual void installClosedHandler();
-			virtual Socket &socketFromInfo(AddressInfo &info);
+			virtual base::Cloneable<Socket> socketFromInfo(AddressInfo &info);
 			
 			Socket &listenSocket();
 		private:

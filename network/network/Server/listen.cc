@@ -9,21 +9,21 @@ bool Server::listen()
 
 	do
 	{
-		Socket &socket = socketFromInfo(info);
+		Cloneable<Socket> socket = socketFromInfo(info);
 		
-		if (!socket)
+		if (!*socket)
 		{
 			debug_network << "Could not create socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
-		if (!socket.setOption(Socket::Options::Reuse))
+		if (!socket->setOption(Socket::Options::Reuse))
 		{
 			debug_network << "Could not reuse socket: " << strerror(errno) << endl;
 			continue;
 		}
 		
-		if (!socket.bind())
+		if (!socket->bind())
 		{
 			debug_network << "Could not bind socket: " << strerror(errno) << endl;
 			continue;

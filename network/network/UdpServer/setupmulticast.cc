@@ -1,6 +1,6 @@
 #include "udpserver.ih"
 
-void UdpServer::setupMulticast(Socket &socket) 
+void UdpServer::setupMulticast(network::Socket &socket) 
 {
 	struct ip_mreq mreq;
 	

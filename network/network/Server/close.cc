@@ -2,5 +2,5 @@
 
 void Server::close() 
 {
-	d_data->listenSocket.close();
+	d_data->listenSocket->close();
 }

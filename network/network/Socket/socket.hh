@@ -24,6 +24,7 @@ namespace network
 			Socket(AddressInfo info);
 			Socket(int socket, struct sockaddr *address, socklen_t size);
 			
+			Socket *clone() const;
 			void setInfo(AddressInfo &info);
 			
 			bool bind();
@@ -33,13 +34,13 @@ namespace network
 			
 			SocketAddress &address();
 		protected:
-			struct Data	: virtual public os::FileDescriptor::Data
+			struct Data	: public os::FileDescriptor::Data
 			{
 				friend class Socket;
 
 				AddressInfo info;
 				SocketAddress address;
-				
+
 				ssize_t (Socket::Data::*writeFunc)(char const *buffer, ssize_t len);
 				ssize_t (Socket::Data::*readFunc)(char *buffer, ssize_t len);
 				
@@ -56,7 +57,7 @@ namespace network
 
 			Socket(bool createData);
 			void setData(Data *data);
-		private:
+		public:
 			Data *d_data;
 	};
 	
