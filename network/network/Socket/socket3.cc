@@ -1,19 +1,16 @@
 #include "socket.ih"
 
-Socket::Socket(int socket, struct sockaddr *address, socklen_t size)
+Socket::Socket(bool createData)
 :
-	FileDescriptor(false)
+	FileDescriptor(createData)
 {
+	d_data = 0;
+
+	if (!createData)
+		return;
+	
 	d_data = new Data();
 	addPrivateData(d_data);
 	
-	d_data->address = SocketAddress(address, size);
-	
-	setData(d_data);
-	
-	d_data->writeFunc = &Data::writeStream;
-	d_data->readFunc = &Data::readStream;
-	
-	assign(socket);
-	attach();
+	d_data->writeFunc = 0;
 }

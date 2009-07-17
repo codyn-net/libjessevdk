@@ -2,5 +2,5 @@
 
 Client Client::Tcp(string const &host, string const &port) 
 {
-	return resolve(AddressInfo::Tcp(host, port));
+	return resolve<Client>(AddressInfo::Tcp(host, port));
 }

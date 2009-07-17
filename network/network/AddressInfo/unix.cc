@@ -13,7 +13,7 @@ AddressInfo AddressInfo::Unix(string const &filename)
 	strncpy(addr->sun_path, filename.c_str(), 107);
 	addr->sun_path[107] = '\0';
 	
-	struct addrinfo *info = new addrinfo();
+	struct addrinfo *info = static_cast<addrinfo *>(malloc(sizeof(addrinfo)));
 	
 	info->ai_flags = 0;
 	info->ai_family = AF_UNIX;
@@ -23,5 +23,8 @@ AddressInfo AddressInfo::Unix(string const &filename)
 	info->ai_addr = (sockaddr *)addr;
 	info->ai_next = 0;
 
-	return AddressInfo(0, info);
+	AddressInfo ret(0, info);
+	ret.d_data->freeAddress = true;
+
+	return ret;
 }

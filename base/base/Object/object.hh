@@ -11,12 +11,23 @@ namespace base
 {
 	class Object
 	{
+		struct Data;
+		
 		public:
 			class PrivateData
 			{
+				Data *d_data;
+
+				friend class Object;
+
 				public:
+					void ref();
+					void unref();
+					
 					virtual ~PrivateData() {};
 					virtual bool dispose(Object &object) { return true; };
+				private:
+					void setData(Data *data);
 			};
 		private:
 			struct Data
@@ -28,7 +39,7 @@ namespace base
 				signals::Signal<Object> onDestroy;
 
 				Data();
-				void destroy(Object &parent);
+				void destroy();
 			};
 		
 			Data *d_data;
@@ -147,6 +158,8 @@ namespace base
 			void addPrivateData(PrivateData *data);
 		private:
 			void destroy();
+			
+			void setData(Data *data);
 	};
 
 	inline Object::Object()

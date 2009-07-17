@@ -20,9 +20,8 @@ namespace network
 				};
 			};
 			
-			Socket(int socket = -1);
+			Socket(int socket = -1, struct sockaddr *address = 0, socklen_t size = 0);
 			Socket(AddressInfo info);
-			Socket(int socket, struct sockaddr *address, socklen_t size);
 			
 			Socket *clone() const;
 			void setInfo(AddressInfo &info);

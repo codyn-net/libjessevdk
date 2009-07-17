@@ -4,6 +4,8 @@ AddressInfo::AddressInfo(int ret, struct addrinfo *addr)
 {
 	d_data = new Data();
 	addPrivateData(d_data);
+	
+	d_data->freeAddress = false;
 
 	if (ret != 0 || !addr)
 	{

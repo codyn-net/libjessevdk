@@ -7,4 +7,5 @@ AddressInfo::AddressInfo()
 	
 	d_data->address = 0;
 	d_data->current = 0;
+	d_data->freeAddress = false;
 }

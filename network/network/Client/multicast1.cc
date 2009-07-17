@@ -2,7 +2,7 @@
 
 Client Client::Multicast(string const &host, string const &port, size_t ttl) 
 {
-	Client ret = resolve(AddressInfo::Udp(host, port));
+	Client ret = resolve<Client>(AddressInfo::Udp(host, port));
 	
 	if (ret)
 	{

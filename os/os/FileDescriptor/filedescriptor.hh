@@ -76,7 +76,7 @@ namespace os
 					bool onIOSource(Glib::IOCondition condition);
 					int recv(std::string &data);
 				protected:	
-					virtual void close();
+					virtual void close(bool destructed = false);
 					
 					virtual ssize_t read(char *buffer, ssize_t len);					
 					virtual ssize_t write(char const *buffer, ssize_t len);

@@ -2,5 +2,5 @@
 
 FileDescriptor::Data::~Data() 
 {
-	close();
+	close(true);
 }

@@ -3,8 +3,10 @@
 
 #include <network/AddressInfo/addressinfo.hh>
 #include <network/Socket/socket.hh>
-
+#include <base/Debug/debug.hh>
 #include <string>
+#include <errno.h>
+#include <cstring>
 
 namespace network
 {
@@ -26,12 +28,47 @@ namespace network
 			Client(int fd = -1);
 			Client(int fd, struct sockaddr *address, socklen_t size);
 			Client(AddressInfo info);
+
+			template <typename T>
+			static T resolve(AddressInfo info);
 		protected:
-			static Client resolve(AddressInfo info);
 			Client(bool createData);
 		private:
 			/* Private functions */
 	};
+	
+	template <typename T>
+	T Client::resolve(AddressInfo info)
+	{
+		if (!info)
+			return T();
+	
+		do
+		{
+			T client(info);
+		
+			if (!client)
+			{
+				debug_network << "Could not create socket: " << strerror(errno) << std::endl;
+				continue;
+			}
+		
+			if (info.socketType() == AddressInfo::SocketType::Stream && !dynamic_cast<Socket &>(client).connect())
+			{
+				debug_network << "Could not connect: " << strerror(errno) << std::endl;
+				continue;
+			}
+		
+			if (base::Debug::enabled(base::Debug::Domain::Network))
+			{
+				debug_network << "Connected to " << info.socketAddress().host(true) << ":" << info.socketAddress().port(true) << std::endl;
+			}
+
+			return client;
+		} while (info.next());
+	
+		return T();
+	}
 }
 
 #endif /* __NETWORK_CLIENT_H__ */

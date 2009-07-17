@@ -16,6 +16,7 @@ namespace network
 			struct addrinfo *address;
 			struct addrinfo *current;
 			
+			bool freeAddress;
 			~Data();
 		};
 		

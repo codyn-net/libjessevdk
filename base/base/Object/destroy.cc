@@ -10,7 +10,7 @@ void Object::destroy()
 	{
 		/* Notify destruction */
 		d_data->onDestroy(*this);
-		d_data->destroy(*this);
+		d_data->destroy();
 
 		delete d_data;
 		d_data = 0;
