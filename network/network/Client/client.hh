@@ -52,8 +52,10 @@ namespace network
 				debug_network << "Could not create socket: " << strerror(errno) << std::endl;
 				continue;
 			}
+
+			Socket &s = dynamic_cast<Socket &>(client);
 		
-			if (info.socketType() == AddressInfo::SocketType::Stream && !dynamic_cast<Socket &>(client).connect())
+			if (info.socketType() == AddressInfo::SocketType::Stream && !s.connect())
 			{
 				debug_network << "Could not connect: " << strerror(errno) << std::endl;
 				continue;
