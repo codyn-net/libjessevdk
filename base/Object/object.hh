@@ -14,6 +14,16 @@ namespace base
 		struct Data;
 		
 		public:
+			template <typename Base>
+			class Cloned : public Base
+			{
+				public:
+					Cloned();
+					Cloned(Base &base);
+
+					virtual Cloned<Base> *clone() const;
+			};
+			
 			class PrivateData
 			{
 				Data *d_data;
@@ -161,6 +171,24 @@ namespace base
 			
 			void setData(Data *data);
 	};
+	
+	template <typename Base>
+	inline Object::Cloned<Base>::Cloned()
+	{
+	}
+
+	template <typename Base>
+	inline Object::Cloned<Base>::Cloned(Base &base)
+	:
+		Base(base)
+	{
+	}
+	
+	template <typename Base>
+	inline Object::Cloned<Base> *Object::Cloned<Base>::clone() const
+	{
+		return new Object::Cloned<Base>(*this);
+	}
 
 	inline Object::Object()
 	:
