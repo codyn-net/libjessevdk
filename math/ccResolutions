@@ -1,3 +1,0 @@
-#& --args '-msse -g -O3 -DENABLE_SSE'
-xmmintrin.h	
-cpuid.h	
