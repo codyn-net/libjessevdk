@@ -19,7 +19,7 @@ namespace base
 			{
 				public:
 					Cloned();
-					Cloned(Base &base);
+					Cloned(Base const &base);
 
 					virtual Cloned<Base> *clone() const;
 			};
@@ -178,7 +178,7 @@ namespace base
 	}
 
 	template <typename Base>
-	inline Object::Cloned<Base>::Cloned(Base &base)
+	inline Object::Cloned<Base>::Cloned(Base const &base)
 	:
 		Base(base)
 	{
