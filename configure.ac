@@ -39,6 +39,7 @@ base/Algorithms/Makefile
 base/BinaryStream/Makefile
 base/Cloneable/Makefile
 base/CommandLine/Makefile
+base/Config/Makefile
 base/Debug/Makefile
 base/Enum/Makefile
 base/Exceptions/Makefile
