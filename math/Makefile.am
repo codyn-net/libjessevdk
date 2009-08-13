@@ -10,6 +10,7 @@ INCLUDES = \
 	$(PACKAGE_LIBJESSEVDK_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DLIBDIR=\""$(libdir)"\" \
+	-DPREFIXDIR=\""$(prefix)"\" \
 	-DPKGDATADIR=\""$(pkgdatadir)"\" \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
