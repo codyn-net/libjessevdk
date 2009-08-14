@@ -47,6 +47,22 @@ namespace base
 			}
 		};
 		
+		template <>
+		struct implementation<bool>
+		{
+			static bool deserialize(std::string const &s, bool &val)
+			{
+				val = (s == "yes" || s == "1" || s == "true" || s == "YES" || s == "TRUE");
+				return true;
+			}
+			
+			static bool serialize(bool const &v, std::string &val)
+			{
+				val = v ? "yes" : "no";
+				return true;
+			}
+		};
+		
 		template <typename T>
 		struct implementation<std::vector<T> >
 		{
