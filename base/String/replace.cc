@@ -12,7 +12,7 @@ String &String::replace(string const &search, string const &replace)
 			break;
 		
 		string::replace(s, search.length(), replace);
-		lastpos = s + (replace.length() - search.length());
+		lastpos = s + replace.length();
 	}
 
 	return *this;
