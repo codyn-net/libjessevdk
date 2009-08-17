@@ -1,0 +1,31 @@
+Source: libjessevdk
+Priority: extra
+Maintainer: Jesse van den Kieboom <jesse.vandenkieboom@epfl.ch>
+Build-Depends: debhelper (>= 7), 
+               autotools-dev, 
+               cdbs, 
+               pkg-config, 
+               libglibmm-2.4-dev, 
+               libsqlite3-dev
+Standards-Version: 3.8.0
+Section: libs
+Homepage: http://birg.epfl.ch
+
+Package: libjessevdk-dev
+Section: libdevel
+Architecture: any
+Depends: libglibmm-2.4-dev, 
+         libsqlite3-dev,
+         libjessevdk0
+Description: libjessevdk C++ system - Development files
+ Provides a basic C++ subsystem providing ref counted object memory management,
+ networking, operating system access and database bindings
+
+Package: libjessevdk0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, 
+         ${misc:Depends}
+Description: libjessevdk C++ system
+ Provides a basic C++ subsystem providing ref counted object memory management,
+ networking, operating system access and database bindings
