@@ -183,6 +183,41 @@ namespace math
 			
 			return d;
 		}
+		
+		inline Vec<Base> mix(Vec<Base> const &other, float alpha) const
+		{
+			return *this + (other - *this) * alpha;
+		}
+		
+		inline Vec<Base> floor() const
+		{
+			return Operator::operate(*this, Operator::floor);
+		}
+		
+		inline Vec<Base> &floor()
+		{
+			return Operator::operate(*this, Operator::floor);
+		}
+		
+		inline Vec<Base> ceil() const
+		{
+			return Operator::operate(*this, Operator::ceil);
+		}
+		
+		inline Vec<Base> &ceil()
+		{
+			return Operator::operate(*this, Operator::ceil);
+		}
+		
+		inline Vec<Base> clip(float a, float b) const
+		{
+			return Operator::operate(Operator::operate(*this, Operator::clipMin, a), Operator::clipMax, b);
+		}
+		
+		inline Vec<Base> &clip(float a, float b)
+		{
+			return Operator::operate(Operator::operate(*this, Operator::clipMin, a), Operator::clipMax, b);
+		}
 	};
 	
 	template <typename Base>
