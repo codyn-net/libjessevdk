@@ -10,7 +10,6 @@
 #define debug_network (debug_out(Network))
 #define debug_data (debug_out(Data))
 #define debug_os (debug_out(OS))
-#define debug_modules (debug_out(Modules))
 
 namespace base
 {
@@ -35,8 +34,7 @@ namespace base
 					Network = 1 << 1,
 					Data = 1 << 2,
 					OS = 1 << 3,
-					Modules = 1 << 4,
-					User = 1 << 10
+					Last = 1 << 3
 				};
 			};
 			
