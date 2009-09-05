@@ -7,7 +7,26 @@ namespace math
 	struct Operators
 	{
 		typedef typename Base::type (*binary_operator)(typename Base::type a, typename Base::type b);
+		typedef typename Base::type (*unary_operator)(typename Base::type a);
 
+		static inline Base operate(Base const &o, unary_operator op)
+		{
+			Base ret;
+
+			for (size_t i = 0; i < Base::size; ++i)
+				ret.values[i] = (*op)(o[i]);
+			
+			return ret;
+		}
+		
+		static inline Base &operate(Base &o, unary_operator op)
+		{
+			for (size_t i = 0; i < Base::size; ++i)
+				o.values[i] = (*op)(o[i]);
+			
+			return o;
+		}
+		
 		static inline Base operate(Base const &o, Base const &other, binary_operator op)
 		{
 			Base copy;
@@ -68,6 +87,26 @@ namespace math
 		static inline typename Base::type substractor(typename Base::type a, typename Base::type b)
 		{
 			return a - b;
+		}
+		
+		static inline typename Base::type floor(typename Base::type a)
+		{
+			return ::floor(a);
+		}
+		
+		static inline typename Base::type ceil(typename Base::type a)
+		{
+			return ::ceil(a);
+		}
+		
+		static inline typename Base::type clipMin(typename Base::type a, typename Base::type c)
+		{
+			return a < c ? c : a;
+		}
+		
+		static inline typename Base::type clipMax(typename Base::type a, typename Base::type c)
+		{
+			return a > c ? c : a;
 		}
 	};
 };
