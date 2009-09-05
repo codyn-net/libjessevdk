@@ -45,6 +45,18 @@ namespace math
 		return a < b ? a : b;
 	}
 	
+	template <typename T>
+	T mix(T const &a, T const &b, float alpha)
+	{
+		return a + alpha * (b - a);
+	}
+	
+	template <typename T>
+	T clip(T const &a, T const &b, T const &c)
+	{
+		return a < b ? b : (a > c ? c : a);
+	}
+	
 	template <typename Container>
 	static typename Container::value_type euclidean(Container const &container)
 	{
