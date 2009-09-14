@@ -5,7 +5,7 @@ SQLite::SQLite(string const &filename)
 	d_data = new Data();
 	addPrivateData(d_data);
 	
-	if (sqlite3_open(filename.c_str(), &d_data->db))
+	if (sqlite3_open(filename.c_str(), &d_data->db) != SQLITE_OK)
 	{
 		d_data->error = sqlite3_errmsg(d_data->db);
 		sqlite3_close(d_data->db);

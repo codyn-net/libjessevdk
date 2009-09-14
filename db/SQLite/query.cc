@@ -10,8 +10,10 @@ Row SQLite::query(string const &query)
 	
 	if (ret != SQLITE_OK)
 	{
-		d_data->error = sqlite3_errmsg(d_data->db);
-		cerr << "Error in query: '" << query << "'" << endl << "\t => " << d_data->error << endl;
+		stringstream s;
+
+		s << "Error in query: '" << query << "' => " << sqlite3_errmsg(d_data->db);
+		d_data->error = s.str();
 		
 		if (statement)
 		{
