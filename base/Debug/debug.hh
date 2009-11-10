@@ -10,10 +10,7 @@
 #define debug_network (debug_out(Network))
 #define debug_data (debug_out(Data))
 #define debug_os (debug_out(OS))
-#define debug_optimization (debug_out(Optimization))
 #define debug_modules (debug_out(Modules))
-#define debug_worker (debug_out(Worker))
-#define debug_master (debug_out(Master))
 
 namespace base
 {
@@ -38,10 +35,8 @@ namespace base
 					Network = 1 << 1,
 					Data = 1 << 2,
 					OS = 1 << 3,
-					Optimization = 1 << 4,
-					Modules = 1 << 5,
-					Worker = 1 << 6,
-					Master = 1 << 7
+					Modules = 1 << 4,
+					User = 1 << 10
 				};
 			};
 			
@@ -52,7 +47,7 @@ namespace base
 			
 			static bool enabled(int domain);
 			
-			static std::ostream &out(int domain, std::string const &domainName, std::string const &file, std::string const &function, int line);		
+			static std::ostream &out(int domain, std::string const &domainName, std::string const &file, std::string const &function, int line);
 			static std::ostream &out(int domain);
 		private:
 			int d_domain;

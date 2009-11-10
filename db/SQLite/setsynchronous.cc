@@ -2,12 +2,22 @@
 
 void SQLite::setSynchronous(bool synchronous) 
 {
+	bool ret;
+
 	if (synchronous)
 	{
-		query("PRAGMA synchronous = 1");
+		ret = query("PRAGMA synchronous = 1");
 	}
 	else
 	{
-		query("PRAGMA synchronous = 0");
+		ret = query("PRAGMA synchronous = 0");
+	}
+
+	if (!ret)
+	{
+		d_data->error = "Invalid database";
+
+		sqlite3_close(d_data->db);	
+		d_data->db = 0;
 	}
 }
