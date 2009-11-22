@@ -213,6 +213,16 @@ namespace math
 			return Operator::Operate(*this, Operator::Ceil);
 		}
 
+		inline Vec<Base> &Abs()
+		{
+			return Operator::Operate(*this, Operator::Abs);
+		}
+
+		inline Vec<Base> &Abs() const
+		{
+			return Operator::Operate(*this, Operator::Abs);
+		}
+
 		inline Vec<Base> Clip(float a, float b) const
 		{
 			return Operator::Operate(Operator::Operate(*this, Operator::ClipMin, a), Operator::ClipMax, b);

@@ -110,6 +110,11 @@ namespace math
 		{
 			return a > c ? c : a;
 		}
+
+		static inline typename Base::type Abs(typename Base::type a)
+		{
+			return a < 0 ? -a : a;
+		}
 	};
 }
 }
