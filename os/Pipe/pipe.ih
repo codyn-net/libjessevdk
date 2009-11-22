@@ -1,4 +1,0 @@
-#include "pipe.hh"
-
-using namespace std;
-using namespace os;

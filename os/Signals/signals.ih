@@ -1,8 +1,0 @@
-#include "signals.hh"
-
-#include <iostream>
-#include <stdlib.h>
-
-using namespace std;
-using namespace os;
-

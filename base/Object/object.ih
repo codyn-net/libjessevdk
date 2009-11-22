@@ -1,4 +1,0 @@
-#include "object.hh"
-
-using namespace base;
-using namespace std;

@@ -1,4 +1,0 @@
-#include "row.hh"
-
-using namespace std;
-using namespace db;

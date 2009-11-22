@@ -1,5 +1,0 @@
-#include "debug.hh"
-#include <iostream>
-
-using namespace std;
-using namespace base;

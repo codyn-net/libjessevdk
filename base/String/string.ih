@@ -1,4 +1,0 @@
-#include "string.hh"
-
-using namespace std;
-using namespace base;

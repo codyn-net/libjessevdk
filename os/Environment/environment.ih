@@ -1,9 +1,0 @@
-#include "environment.hh"
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <base/String/string.hh>
-
-using namespace std;
-using namespace os;
-using namespace base;
