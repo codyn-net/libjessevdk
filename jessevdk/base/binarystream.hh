@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <jessevdk/base/object.hh>
+#include <jessevdk/base/flags.hh>
 
 namespace jessevdk
 {
@@ -12,7 +13,7 @@ namespace base
 	{
 		struct Data : public jessevdk::base::Object::PrivateData
 		{
-			std::ifstream *stream;
+			std::fstream *stream;
 
 			~Data();
 		};
@@ -20,15 +21,24 @@ namespace base
 		Data *d_data;
 
 		public:
+			struct Direction
+			{
+				enum Values
+				{
+					In = 1 << 0,
+					Out = 1 << 1
+				};
+			};
+			
 			typedef std::streampos MarkPoint;
 
 			/* Constructor/destructor */
 			BinaryStream();
-			BinaryStream(std::string const &filename);
+			BinaryStream(std::string const &filename, base::Flags<Direction> const &direction = Direction::In);
 
 			/* Public functions */
 			operator bool() const;
-			std::ifstream &Stream();
+			std::fstream &Stream();
 
 			template <typename Type>
 			bool Read(Type &result);
@@ -44,6 +54,12 @@ namespace base
 
 			template <typename Type>
 			bool Read(Type *result, MarkPoint mark, size_t size);
+
+			template <typename Type>
+			bool Write(Type const &value);
+
+			template<typename Type>
+			bool Write(Type const *value, size_t size);
 
 			bool Skip(size_t size);
 
@@ -62,7 +78,7 @@ namespace base
 	{
 	}
 
-	inline std::ifstream &BinaryStream::Stream()
+	inline std::fstream &BinaryStream::Stream()
 	{
 		return *d_data->stream;
 	}
@@ -108,6 +124,18 @@ namespace base
 		GotoMark(current);
 
 		return ret;
+	}
+
+	template <typename Type>
+	bool BinaryStream::Write(Type const &value)
+	{
+		return Write(&value, sizeof(Type));
+	}
+
+	template <typename Type>
+	bool BinaryStream::Write(Type const *value, size_t size)
+	{
+		return Stream().write(reinterpret_cast<char const *>(value), size);
 	}
 
 	inline bool BinaryStream::Skip(size_t size)
