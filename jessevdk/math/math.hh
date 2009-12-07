@@ -5,7 +5,6 @@
 #include <jessevdk/math/mat.hh>
 #include <jessevdk/math/random.hh>
 #include <cmath>
-#include <jessevdk/config.hh>
 
 #ifdef JESSEVDK_ENABLE_SSE
 #include <jessevdk/math/sse/float4.hh>

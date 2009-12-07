@@ -46,7 +46,6 @@ libjessevdk_1_0_la_SOURCES = \
 
 headerdir = $(pkgincludedir)/
 header_DATA = \
-	config.hh \
 	jessevdk.hh
 
 EXTRA_DIST = \
