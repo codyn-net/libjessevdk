@@ -1,7 +1,7 @@
 #ifndef __JESSEVDK_MATH_SSE_FLOAT4_H__
 #define __JESSEVDK_MATH_SSE_FLOAT4_H__
 
-#ifdef ENABLE_SSE
+#ifdef JESSEVDK_ENABLE_SSE
 #include <xmmintrin.h>
 #include <jessevdk/math/vec.hh>
 #include <jessevdk/math/sse/implementation.hh>

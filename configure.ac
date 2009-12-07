@@ -13,14 +13,26 @@ AC_HEADER_STDC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
-AC_CONFIG_HEADERS(config.h)
+AC_CONFIG_HEADERS(jessevdk/config.hh)
 AM_MAINTAINER_MODE
 
 LIBJESSEVDK_API_VERSION=1.0
 AC_SUBST(LIBJESSEVDK_API_VERSION)
 
-pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_API_VERSION"
+pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_API_VERSION/jessevdk"
 AC_SUBST(pkgincludedir)
+
+# Check for enabling sse support
+AC_ARG_ENABLE([sse],
+        AS_HELP_STRING([--enable-sse],[Enable sse support (default: disabled)]),
+        [enable_sse=$enableval],
+        [enable_sse=no])
+
+if test "x$enable_sse" == "xyes"; then
+	AC_DEFINE([JESSEVDK_ENABLE_SSE], [1], [Defined if sse support is enabled])
+fi
+
+AM_CONDITIONAL(ENABLE_SSE, test x"$enable_sse" = "xyes")
 
 PKG_CHECK_MODULES(PACKAGE_LIBJESSEVDK, [
 	sqlite3
@@ -41,6 +53,7 @@ jessevdk/base/properties/Makefile
 jessevdk/db/Makefile
 jessevdk/db/sqlite/Makefile
 jessevdk/math/Makefile
+jessevdk/math/sse/Makefile
 jessevdk/network/Makefile
 jessevdk/os/Makefile
 libjessevdk.pc
