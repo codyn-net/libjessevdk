@@ -214,7 +214,7 @@ namespace signals
 	template <typename TFunction, typename TArgs, typename TUserData>
 	inline Callback<TFunction, TArgs, _CbNone, TUserData> *Callback<TFunction, TArgs, _CbNone, TUserData>::Clone() const
 	{
-		return new Callback<TFunction, TArgs, _CbNone, TUserData>(d_function, d_userdata, this->priority());
+		return new Callback<TFunction, TArgs, _CbNone, TUserData>(d_function, d_userdata, this->Priority());
 	}
 
 	template <typename TFunction, typename TArgs, typename TUserData>

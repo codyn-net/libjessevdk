@@ -135,7 +135,7 @@ namespace signals
 	template <typename TFunction, typename TArgs>
 	inline Callback<TFunction, TArgs, _CbNone, _CbNone> *Callback<TFunction, TArgs, _CbNone, _CbNone>::Clone() const
 	{
-		return new Callback<TFunction, TArgs, _CbNone, _CbNone>(d_function, this->priority());
+		return new Callback<TFunction, TArgs, _CbNone, _CbNone>(d_function, this->Priority());
 	}
 
 	template <typename TFunction, typename TArgs>
