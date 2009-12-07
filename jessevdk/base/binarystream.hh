@@ -91,19 +91,19 @@ namespace base
 	template <typename Type>
 	inline bool BinaryStream::Read(Type &result)
 	{
-		return read(result, sizeof(Type));
+		return Read(result, sizeof(Type));
 	}
 
 	template <typename Type>
 	inline bool BinaryStream::Read(Type &result, size_t size)
 	{
-		return read(&result, size);
+		return Read(&result, size);
 	}
 
 	template <typename Type>
 	inline bool BinaryStream::Read(Type &result, BinaryStream::MarkPoint mark, size_t size)
 	{
-		return read(&result, mark, size);
+		return Read(&result, mark, size);
 	}
 
 	template <typename Type>
