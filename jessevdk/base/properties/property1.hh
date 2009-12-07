@@ -44,7 +44,7 @@ namespace properties
 	inline void
 	Property<Type>::EmitChanged()
 	{
-		onChanged(*this);
+		OnChanged(*this);
 	}
 
 	template <typename Type>

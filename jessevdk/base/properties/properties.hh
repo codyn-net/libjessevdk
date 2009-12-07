@@ -122,7 +122,7 @@ namespace properties
 	Property<Type> &Properties::AddProperty(std::string const &name, Property<Type> const &prop)
 	{
 		Object::Augmentation::Data<Data>()->properties[name] = prop;
-		return Property<Type>(name);
+		return GetProperty<Type>(name);
 	}
 
 	template <typename Type>
