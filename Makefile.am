@@ -1,5 +1,7 @@
 SUBDIRS = jessevdk
 
+ACLOCAL_AMFLAGS = -I m4
+
 # pkg-config stuff
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = \
