@@ -233,14 +233,14 @@ namespace math
 			return Operator::Operate(*this, Operator::Abs);
 		}
 
-		inline Vec<Base> Clip(float a, float b) const
+		inline Vec<Base> Clip(typename Base::type a, typename Base::type b) const
 		{
-			return Operator::Operate(Operator::Operate(*this, Operator::ClipMin, a), Operator::ClipMax, b);
+			return Operator::Operate(Operator::Operate(*this, a, Operator::ClipMin), b, Operator::ClipMax);
 		}
 
-		inline Vec<Base> &Clip(float a, float b)
+		inline Vec<Base> &Clip(typename Base::type a, typename Base::type b)
 		{
-			return Operator::Operate(Operator::Operate(*this, Operator::ClipMin, a), Operator::ClipMax, b);
+			return Operator::Operate(Operator::Operate(*this, a, Operator::ClipMin), b, Operator::ClipMax);
 		}
 	};
 
