@@ -9,6 +9,10 @@ Properties::Properties(Object &object)
 {
 }
 
+Properties::~Properties()
+{
+}
+
 vector<string>
 Properties::Names() const
 {

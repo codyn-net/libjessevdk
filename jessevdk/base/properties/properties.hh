@@ -34,6 +34,7 @@ namespace properties
 			};
 
 			Properties(Object &object);
+			virtual ~Properties();
 
 			/* Public functions */
 			template <typename Type>
