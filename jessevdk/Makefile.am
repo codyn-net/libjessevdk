@@ -6,6 +6,7 @@ INCLUDES = \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
 	$(PACKAGE_LIBJESSEVDK_CFLAGS) \
+	$(SQLITE_CFLAGS) \
 	-DDATADIR=\""$(datadir)"\" \
 	-DLIBDIR=\""$(libdir)"\" \
 	-DCONFDIR=\""$(sysconfdir)"\" \
@@ -14,8 +15,10 @@ INCLUDES = \
 	-DPKGLIBDIR=\""$(pkglibdir)"\"
 
 lib_LTLIBRARIES = libjessevdk-1.0.la
-libjessevdk_1_0_la_CFLAGS = -D_GNU_SOURCE -g $(PACKAGE_LIBJESSEVDK_CFLAGS)
-libjessevdk_1_0_la_LDFLAGS = -export-dynamic -no-undefined $(PACKAGE_LIBJESSEVDK_LIBS)
+libjessevdk_1_0_la_CFLAGS = -D_GNU_SOURCE -g $(PACKAGE_LIBJESSEVDK_CFLAGS) $(SQLITE_CFLAGS)
+
+libjessevdk_1_0_la_LDFLAGS = -export-dynamic -no-undefined $(PACKAGE_LIBJESSEVDK_LIBS) $(SQLITE_LIBS)
+
 libjessevdk_1_0_la_SOURCES = \
 	base/binarystream.cc \
 	base/object.cc \

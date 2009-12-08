@@ -22,6 +22,33 @@ AC_SUBST(LIBJESSEVDK_API_VERSION)
 pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_API_VERSION/jessevdk"
 AC_SUBST(pkgincludedir)
 
+dnl check for osx platform
+AC_MSG_CHECKING([for Mac OS X platform])
+case "$host" in
+  *-*-darwin*)
+    platform_osx=yes
+    ;;
+  *)
+    platform_osx=no
+    ;;
+esac
+
+AC_MSG_RESULT([$platform_osx])
+AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
+
+if test "$platform_osx" = "yes"; then
+	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
+	
+	SQLITE_LIBS="-lsqlite3"
+else
+	PKG_CHECK_MODULES(SQLITE, [
+		sqlite3
+	])
+fi
+
+AC_SUBST(SQLITE_CFLAGS)
+AC_SUBST(SQLITE_LIBS)
+
 # Check for enabling sse support
 AC_ARG_ENABLE([sse],
         AS_HELP_STRING([--enable-sse],[Enable sse support (default: disabled)]),
@@ -35,7 +62,6 @@ fi
 AM_CONDITIONAL(ENABLE_SSE, test x"$enable_sse" = "xyes")
 
 PKG_CHECK_MODULES(PACKAGE_LIBJESSEVDK, [
-	sqlite3
 	glibmm-2.4
 ])
 

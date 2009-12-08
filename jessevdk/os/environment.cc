@@ -7,7 +7,15 @@
 using namespace std;
 using namespace jessevdk::os;
 using namespace jessevdk::base;
+
+#ifdef HAVE_CONFIG_H
+#include <jessevdk/config.hh>
+#endif
+
+#ifdef PLATFORM_OSX
+#include <crt_externs.h>#define environ (*_NSGetEnviron())#else
 extern char **environ;
+#endif
 
 map<string, string>
 Environment::All()

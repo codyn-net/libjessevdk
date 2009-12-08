@@ -7,6 +7,16 @@ using namespace jessevdk::network;
 using namespace jessevdk::base;
 using namespace std;
 
+#ifdef HAVE_CONFIG_H
+#include <jessevdk/config.hh>
+#endif
+
+#ifndef PLATFORM_OSX
+#define SEND_FLAGS MSG_NOSIGNAL
+#else
+#define SEND_FLAGS 0
+#endif
+
 bool
 Socket::Bind()
 {
@@ -81,7 +91,7 @@ ssize_t
 Socket::Data::WriteStream(char const *buffer, ssize_t len)
 {
 	debug_network << "Writing stream style (" << len << ")" << endl;
-	return ::send(fd, buffer, len, MSG_NOSIGNAL);
+	return ::send(fd, buffer, len, SEND_FLAGS);
 }
 
 bool

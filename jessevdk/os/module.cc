@@ -7,7 +7,7 @@ using namespace std;
 using namespace jessevdk::base;
 using namespace jessevdk::os;
 
-#if defined OSX
+#if defined PLATFORM_OSX
 string const Module::suffix = ".dylib";
 string const Module::prefix = "lib";
 #elif defined WIN32
