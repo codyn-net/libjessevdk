@@ -36,15 +36,23 @@ esac
 AC_MSG_RESULT([$platform_osx])
 AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
 
+LIBJESSEVDK_REQUIRES="glibmm-2.4"
+
 if test "$platform_osx" = "yes"; then
 	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
 	
 	SQLITE_LIBS="-lsqlite3"
+	PKGCONFIG_EXTRA_LIBS="-lsqlite3"
 else
 	PKG_CHECK_MODULES(SQLITE, [
 		sqlite3
 	])
+
+	LIBJESSEVDK_REQUIRES="$LIBJESSEVDK_REQUIRES sqlite3"
 fi
+
+AC_SUBST(LIBJESSEVDK_REQUIRES)
+AC_SUBST(PKGCONFIG_EXTRA_LIBS)
 
 AC_SUBST(SQLITE_CFLAGS)
 AC_SUBST(SQLITE_LIBS)
