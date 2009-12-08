@@ -3,6 +3,8 @@
 
 #include <cstddef>
 
+namespace jessevdk
+{
 namespace base
 {
 namespace functional
@@ -307,6 +309,7 @@ namespace functional
 	{
 		return (d_object.*d_function)(arg1, arg2, d_args);
 	}
+}
 }
 }
 

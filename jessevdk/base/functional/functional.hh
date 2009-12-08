@@ -1,5 +1,5 @@
-#ifndef __JESSEVDK_BASE_FUNCTIONAL_H__
-#define __JESSEVDK_BASE_FUNCTIONAL_H__
+#ifndef __JESSEVDK_BASE_FUNCTIONAL_FUNCTIONAL_H__
+#define __JESSEVDK_BASE_FUNCTIONAL_FUNCTIONAL_H__
 
 #include <jessevdk/base/functional/memcbimpl.hh>
 
@@ -71,5 +71,5 @@ namespace functional
 }
 }
 
-#endif /* __JESSEVDK_BASE_FUNCTIONAL_H__ */
+#endif /* __JESSEVDK_BASE_FUNCTIONAL_FUNCTIONAL_H__ */
 

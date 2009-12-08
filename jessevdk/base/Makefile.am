@@ -9,7 +9,11 @@ header_DATA = \
 	config.hh \
 	debug.hh \
 	enum.hh \
+	exceptions.hh \
 	flags.hh \
+	functional.hh \
+	properties.hh \
+	signals.hh \
 	object.hh \
 	string.hh \
 	timer.hh

@@ -10,8 +10,7 @@ header_DATA = \
 	callbacku2.hh \
 	callbacku3.hh \
 	callbacku4.hh \
-	signal.hh \
-	signals.hh
+	signal.hh
 
 EXTRA_DIST = \
 	$(header_DATA)
