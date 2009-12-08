@@ -31,12 +31,12 @@ namespace math
 
 		inline typename Base::type Product() const
 		{
-			return std::accumulate(Base::values, Base::values + Base::size, 0, Operator::Multiplier);
+			return std::accumulate(Base::values + 1, Base::values + Base::size, Base::values[0], Operator::Multiplier);
 		}
 
 		inline typename Base::type Division() const
 		{
-			return std::accumulate(Base::values, Base::values + Base::size, 0, Operator::Divider);
+			return std::accumulate(Base::values + 1, Base::values + Base::size, Base::values[0], Operator::Divider);
 		}
 
 		inline typename Base::type operator[](size_t idx) const
