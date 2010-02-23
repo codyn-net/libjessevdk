@@ -70,6 +70,7 @@ namespace functional
 	}
 }
 }
+}
 
 #endif /* __JESSEVDK_BASE_FUNCTIONAL_FUNCTIONAL_H__ */
 
