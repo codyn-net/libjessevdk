@@ -45,7 +45,7 @@ namespace network
 			};
 
 			Server();
-			void SetData(Data *data);
+			virtual void SetData(Data *data);
 
 			virtual AddressInfo ListenAddressInfo() = 0;
 			virtual bool ListenOnSocket(Socket &socket) = 0;

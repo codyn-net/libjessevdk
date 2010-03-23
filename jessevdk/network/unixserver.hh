@@ -9,25 +9,25 @@ namespace network
 {
 	class UnixServer : public Server
 	{
-		struct Data : public Server::Data
-		{
-			std::string filename;
-
-			~Data();
-
-			protected:
-				virtual Client Accept();
-		};
-
-		Data *d_data;
-
 		public:
+			struct Data : public Server::Data
+			{
+				std::string filename;
+
+				~Data();
+
+				protected:
+					virtual Client Accept();
+			};
+
 			/* Constructor/destructor */
 			UnixServer(std::string const &filename = "");
+			UnixServer(Data *data);
 
 			/* Public functions */
 			virtual bool Listen();
 			virtual std::string Connection();
+			virtual void SetData(Data *data);
 
 			void Set(std::string const &filename);
 		protected:
@@ -35,7 +35,7 @@ namespace network
 			virtual bool ListenOnSocket(Socket &socket);
 		private:
 			/* Private functions */
-
+			Data *d_data;
 	};
 }
 }

@@ -52,6 +52,13 @@ UnixServer::Set(string const &filename)
 	d_data->filename = filename;
 }
 
+void
+UnixServer::SetData(Data *data)
+{
+	Server::SetData(data);
+	d_data = data;
+}
+
 UnixServer::UnixServer(string const &filename)
 {
 	d_data = new Data();
@@ -59,5 +66,11 @@ UnixServer::UnixServer(string const &filename)
 
 	Set(filename);
 
+	SetData(d_data);
+}
+
+UnixServer::UnixServer(Data *data)
+{
+	d_data = data;
 	SetData(d_data);
 }
