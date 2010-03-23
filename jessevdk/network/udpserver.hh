@@ -15,7 +15,7 @@ namespace network
 		public:
 			struct DataArgs : public FileDescriptor::DataArgs
 			{
-				SocketAddress address;
+				SocketAddress Address;
 
 				DataArgs(int fd, std::string *buffer, SocketAddress &address);
 				DataArgs *Clone() const;

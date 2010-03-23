@@ -49,7 +49,7 @@ UdpServer::DataArgs::Clone() const
 UdpServer::DataArgs::DataArgs(int fd, string *buffer, SocketAddress &address)
 :
 	FileDescriptor::DataArgs(fd, buffer),
-	address(address)
+	Address(address)
 {
 }
 
