@@ -4,6 +4,7 @@
 #include <jessevdk/base/algorithms.hh>
 #include <jessevdk/base/binarystream.hh>
 #include <jessevdk/base/cloneable.hh>
+#include <jessevdk/base/config.hh>
 #include <jessevdk/base/debug.hh>
 #include <jessevdk/base/enum.hh>
 #include <jessevdk/base/exceptions.hh>
