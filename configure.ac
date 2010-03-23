@@ -58,6 +58,7 @@ base/Makefile
 db/SQLite/Row/Makefile
 db/SQLite/Makefile
 db/Makefile
+jessevdk/Makefile
 math/Random/Makefile
 math/sse/Makefile
 math/Makefile
