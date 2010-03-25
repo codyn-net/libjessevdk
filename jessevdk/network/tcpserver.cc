@@ -74,6 +74,11 @@ TcpServer::Set(size_t port)
 	Set("", port);
 }
 
+TcpServer::TcpServer(Data *data)
+{
+	SetData(data);
+}
+
 TcpServer::TcpServer(size_t port)
 {
 	stringstream s;
@@ -98,4 +103,11 @@ TcpServer::TcpServer(string const &host, string const &port)
 TcpServer::TcpServer(string const &port)
 {
 	Initialize("", port);
+}
+
+void
+TcpServer::SetData(Data *data)
+{
+	Server::SetData(data);
+	d_data = data;
 }

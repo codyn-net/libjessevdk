@@ -4,6 +4,7 @@
 #include <jessevdk/base/object.hh>
 #include <jessevdk/network/addressinfo.hh>
 #include <jessevdk/os/filedescriptor.hh>
+#include <netinet/tcp.h>
 
 namespace jessevdk
 {
@@ -18,7 +19,17 @@ namespace network
 				{
 					Reuse = SO_REUSEADDR,
 					Broadcast = SO_BROADCAST,
-					KeepAlive = SO_KEEPALIVE
+					KeepAlive = SO_KEEPALIVE,
+					NoDelay = TCP_NODELAY
+				};
+			};
+
+			struct Level
+			{
+				enum Values
+				{
+					Tcp = IPPROTO_TCP,
+					Socket = SOL_SOCKET
 				};
 			};
 
@@ -30,6 +41,8 @@ namespace network
 
 			bool Bind();
 			bool SetOption(Options::Values option);
+			bool SetOption(Level::Values level, Options::Values option);
+
 			bool Listen(size_t queue);
 			bool Connect();
 

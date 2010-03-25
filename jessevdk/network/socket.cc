@@ -181,13 +181,19 @@ Socket::SetInfo(AddressInfo &info)
 bool
 Socket::SetOption(Options::Values option)
 {
+	return SetOption(Level::Socket, option);
+}
+
+bool
+Socket::SetOption(Level::Values level, Options::Values option)
+{
 	if (!*this)
 	{
 		return false;
 	}
 
 	int one = 1;
-	return setsockopt(Fd(), SOL_SOCKET, option, &one, sizeof(one)) == 0;
+	return setsockopt(Fd(), level, option, &one, sizeof(one)) == 0;
 }
 
 Socket::Socket(int socket, struct sockaddr *address, socklen_t size)
