@@ -7,7 +7,9 @@ header_DATA = \
 	module.hh \
 	os.hh \
 	pipe.hh \
-	signals.hh
+	processes.hh \
+	signals.hh \
+	terminator.hh
 
 EXTRA_DIST = \
 	$(header_DATA)

@@ -6,7 +6,9 @@
 #include <jessevdk/os/filesystem.hh>
 #include <jessevdk/os/module.hh>
 #include <jessevdk/os/pipe.hh>
+#include <jessevdk/os/processes.hh>
 #include <jessevdk/os/signals.hh>
+#include <jessevdk/os/terminator.hh>
 
 #endif /* __JESSEVDK_OS_OS_H__ */
 

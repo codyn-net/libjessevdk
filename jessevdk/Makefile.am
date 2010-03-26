@@ -21,31 +21,33 @@ libjessevdk_1_0_la_LDFLAGS = -export-dynamic -no-undefined $(PACKAGE_LIBJESSEVDK
 
 libjessevdk_1_0_la_SOURCES = \
 	base/binarystream.cc \
-	base/object.cc \
 	base/config.cc \
-	base/timer.cc \
-	base/string.cc \
 	base/debug.cc \
+	base/object.cc \
 	base/properties/properties.cc \
+	base/string.cc \
+	base/timer.cc \
 	db/sqlite/row.cc \
 	db/sqlite/sqlite.cc \
-	os/filesystem.cc \
-	os/pipe.cc \
-	os/fifo.cc \
-	os/signals.cc \
-	os/filedescriptor.cc \
-	os/module.cc \
-	os/environment.cc \
-	network/udpserver.cc \
-	network/tcpserver.cc \
-	network/socket.cc \
-	network/unixserver.cc \
+	math/math.cc \
+	math/sse/float4.cc \
 	network/addressinfo.cc \
+	network/client.cc \
 	network/server.cc \
 	network/socketaddress.cc \
-	network/client.cc \
-	math/math.cc \
-	math/sse/float4.cc
+	network/socket.cc \
+	network/tcpserver.cc \
+	network/udpserver.cc \
+	network/unixserver.cc \
+	os/environment.cc \
+	os/fifo.cc \
+	os/filedescriptor.cc \
+	os/filesystem.cc \
+	os/module.cc \
+	os/pipe.cc \
+	os/processes.cc \
+	os/signals.cc \
+	os/terminator.cc
 
 headerdir = $(pkgincludedir)/
 header_DATA = \
