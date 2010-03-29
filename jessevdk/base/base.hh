@@ -10,8 +10,8 @@
 #include <jessevdk/base/exceptions.hh>
 #include <jessevdk/base/flags.hh>
 #include <jessevdk/base/object.hh>
-#include <jessevdk/base/properties/properties.hh>
-#include <jessevdk/base/signals/signals.hh>
+#include <jessevdk/base/properties.hh>
+#include <jessevdk/base/signals.hh>
 #include <jessevdk/base/string.hh>
 #include <jessevdk/base/timer.hh>
 #include <jessevdk/base/functional.hh>
