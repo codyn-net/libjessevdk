@@ -284,9 +284,9 @@ namespace math
 			};
 		};
 
-		static Vec<Vec2Data<Type> > empty;
-		static Vec<Vec2Data<Type> > zeros;
-		static Vec<Vec2Data<Type> > ones;
+		static Vec2Data<Type> empty;
+		static Vec2Data<Type> zeros;
+		static Vec2Data<Type> ones;
 	};
 
 	template <typename Type>
@@ -321,13 +321,13 @@ namespace math
 	};
 
 	template <typename Type>
-	Vec<Vec2Data<Type> > Vec2Data<Type>::empty = vec2<Type>(0, 0);
+	Vec2Data<Type> Vec2Data<Type>::empty = vec2<Type>(0, 0);
 
 	template <typename Type>
-	Vec<Vec2Data<Type> > Vec2Data<Type>::zeros = Vec2Data<Type>::empty;
+	Vec2Data<Type> Vec2Data<Type>::zeros = Vec2Data<Type>::empty;
 
 	template <typename Type>
-	Vec<Vec2Data<Type> > Vec2Data<Type>::ones = vec2<Type>(1, 1);
+	Vec2Data<Type> Vec2Data<Type>::ones = vec2<Type>(1, 1);
 
 	template <typename Type>
 	struct Vec3Data : TypeDefine<Type, 3>
@@ -366,9 +366,9 @@ namespace math
 			return c;
 		}
 
-		static Vec<Vec3Data<Type> > empty;
-		static Vec<Vec3Data<Type> > zeros;
-		static Vec<Vec3Data<Type> > ones;
+		static Vec3Data<Type> empty;
+		static Vec3Data<Type> zeros;
+		static Vec3Data<Type> ones;
 	};
 
 	template <typename Type>
@@ -418,13 +418,13 @@ namespace math
 	};
 
 	template <typename Type>
-	Vec<Vec3Data<Type> > Vec3Data<Type>::empty = vec3<Type>(0, 0, 0);
+	Vec3Data<Type> Vec3Data<Type>::empty = vec3<Type>(0, 0, 0);
 
 	template <typename Type>
-	Vec<Vec3Data<Type> > Vec3Data<Type>::zeros = Vec3Data<Type>::empty;
+	Vec3Data<Type> Vec3Data<Type>::zeros = Vec3Data<Type>::empty;
 
 	template <typename Type>
-	Vec<Vec3Data<Type> > Vec3Data<Type>::ones = vec3<Type>(1, 1, 1);
+	Vec3Data<Type> Vec3Data<Type>::ones = vec3<Type>(1, 1, 1);
 
 	template <typename Type>
 	struct Vec4Data : TypeDefine<Type, 4>
@@ -470,9 +470,9 @@ namespace math
 			};
 		};
 
-		static Vec<Vec4Data<Type> > zeros;
-		static Vec<Vec4Data<Type> > empty;
-		static Vec<Vec4Data<Type> > ones;
+		static Vec4Data<Type> zeros;
+		static Vec4Data<Type> empty;
+		static Vec4Data<Type> ones;
 	};
 
 	template <typename Type>
@@ -509,13 +509,13 @@ namespace math
 	};
 
 	template <typename Type>
-	Vec<Vec4Data<Type> > Vec4Data<Type>::empty = vec4<Type>(0, 0, 0, 0);
+	Vec4Data<Type> Vec4Data<Type>::empty = vec4<Type>(0, 0, 0, 0);
 
 	template <typename Type>
-	Vec<Vec4Data<Type> > Vec4Data<Type>::zeros = Vec4Data<Type>::empty;
+	Vec4Data<Type> Vec4Data<Type>::zeros = Vec4Data<Type>::empty;
 
 	template <typename Type>
-	Vec<Vec4Data<Type> > Vec4Data<Type>::ones = vec4<Type>(1, 1, 1, 1);
+	Vec4Data<Type> Vec4Data<Type>::ones = vec4<Type>(1, 1, 1, 1);
 
 	template <typename Type, size_t Size>
 	struct VecData : TypeDefine<Type, Size>
