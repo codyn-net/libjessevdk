@@ -1,5 +1,5 @@
-#ifndef __JESSEVDK_BASE_PROPERTIES_H__
-#define __JESSEVDK_BASE_PROPERTIES_H__
+#ifndef __JESSEVDK_BASE_PROPERTIES_PROPERTIES_H__
+#define __JESSEVDK_BASE_PROPERTIES_PROPERTIES_H__
 
 #include <map>
 #include <exception>
@@ -209,4 +209,4 @@ namespace properties
 }
 }
 
-#endif /* __JESSEVDK_BASE_PROPERTIES_H__ */
+#endif /* __JESSEVDK_BASE_PROPERTIES_PROPERTIES_H__ */
