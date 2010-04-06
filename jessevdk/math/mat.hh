@@ -256,6 +256,8 @@ namespace math
 	{
 		Mat<Mat2Data<Type> > copy = Inverse();
 		*this = copy;
+
+		return *reinterpret_cast<Mat<Mat2Data<Type> > *>(this);
 	}
 
 	template <typename Type>
@@ -453,6 +455,8 @@ namespace math
 	{
 		Mat<Mat3Data<Type> > copy = Inverse();
 		*this = copy;
+
+		return *reinterpret_cast<Mat<Mat3Data<Type> > *>(this);
 	}
 
 	template <typename Type>
@@ -663,6 +667,8 @@ namespace math
 	{
 		Mat<Mat4Data<Type> > copy = Inverse();
 		*this = copy;
+
+		return *reinterpret_cast<Mat<Mat4Data<Type> > *>(this);
 	}
 
 	template <typename Type>
