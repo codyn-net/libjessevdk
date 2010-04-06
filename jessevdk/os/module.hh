@@ -25,8 +25,8 @@ namespace os
 		Data *d_data;
 
 		public:
-			static std::string const suffix;
-			static std::string const prefix;
+			static std::string const Suffix;
+			static std::string const Prefix;
 
 			/* Constructor/destructor */
 			Module();
@@ -38,6 +38,8 @@ namespace os
 
 			template <typename Type>
 			Type Lookup(std::string const &symbol);
+
+			static bool IsModuleName(std::string const &name);
 		private:
 			/* Private functions */
 			std::string ResolvePath(std::string const &path) const;

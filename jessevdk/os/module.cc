@@ -8,15 +8,22 @@ using namespace jessevdk::base;
 using namespace jessevdk::os;
 
 #if defined PLATFORM_OSX
-string const Module::suffix = ".dylib";
-string const Module::prefix = "lib";
+string const Module::Suffix = ".dylib";
+string const Module::Prefix = "lib";
 #elif defined WIN32
-string const Module::suffix = ".dll";
-string const Module::prefix = "";
+string const Module::Suffix = ".dll";
+string const Module::Prefix = "";
 #else
-string const Module::suffix = ".so";
-string const Module::prefix = "lib";
+string const Module::Suffix = ".so";
+string const Module::Prefix = "lib";
 #endif
+
+bool
+Module::IsModuleName(string const &name)
+{
+	return String(name).StartsWith(Module::Prefix) &&
+	       String(name).EndsWith(Module::Suffix);
+}
 
 Module::Data::~Data()
 {
@@ -69,9 +76,9 @@ Module::ResolvePath(string const &path) const
 {
 	String s(path);
 
-	if (!s.EndsWith(Module::suffix))
+	if (!s.EndsWith(Module::Suffix))
 	{
-		s += Module::suffix;
+		s += Module::Suffix;
 	}
 
 	string res;
