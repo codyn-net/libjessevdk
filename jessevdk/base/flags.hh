@@ -80,7 +80,7 @@ namespace base
 	template <typename Type>
 	inline Flags<Type> Flags<Type>::operator&(Flags<Type> const &other) const
 	{
-		return Flags<Type>(this->Get() & other.value());
+		return Flags<Type>(this->Get() & other.Get());
 	}
 
 	template <typename Type>
