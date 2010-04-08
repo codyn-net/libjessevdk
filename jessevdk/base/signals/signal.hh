@@ -468,7 +468,7 @@ namespace signals
 	template <typename TFunction>
 	void Signal<TArgs>::AddAfter(TFunction function, int priority)
 	{
-		d_callbacksAfter.push_back(callback(function, priority));
+		d_callbacksAfter.push_back(Callback(function, priority));
 
 		Sort(d_callbacksAfter);
 	}
@@ -477,7 +477,7 @@ namespace signals
 	template <typename TFunction, typename TObject>
 	void Signal<TArgs>::AddAfter(TObject &obj, TFunction function, int priority)
 	{
-		d_callbacksAfter.push_back(callback(obj, function, priority));
+		d_callbacksAfter.push_back(Callback(obj, function, priority));
 
 		Sort(d_callbacksAfter);
 	}
@@ -486,7 +486,7 @@ namespace signals
 	template <typename TFunction, typename TUserData>
 	void Signal<TArgs>::AddAfterData(TFunction function, TUserData const &userdata, int priority)
 	{
-		d_callbacksAfter.push_back(callbackData(function, userdata, priority));
+		d_callbacksAfter.push_back(CallbackData(function, userdata, priority));
 
 		Sort(d_callbacksAfter);
 	}
@@ -495,7 +495,7 @@ namespace signals
 	template <typename TFunction, typename TObject, typename TUserData>
 	void Signal<TArgs>::AddAfterData(TObject &obj, TFunction function, TUserData const &userdata, int priority)
 	{
-		d_callbacksAfter.push_back(callbackData(obj, function, userdata, priority));
+		d_callbacksAfter.push_back(CallbackData(obj, function, userdata, priority));
 
 		Sort(d_callbacksAfter);
 	}
