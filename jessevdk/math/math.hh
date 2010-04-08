@@ -33,7 +33,49 @@ namespace math
 	typedef mat3<int> int3x3;
 	typedef mat4<int> int4x4;
 
-	void Initialize(bool usesse = true);
+	class Math
+	{
+		public:
+			typedef float (*InverseSqrtfFunc)(float x);
+			typedef double (*InverseSqrtFunc)(double x);
+
+			static void Initialize(bool usesse = true);
+
+			static void SetInverseSqrtf(InverseSqrtfFunc func);
+			static void SetInverseSqrt(InverseSqrtFunc func);
+
+			static float InverseSqrtfDefault(float x);
+			static float InverseSqrtfFast(float x);
+
+			static double InverseSqrtDefault(double x);
+			static double InverseSqrtFast(double x);
+
+			static float InverseSqrtf(float x);
+			static double InverseSqrt(double x);
+		private:
+			static InverseSqrtfFunc s_inverseSqrtf;
+			static InverseSqrtFunc s_inverseSqrt;
+	};
+
+	inline float Math::InverseSqrtf(float x)
+	{
+		return s_inverseSqrtf(x);
+	}
+
+	inline double Math::InverseSqrt(double x)
+	{
+		return s_inverseSqrt(x);
+	}
+
+	inline float Invsqrtf(float x)
+	{
+		return Math::InverseSqrtf(x);
+	}
+
+	inline double Invsqrt(double x)
+	{
+		return Math::InverseSqrt(x);
+	}
 
 	template <typename T>
 	T Max(T const &a, T const &b)
