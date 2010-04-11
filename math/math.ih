@@ -1,5 +1,0 @@
-#include "math.hh"
-
-#ifdef ENABLE_SSE
-#include <cpuid.h>
-#endif

@@ -5,7 +5,7 @@ includedir=@includedir@
 
 Name: libjessevdk
 Description: C++ libjessevdk library
-Requires: sqlite3 glibmm-2.4
+Requires: @LIBJESSEVDK_REQUIRES@
 Version: @VERSION@
-Libs: -L${libdir} -ljessevdk-@LIBJESSEVDK_API_VERSION@
+Libs: -L${libdir} -ljessevdk-@LIBJESSEVDK_API_VERSION@ @PKGCONFIG_EXTRA_LIBS@
 Cflags: -I${includedir}/libjessevdk-@LIBJESSEVDK_API_VERSION@

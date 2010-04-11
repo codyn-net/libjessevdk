@@ -1,5 +1,0 @@
-#include "float4.hh"
-
-#ifdef ENABLE_SSE
-using namespace math;
-#endif

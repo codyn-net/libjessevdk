@@ -1,9 +1,0 @@
-#include "client.hh"
-#include <string.h>
-#include <errno.h>
-
-#include <base/Debug/debug.hh>
-
-using namespace std;
-using namespace network;
-using namespace base;

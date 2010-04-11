@@ -1,8 +1,7 @@
-AC_INIT(libjessevdk, 0.2)
+AC_INIT(libjessevdk, 1.0)
 
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_INIT_AUTOMAKE([subdir-objects])
 
-AC_CONFIG_MACRO_DIR([m4])
 AC_PROG_LIBTOOL
 
 AC_ISC_POSIX
@@ -13,20 +12,64 @@ AC_HEADER_STDC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
-AC_CONFIG_HEADERS(config.h)
+AC_CONFIG_HEADERS(jessevdk/config.hh)
 AM_MAINTAINER_MODE
+m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-LIBJESSEVDK_API_VERSION=0.1
+LIBJESSEVDK_API_VERSION=1.0
 AC_SUBST(LIBJESSEVDK_API_VERSION)
 
-pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_API_VERSION"
+pkgincludedir="$includedir/libjessevdk-$LIBJESSEVDK_API_VERSION/jessevdk"
 AC_SUBST(pkgincludedir)
 
-pkgbasedir=""
-AC_SUBST(pkgbasedir)
+dnl check for osx platform
+AC_MSG_CHECKING([for Mac OS X platform])
+case "$host" in
+  *-*-darwin*)
+    platform_osx=yes
+    ;;
+  *)
+    platform_osx=no
+    ;;
+esac
+
+AC_MSG_RESULT([$platform_osx])
+AM_CONDITIONAL(PLATFORM_OSX, test "$platform_osx" = "yes")
+
+LIBJESSEVDK_REQUIRES="glibmm-2.4"
+
+if test "$platform_osx" = "yes"; then
+	AC_DEFINE([PLATFORM_OSX],[1],[Defined if platform is Mac OSX])
+	
+	SQLITE_LIBS="-lsqlite3"
+	PKGCONFIG_EXTRA_LIBS="-lsqlite3"
+else
+	PKG_CHECK_MODULES(SQLITE, [
+		sqlite3
+	])
+
+	LIBJESSEVDK_REQUIRES="$LIBJESSEVDK_REQUIRES sqlite3"
+fi
+
+AC_SUBST(LIBJESSEVDK_REQUIRES)
+AC_SUBST(PKGCONFIG_EXTRA_LIBS)
+
+AC_SUBST(SQLITE_CFLAGS)
+AC_SUBST(SQLITE_LIBS)
+
+# Check for enabling sse support
+AC_ARG_ENABLE([sse],
+        AS_HELP_STRING([--enable-sse],[Enable sse support (default: disabled)]),
+        [enable_sse=$enableval],
+        [enable_sse=no])
+
+if test "x$enable_sse" == "xyes"; then
+	AC_DEFINE([JESSEVDK_ENABLE_SSE], [1], [Defined if sse support is enabled])
+fi
+
+AM_CONDITIONAL(ENABLE_SSE, test x"$enable_sse" = "xyes")
 
 PKG_CHECK_MODULES(PACKAGE_LIBJESSEVDK, [
-	sqlite3
 	glibmm-2.4
 ])
 
@@ -35,49 +78,17 @@ AC_SUBST(PACKAGE_LIBJESSEVDK_LIBS)
 
 AC_OUTPUT(
 Makefile
-base/Algorithms/Makefile
-base/BinaryStream/Makefile
-base/Cloneable/Makefile
-base/CommandLine/Makefile
-base/Config/Makefile
-base/Debug/Makefile
-base/Enum/Makefile
-base/Exceptions/Makefile
-base/Flags/Makefile
-base/Functional/Makefile
-base/Object/Makefile
-base/Properties/Property/Makefile
-base/Properties/Makefile
-base/Signals/Callback/Makefile
-base/Signals/CallbackBase/Makefile
-base/Signals/Signal/Makefile
-base/Signals/Makefile
-base/String/Makefile
-base/Timer/Makefile
-base/Makefile
-db/SQLite/Row/Makefile
-db/SQLite/Makefile
-db/Makefile
-math/Random/Makefile
-math/sse/Makefile
-math/Makefile
-network/AddressInfo/Makefile
-network/Client/Makefile
-network/Server/Makefile
-network/Socket/Makefile
-network/SocketAddress/Makefile
-network/TcpServer/Makefile
-network/UdpServer/Makefile
-network/UnixServer/Makefile
-network/Makefile
-os/Environment/Makefile
-os/Fifo/Makefile
-os/FileDescriptor/Makefile
-os/FileSystem/Makefile
-os/Module/Makefile
-os/Pipe/Makefile
-os/Signals/Makefile
-os/Makefile
-
+jessevdk/Makefile
+jessevdk/base/Makefile
+jessevdk/base/signals/Makefile
+jessevdk/base/exceptions/Makefile
+jessevdk/base/functional/Makefile
+jessevdk/base/properties/Makefile
+jessevdk/db/Makefile
+jessevdk/db/sqlite/Makefile
+jessevdk/math/Makefile
+jessevdk/math/sse/Makefile
+jessevdk/network/Makefile
+jessevdk/os/Makefile
 libjessevdk.pc
 )

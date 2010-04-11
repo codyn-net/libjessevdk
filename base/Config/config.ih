@@ -1,6 +1,0 @@
-#include "config.hh"
-
-#include <fstream>
-
-using namespace base;
-using namespace std;

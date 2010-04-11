@@ -3,8 +3,6 @@
 Makefile
 Makefile.in
 autom4te.cache
-Makefile.am
-Makefile.am.inc
 *.la
 config.guess
 config.status
@@ -21,3 +19,7 @@ install-sh
 *.o
 *.pc
 config.log
+config.h
+config.h.in
+*~
+.dirstamp

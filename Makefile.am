@@ -1,6 +1,7 @@
+SUBDIRS = jessevdk
 
-include Makefile.am.inc
-	
+ACLOCAL_AMFLAGS = -I m4
+
 # pkg-config stuff
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = \
@@ -9,7 +10,7 @@ pkgconfig_DATA = \
 libjessevdk-@LIBJESSEVDK_API_VERSION@.pc: libjessevdk.pc
 	cp libjessevdk.pc libjessevdk-@LIBJESSEVDK_API_VERSION@.pc
 
-EXTRA_DIST += \
+EXTRA_DIST = \
 	libjessevdk.pc.in
 
 CLEANFILES = \
