@@ -24,15 +24,12 @@ namespace os
 
 			GPid d_pid;
 			sigc::connection d_timeout;
-			sigc::connection d_watch;
 			Stage::Values d_stage;
 			bool d_recursive;
 
 			base::signals::Signal<int> OnTerminated;
 
 			bool OnTimeout();
-			void OnChildKilled(GPid pid, int ret);
-
 			void Kill(int sig);
 
 			~Data();
@@ -44,6 +41,9 @@ namespace os
 			Terminator();
 
 			int Terminate(GPid pid, bool recursive = false, bool block = true);
+			void Terminated(int status);
+			
+			operator bool() const;
 
 			jessevdk::base::signals::Signal<int> &OnTerminated();
 		private:

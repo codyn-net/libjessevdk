@@ -19,22 +19,6 @@ Terminator::Data::~Data()
 	{
 		d_timeout.disconnect();
 	}
-
-	if (d_watch)
-	{
-		d_watch.disconnect();
-	}
-}
-
-void
-Terminator::Data::OnChildKilled(GPid pid, int status)
-{
-	d_watch.disconnect();
-	d_timeout.disconnect();
-
-	d_stage = Stage::None;
-
-	OnTerminated(status);
 }
 
 void
@@ -51,6 +35,7 @@ Terminator::Data::Kill(int sig)
 
 	for (vector<GPid>::iterator iter = kills.begin(); iter != kills.end(); ++iter)
 	{
+		cerr << "Killing: " << *iter << ", " << sig << endl;
 		::kill(*iter, sig);
 	}
 }
@@ -69,7 +54,6 @@ Terminator::Data::OnTimeout()
 	else
 	{
 		// Totally failed
-		d_watch.disconnect();
 		d_timeout.disconnect();
 		d_stage = Stage::None;
 
@@ -78,6 +62,28 @@ Terminator::Data::OnTimeout()
 		OnTerminated(status);
 		return false;
 	}
+}
+
+Terminator::operator bool() const
+{
+	return d_data->d_stage != Data::Stage::None;
+}
+
+void
+Terminator::Terminated(int status)
+{
+	if (d_data->d_stage == Data::Stage::None)
+	{
+		return;
+	}
+	
+	if (d_data->d_timeout)
+	{
+		d_data->d_timeout.disconnect();
+	}
+
+	d_data->d_stage = Data::Stage::None;
+	d_data->OnTerminated(status);
 }
 
 int
@@ -97,6 +103,11 @@ Terminator::Terminate(GPid pid, bool recursive, bool block)
 	d_data->d_recursive = recursive;
 	d_data->d_stage = Data::Stage::Terminate;
 
+	if (!block)
+	{
+		d_data->d_timeout = Glib::signal_timeout().connect_seconds(sigc::mem_fun(*d_data, &Terminator::Data::OnTimeout), 3);
+	}
+
 	d_data->Kill(SIGTERM);
 
 	if (block)
@@ -108,11 +119,6 @@ Terminator::Terminate(GPid pid, bool recursive, bool block)
 		d_data->OnTerminated(status);
 
 		return status;
-	}
-	else
-	{
-		d_data->d_timeout = Glib::signal_timeout().connect_seconds(sigc::mem_fun(*d_data, &Terminator::Data::OnTimeout), 3);
-		d_data->d_watch = Glib::signal_child_watch().connect(sigc::mem_fun(*d_data, &Terminator::Data::OnChildKilled), pid);
 	}
 
 	return -1;
