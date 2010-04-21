@@ -3,6 +3,7 @@
 
 #include <string>
 #include <jessevdk/base/exceptions/badvalue.hh>
+#include <jessevdk/base/signals/signal.hh>
 
 namespace jessevdk
 {
@@ -25,9 +26,16 @@ namespace base
 
 			std::string const &Name() const;
 			operator std::string const &() const;
+
+			Enum<Type> &operator=(int value);
+			Enum<Type> &operator=(Value value);
+
+			signals::Signal<Value> OnChanged;
 		private:
 			/* Private functions */
 			Value d_value;
+
+			void Set(Value newValue);
 	};
 
 	template <typename Type>
@@ -73,6 +81,37 @@ namespace base
 	inline Enum<Type>::operator std::string const &() const
 	{
 		return Name();
+	}
+
+	template <typename Type>
+	inline Enum<Type> &
+	Enum<Type>::operator=(int value)
+	{
+		Set(static_cast<Value>(value));
+		return *this;
+	}
+
+	template <typename Type>
+	inline Enum<Type> &
+	Enum<Type>::operator=(Value value)
+	{
+		Set(value);
+		return *this;
+	}
+
+	template <typename Type>
+	inline void
+	Enum<Type>::Set(Value value)
+	{
+		if (d_value == value)
+		{
+			return;
+		}
+
+		Value old = d_value;
+
+		d_value = value;
+		OnChanged(old);
 	}
 
 	template <typename Type>

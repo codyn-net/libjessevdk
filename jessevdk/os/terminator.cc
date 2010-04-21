@@ -11,6 +11,8 @@ Terminator::Terminator()
 {
 	d_data = new Data();
 	AddPrivateData(d_data);
+
+	d_data->d_stage = Data::Stage::None;
 }
 
 Terminator::Data::~Data()

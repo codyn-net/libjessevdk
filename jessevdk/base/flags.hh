@@ -18,13 +18,26 @@ namespace base
 
 			/* Public functions */
 			Flags<Type> &operator<<(typename Enum<Type>::Value const &value);
-			void Add(typename Enum<Type>::Value const &value);
+			Flags<Type> &Add(typename Enum<Type>::Value const &value);
 
 			Flags<Type> &operator>>(typename Enum<Type>::Value const &value);
-			void Remove(typename Enum<Type>::Value const &value);
+			Flags<Type> &Remove(typename Enum<Type>::Value const &value);
 
 			Flags<Type> operator&(Flags<Type> const &other) const;
 			Flags<Type> operator&(typename Enum<Type>::Value const &other) const;
+			Flags<Type> operator&(int value) const;
+
+			Flags<Type> &operator&=(Flags<Type> const &other);
+			Flags<Type> &operator&=(typename Enum<Type>::Value const &other);
+			Flags<Type> &operator&=(int value);
+
+			Flags<Type> operator|(Flags<Type> const &other) const;
+			Flags<Type> operator|(typename Enum<Type>::Value const &other) const;
+			Flags<Type> operator|(int value) const;
+
+			Flags<Type> &operator|=(Flags<Type> const &other);
+			Flags<Type> &operator|=(typename Enum<Type>::Value const &other);
+			Flags<Type> &operator|=(int value);
 		private:
 			/* Private functions */
 
@@ -59,9 +72,10 @@ namespace base
 	}
 
 	template <typename Type>
-	inline void Flags<Type>::Add(typename Enum<Type>::Value const &value)
+	inline Flags<Type> &Flags<Type>::Add(typename Enum<Type>::Value const &value)
 	{
-		*this = this->Get() | value;
+		Set(this->Get() | value);
+		return *this;
 	}
 
 	template <typename Type>
@@ -72,9 +86,10 @@ namespace base
 	}
 
 	template <typename Type>
-	inline void Flags<Type>::Remove(typename Enum<Type>::Value const &value)
+	inline Flags<Type> &Flags<Type>::Remove(typename Enum<Type>::Value const &value)
 	{
-		*this = this->Get() & ~value;
+		Set(this->Get() & ~value);
+		return *this;
 	}
 
 	template <typename Type>
@@ -84,9 +99,75 @@ namespace base
 	}
 
 	template <typename Type>
-	Flags<Type> Flags<Type>::operator&(typename Enum<Type>::Value const &other) const
+	inline Flags<Type> Flags<Type>::operator&(typename Enum<Type>::Value const &other) const
 	{
 		return Flags<Type>(static_cast<typename Enum<Type>::Value>(this->Get() & other));
+	}
+
+	template <typename Type>
+	inline Flags<Type> Flags<Type>::operator&(int value) const
+	{
+		return Flags<Type>(static_cast<typename Enum<Type>::Value>(this->Get() & value));
+	}
+
+	template <typename Type>
+	inline Flags<Type> Flags<Type>::operator|(Flags<Type> const &other) const
+	{
+		return Flags<Type>(this->Get() & other.Get());
+	}
+
+	template <typename Type>
+	inline Flags<Type> Flags<Type>::operator|(typename Enum<Type>::Value const &other) const
+	{
+		return Flags<Type>(static_cast<typename Enum<Type>::Value>(this->Get() & other));
+	}
+
+	template <typename Type>
+	inline Flags<Type> Flags<Type>::operator|(int value) const
+	{
+		return Flags<Type>(static_cast<typename Enum<Type>::Value>(this->Get() & value));
+	}
+
+	template <typename Type>
+	inline Flags<Type> &Flags<Type>::operator&=(Flags<Type> const &other)
+	{
+		Set(this->Get() & other.Get());
+		return *this;
+	}
+
+	template <typename Type>
+	inline Flags<Type> &Flags<Type>::operator&=(typename Enum<Type>::Value const &other)
+	{
+		Set(static_cast<typename Enum<Type>::Value>(this->Get() & other));
+		return *this;
+	}
+
+	template <typename Type>
+	inline Flags<Type> &Flags<Type>::operator&=(int value)
+	{
+		Set(Flags<Type>(static_cast<typename Enum<Type>::Value>(this->Get() & value)));
+		return *this;
+	}
+
+	template <typename Type>
+	inline Flags<Type> &Flags<Type>::operator|=(Flags<Type> const &other)
+	{
+		Set(this->Get() & other.Get());
+		return *this;
+	}
+
+	template <typename Type>
+	inline Flags<Type> &Flags<Type>::operator|=(typename Enum<Type>::Value const &other)
+	{
+		Set(static_cast<typename Enum<Type>::Value>(this->Get() & other));
+		return *this;
+	}
+
+	template <typename Type>
+	inline Flags<Type> &Flags<Type>::operator|=(int value)
+	{
+		Set(static_cast<typename Enum<Type>::Value>(this->Get() & value));
+		return *this;
 	}
 }
 }
