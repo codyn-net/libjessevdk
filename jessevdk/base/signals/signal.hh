@@ -422,7 +422,7 @@ namespace signals
 	Signal<TArgs>::Signal(TFunction function)
 	:
 		d_blocked(false),
-		d_defaultHandler(callback(function))
+		d_defaultHandler(Callback(function))
 	{
 	}
 
@@ -431,7 +431,7 @@ namespace signals
 	Signal<TArgs>::Signal(TObject &obj, TFunction function)
 	:
 		d_blocked(false),
-		d_defaultHandler(callback(obj, function))
+		d_defaultHandler(Callback(obj, function))
 	{
 	}
 
