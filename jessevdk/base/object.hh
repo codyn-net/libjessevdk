@@ -150,6 +150,9 @@ namespace base
 
 			bool operator!=(Object const &other) const;
 
+			bool operator<(Object const &other) const;
+			bool operator>(Object const &other) const;
+
 			/* signals */
 			signals::Signal<Object> &OnDestroy();
 			bool Dispose();
@@ -261,6 +264,16 @@ namespace base
 	inline bool Object::operator!=(Object const &other) const
 	{
 		return !(*this == other);
+	}
+
+	inline bool Object::operator<(Object const &other) const
+	{
+		return d_data < other.d_data;
+	}
+
+	inline bool Object::operator>(Object const &other) const
+	{
+		return d_data > other.d_data;
 	}
 
 	inline signals::Signal<Object> &Object::OnDestroy()
