@@ -86,41 +86,17 @@ namespace signals
 	};
 
 	namespace {
-		template <typename TObject, typename TReturnType>
+		template <typename TObject>
 		struct CallerImplementation4
 		{
-		};
-
-		template <typename TObject>
-		struct CallerImplementation4<TObject, bool>
-		{
-			template <typename TOtherObject>
 			static bool Caller(TObject &obj, bool (TObject::* const function)())
 			{
 				return (obj.*function)();
 			}
 
-			template <typename TOtherObject>
-			static bool Caller(TObject &obj, bool (TOtherObject::* const function)())
-			{
-				return (dynamic_cast<TOtherObject &>(obj).*function)();
-			}
-		};
-
-		template <typename TObject>
-		struct CallerImplementation4<TObject, void>
-		{
-			template <typename TOtherObject>
 			static bool Caller(TObject &obj, void (TObject::* const function)())
 			{
 				(obj.*function)();
-				return false;
-			}
-
-			template <typename TOtherObject>
-			static bool Caller(TObject &obj, void (TOtherObject::* const function)())
-			{
-				(dynamic_cast<TOtherObject &>(obj).*function)();
 				return false;
 			}
 		};
@@ -179,7 +155,7 @@ namespace signals
 	template <typename TOtherObject, typename TReturnType>
 	bool Callback<TFunction, _CbNone, TObject, _CbNone>::Emit(TReturnType (TOtherObject::* const func)()) const
 	{
-		return CallerImplementation4<TObject, TReturnType>::Caller(d_obj, func);
+		return CallerImplementation4<TObject>::Caller(d_obj, func);
 	}
 }
 }
