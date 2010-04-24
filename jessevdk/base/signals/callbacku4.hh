@@ -83,6 +83,14 @@ namespace signals
 			  * @author Jesse van den Kieboom
 			  */
 			virtual TFunction Function() const;
+		private:
+			bool Emit(bool (TObject::* const function)(TUserData)) const;
+			bool Emit(bool (TObject::* const function)(TUserData &)) const;
+			bool Emit(bool (TObject::* const function)(TUserData const &)) const;
+
+			bool Emit(void (TObject::* const function)(TUserData)) const;
+			bool Emit(void (TObject::* const function)(TUserData &)) const;
+			bool Emit(void (TObject::* const function)(TUserData const &)) const;
 	};
 
 	template <typename TFunction, typename TObject, typename TUserData>
@@ -98,7 +106,7 @@ namespace signals
 	template <typename TFunction, typename TObject, typename TUserData>
 	inline bool Callback<TFunction, _CbNone, TObject, TUserData>::Emit() const
 	{
-		return d_function ? (d_obj.*d_function)(d_userdata) : false;
+		return d_function ? Emit(d_function) : false;
 	}
 
 	template <typename TFunction, typename TObject, typename TUserData>
@@ -133,6 +141,52 @@ namespace signals
 	TFunction Callback<TFunction, _CbNone, TObject, TUserData>::Function() const
 	{
 		return d_function;
+	}
+
+
+	template <typename TFunction, typename TObject, typename TUserData>
+	bool
+	Callback<TFunction, _CbNone, TObject, TUserData>::Emit(bool (TObject::* const function)(TUserData)) const
+	{
+		return (d_obj.*function)(d_userdata);
+	}
+
+	template <typename TFunction, typename TObject, typename TUserData>
+	bool
+	Callback<TFunction, _CbNone, TObject, TUserData>::Emit(bool (TObject::* const function)(TUserData &)) const
+	{
+		return (d_obj.*function)(const_cast<TUserData &>(d_userdata));
+	}
+
+	template <typename TFunction, typename TObject, typename TUserData>
+	bool
+	Callback<TFunction, _CbNone, TObject, TUserData>::Emit(bool (TObject::* const function)(TUserData const &)) const
+	{
+		return (d_obj.*function)(d_userdata);
+	}
+
+	template <typename TFunction, typename TObject, typename TUserData>
+	bool
+	Callback<TFunction, _CbNone, TObject, TUserData>::Emit(void (TObject::* const function)(TUserData)) const
+	{
+		(d_obj.*function)(d_userdata);
+		return false;
+	}
+
+	template <typename TFunction, typename TObject, typename TUserData>
+	bool
+	Callback<TFunction, _CbNone, TObject, TUserData>::Emit(void (TObject::* const function)(TUserData &)) const
+	{
+		(d_obj.*function)(const_cast<TUserData &>(d_userdata));
+		return false;
+	}
+
+	template <typename TFunction, typename TObject, typename TUserData>
+	bool
+	Callback<TFunction, _CbNone, TObject, TUserData>::Emit(void (TObject::* const function)(TUserData const &)) const
+	{
+		(d_obj.*function)(d_userdata);
+		return false;
 	}
 }
 }

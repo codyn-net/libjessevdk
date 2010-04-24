@@ -1,4 +1,4 @@
-SUBDIRS = jessevdk
+SUBDIRS = jessevdk tests
 
 ACLOCAL_AMFLAGS = -I m4
 

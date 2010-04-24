@@ -90,5 +90,6 @@ jessevdk/math/Makefile
 jessevdk/math/sse/Makefile
 jessevdk/network/Makefile
 jessevdk/os/Makefile
+tests/Makefile
 libjessevdk.pc
 )
