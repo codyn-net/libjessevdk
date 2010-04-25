@@ -14,6 +14,7 @@
 #include <jessevdk/base/cloneable.hh>
 #include <jessevdk/base/signals/callbackbase.hh>
 #include <jessevdk/base/signals/callback.hh>
+#include <jessevdk/base/signals/create.hh>
 
 namespace jessevdk
 {
@@ -43,61 +44,6 @@ namespace signals
 		Cloneable<CallbackBase<TArgs> > d_defaultHandler;
 
 		public:
-			/** Create new callback
-			  * This is a convenient function to create a new callback method
-			  * for a certain signal signature
-			  * @param function the callback function to be executed on emission
-			  * @param priority the callback priority (default 0)
-			  * @return A callback object for the given function
-			  * @author Jesse van den Kieboom
-			  */
-			template <typename TFunction>
-			static Cloneable<Callback<TFunction, TArgs> > Callback(TFunction function, int priority = 0);
-
-			/** Create new callback
-			  * This is a convenient function to create a new callback method
-			  * for a certain signal signature
-			  * @param obj the object on which the callback should be executed
-			  * @param function the callback member method to be executed on
-			  * emission
-			  * @param priority the callback priority (default 0)
-			  * @return A callback object for the given object and member
-			  * function
-			  * @author Jesse van den Kieboom
-			  */
-			template <typename TFunction, typename TObject>
-			static Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs, TObject> > Callback(TObject &obj, TFunction function, int priority = 0);
-
-			/** Create new callback
-			  * This is a convenient function to create a new callback method
-			  * for a certain signal signature
-			  * @param function the callback member method to be executed on
-			  * emission
-			  * @param userdata the userdata to be provided to the callback
-			  * function on emission
-			  * @param priority the callback priority (default 0)
-			  * @return A callback object for the given function
-			  * @author Jesse van den Kieboom
-			  */
-			template <typename TFunction, typename TUserData>
-			static Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs, _CbNone, TUserData> > CallbackData(TFunction function, TUserData const &userdata, int priority = 0);
-
-			/** Create new callback
-			  * This is a convenient function to create a new callback method
-			  * for a certain signal signature
-			  * @param obj the object on which the callback should be executed
-			  * @param function the callback member method to be executed on
-			  * emission
-			  * @param userdata the userdata to be provided to the callback
-			  * function on emission
-			  * @param priority the callback priority (default 0)
-			  * @return A callback object for the given object and member
-			  * function
-			  * @author Jesse van den Kieboom
-			  */
-			template <typename TFunction, typename TObject, typename TUserData>
-			static Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs, TObject, TUserData> > CallbackData(TObject &obj, TFunction function, TUserData const &userdata, int priority = 0);
-
 			/** Constructor.
 			  * Default constructor. No default handler is registered for the
 			  * signal
@@ -381,37 +327,9 @@ namespace signals
 			  * @author Jesse van den Kieboom
 			  */
 			bool Emit(CallbackVec vec, TArgs &args) const;
+
+			CallbackBase<TArgs> &SetPriority(CallbackBase<TArgs> &callback, int priority);
 	};
-
-
-	// Callback creators
-	template <typename TArgs>
-	template <typename TFunction>
-	Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs> > Signal<TArgs>::Callback(TFunction function, int priority)
-	{
-		return jessevdk::base::signals::Callback<TFunction, TArgs>(function, priority);
-	}
-
-	template <typename TArgs>
-	template <typename TFunction, typename TObject>
-	Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs, TObject> > Signal<TArgs>::Callback(TObject &obj, TFunction function, int priority)
-	{
-		return jessevdk::base::signals::Callback<TFunction, TArgs, TObject>(obj, function, priority);
-	}
-
-	template <typename TArgs>
-	template <typename TFunction, typename TUserData>
-	Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs, _CbNone, TUserData> > Signal<TArgs>::CallbackData(TFunction function, TUserData const &userdata, int priority)
-	{
-		return jessevdk::base::signals::Callback<TFunction, TArgs, _CbNone, TUserData>(function, userdata, priority);
-	}
-
-	template <typename TArgs>
-	template <typename TFunction, typename TObject, typename TUserData>
-	Cloneable<jessevdk::base::signals::Callback<TFunction, TArgs, TObject, TUserData> > Signal<TArgs>::CallbackData(TObject &obj, TFunction function, TUserData const &userdata, int priority)
-	{
-		return jessevdk::base::signals::Callback<TFunction, TArgs, TObject, TUserData>(obj, function, userdata, priority);
-	}
 
 	template <typename TArgs>
 	Signal<TArgs>::Signal()
@@ -441,7 +359,7 @@ namespace signals
 	Signal<TArgs>::Signal(TFunction function)
 	:
 		d_blocked(false),
-		d_defaultHandler(Callback(function))
+		d_defaultHandler(Create<TArgs>::Callback(function))
 	{
 	}
 
@@ -450,7 +368,7 @@ namespace signals
 	Signal<TArgs>::Signal(TObject &obj, TFunction function)
 	:
 		d_blocked(false),
-		d_defaultHandler(Callback(obj, function))
+		d_defaultHandler(Create<TArgs>::Callback(obj, function))
 	{
 	}
 
@@ -459,98 +377,98 @@ namespace signals
 	template <typename TFunction>
 	void Signal<TArgs>::Add(TFunction function, int priority)
 	{
-		*this += Callback(function, priority);
+		*this += SetPriority(Create<TArgs>::Callback(function), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject, typename TOtherArgs>
 	void Signal<TArgs>::Add(TObject &obj, TReturnType (TOtherObject::* const function)(TOtherArgs), int priority)
 	{
-		*this += Callback(dynamic_cast<TOtherObject &>(obj), function, priority);
+		*this += SetPriority(Create<TArgs>::Callback(dynamic_cast<TOtherObject &>(obj), function), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject>
 	void Signal<TArgs>::Add(TObject &obj, TReturnType (TOtherObject::* const function)(), int priority)
 	{
-		*this += Callback(dynamic_cast<TOtherObject &>(obj), function, priority);
+		*this += SetPriority(Create<TArgs>::Callback(dynamic_cast<TOtherObject &>(obj), function), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TReturnType, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddData(TReturnType (*function)(TOtherUserData), TUserData const &userdata, int priority)
 	{
-		*this += CallbackData(function, userdata, priority);
+		*this += SetPriority(Create<TArgs>::Callback(function, userdata), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TReturnType, typename TOtherArgs, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddData(TReturnType (*function)(TOtherArgs, TOtherUserData), TUserData const &userdata, int priority)
 	{
-		*this += CallbackData(function, userdata, priority);
+		*this += SetPriority(Create<TArgs>::Callback(function, userdata), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddData(TObject &obj, TReturnType (TOtherObject::* const function)(TOtherUserData), TUserData const &userdata, int priority)
 	{
-		*this += CallbackData(dynamic_cast<TOtherObject &>(obj), function, userdata, priority);
+		*this += SetPriority(Create<TArgs>::Callback(obj, function, userdata), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject, typename TOtherArgs, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddData(TObject &obj, TReturnType (TOtherObject::* const function)(TOtherArgs, TOtherUserData), TUserData const &userdata, int priority)
 	{
-		*this += CallbackData(dynamic_cast<TOtherObject &>(obj), function, userdata, priority);
+		*this += SetPriority(Create<TArgs>::Callback(obj, function, userdata), priority);
 	}
 
 	template <typename TArgs>
 	template <typename TFunction>
 	void Signal<TArgs>::AddAfter(TFunction function, int priority)
 	{
-		d_callbacksAfter.insert(Callback(function, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(function), priority));
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject>
 	void Signal<TArgs>::AddAfter(TObject &obj, TReturnType (TOtherObject::* const function)(), int priority)
 	{
-		d_callbacksAfter.insert(Callback(dynamic_cast<TOtherObject &>(obj), function, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(obj, function), priority));
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject, typename TOtherArgs>
 	void Signal<TArgs>::AddAfter(TObject &obj, TReturnType (TOtherObject::* const function)(TOtherArgs args), int priority)
 	{
-		d_callbacksAfter.insert(Callback(dynamic_cast<TOtherObject &>(obj), function, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(obj, function), priority));
 	}
 
 	template <typename TArgs>
 	template <typename TReturnType, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddAfterData(TReturnType (*function)(TOtherUserData), TUserData const &userdata, int priority)
 	{
-		d_callbacksAfter.insert(CallbackData(function, userdata, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(function, userdata), priority));
 	}
 
 	template <typename TArgs>
 	template <typename TReturnType, typename TOtherArgs, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddAfterData(TReturnType (*function)(TOtherArgs, TOtherUserData), TUserData const &userdata, int priority)
 	{
-		d_callbacksAfter.insert(CallbackData(function, userdata, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(function, userdata), priority));
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddAfterData(TObject &obj, TReturnType (TOtherObject::* const function)(TOtherUserData), TUserData const &userdata, int priority)
 	{
-		d_callbacksAfter.insert(CallbackData(dynamic_cast<TOtherObject &>(obj), function, userdata, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(obj, function, userdata), priority));
 	}
 
 	template <typename TArgs>
 	template <typename TObject, typename TReturnType, typename TOtherObject, typename TOtherArgs, typename TOtherUserData, typename TUserData>
 	void Signal<TArgs>::AddAfterData(TObject &obj, TReturnType (TOtherObject::* const function)(TOtherArgs args, TOtherUserData), TUserData const &userdata, int priority)
 	{
-		d_callbacksAfter.insert(CallbackData(dynamic_cast<TOtherObject &>(obj), function, userdata, priority));
+		d_callbacksAfter.insert(SetPriority(Create<TArgs>::Callback(obj, function, userdata), priority));
 	}
 
 	template <typename TArgs>
@@ -565,28 +483,28 @@ namespace signals
 	template <typename TFunction>
 	void Signal<TArgs>::Remove(TFunction function)
 	{
-		*this -= Callback(function);
+		*this -= Create<TArgs>::Callback(function);
 	}
 
 	template <typename TArgs>
 	template <typename TFunction, typename TObject>
 	void Signal<TArgs>::Remove(TObject &obj, TFunction function)
 	{
-		*this -= Callback(obj, function);
+		*this -= Create<TArgs>::Callback(obj, function);
 	}
 
 	template <typename TArgs>
 	template <typename TFunction, typename TUserData>
 	void Signal<TArgs>::RemoveData(TFunction function, TUserData const &userdata)
 	{
-		*this -= CallbackData(function, userdata);
+		*this -= Create<TArgs>::Callback(function, userdata);
 	}
 
 	template <typename TArgs>
 	template <typename TFunction, typename TObject, typename TUserData>
 	void Signal<TArgs>::RemoveData(TObject &obj, TFunction function, TUserData const &userdata)
 	{
-		*this -= CallbackData(obj, function, userdata);
+		*this -= Create<TArgs>::Callback(obj, function, userdata);
 	}
 
 	template <typename TArgs>
@@ -699,6 +617,13 @@ namespace signals
 	inline size_t Signal<TArgs>::Size() const
 	{
 		return d_callbacks.size() + d_callbacksAfter.size();
+	}
+
+	template <typename TArgs>
+	CallbackBase<TArgs> &Signal<TArgs>::SetPriority(CallbackBase<TArgs> &callback, int priority)
+	{
+		callback.SetPriority(priority);
+		return callback;
 	}
 }
 }
