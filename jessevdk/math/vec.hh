@@ -186,6 +186,11 @@ namespace math
 			return *this * -1;
 		}
 
+		inline typename Base::type Hypot() const
+		{
+			return Dot(*this);
+		}
+
 		inline typename Base::type Dot(Vec<Base> const &other) const
 		{
 			typename Base::type d = 0;
