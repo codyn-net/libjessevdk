@@ -81,69 +81,86 @@ namespace signals
 			virtual TFunction Function() const;
 		private:
 			template <typename TOtherObject, typename TOtherArgs, typename TReturnType>
+			bool EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs), TArgs &args) const;
+
+			template <typename TOtherObject, typename TOtherArgs, typename TReturnType>
 			bool EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs &), TArgs &args) const;
 
 			template <typename TOtherObject, typename TOtherArgs, typename TReturnType>
-			bool EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs), TArgs &args) const;
+			bool EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs const &), TArgs &args) const;
 	};
 
 	namespace {
-		template <typename TArgs, typename TOtherArgs, typename TReturnType>
+		template <typename TObject, typename TArgs, typename TOtherArgs>
 		struct CallerImplementation1
 		{
-		};
+			static bool Caller(TObject &obj, bool (TObject::* const function)(TOtherArgs), TArgs &args)
+			{
+				TOtherArgs &a(dynamic_cast<TOtherArgs &>(args));
+				return (obj.*function)(a);
+			}
 
-		template <typename TArgs, typename TOtherArgs>
-		struct CallerImplementation1<TArgs, TOtherArgs, bool>
-		{
-			template <typename TObject, typename TOtherObject>
-			static bool Caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs &), TArgs &args)
+			static bool Caller(TObject &obj, bool (TObject::* const function)(TOtherArgs &), TArgs &args)
 			{
 				return (obj.*function)(dynamic_cast<TOtherArgs &>(args));
 			}
 
-			template <typename TObject, typename TOtherObject>
-			static bool Caller(TObject &obj, bool (TOtherObject::* const function)(TOtherArgs), TArgs &args)
+			static bool Caller(TObject &obj, bool (TObject::* const function)(TOtherArgs const &), TArgs &args)
 			{
-				TOtherArgs a = args;
-				return (obj.*function)(a);
+				return (obj.*function)(dynamic_cast<TOtherArgs const &>(args));
 			}
-		};
 
-		template <typename TArgs>
-		struct CallerImplementation1<TArgs, TArgs &, bool>
-		{
-			template <typename TObject, typename TOtherObject>
-			static bool Caller(TObject &obj, bool (TOtherObject::* const function)(TArgs &), TArgs &args)
+			static bool Caller(TObject &obj, void (TObject::* const function)(TOtherArgs), TArgs &args)
 			{
-				return (obj.*function)(args);
+				TOtherArgs &a(dynamic_cast<TOtherArgs &>(args));
+				(obj.*function)(a);
+				return false;
 			}
-		};
 
-		template <typename TArgs, typename TOtherArgs>
-		struct CallerImplementation1<TArgs, TOtherArgs, void>
-		{
-			template <typename TObject, typename TOtherObject>
-			static bool Caller(TObject &obj, void (TOtherObject::* const function)(TOtherArgs &), TArgs &args)
+			static bool Caller(TObject &obj, void (TObject::* const function)(TOtherArgs &), TArgs &args)
 			{
 				(obj.*function)(dynamic_cast<TOtherArgs &>(args));
 				return false;
 			}
 
-			template <typename TObject, typename TOtherObject>
-			static bool Caller(TObject &obj, void (TOtherObject::* const function)(TOtherArgs), TArgs &args)
+			static bool Caller(TObject &obj, void (TObject::* const function)(TOtherArgs const &), TArgs &args)
 			{
-				TOtherArgs a = args;
-				(obj.*function)(a);
+				(obj.*function)(dynamic_cast<TOtherArgs const &>(args));
 				return false;
 			}
 		};
 
-		template <typename TArgs>
-		struct CallerImplementation1<TArgs, TArgs &, void>
+		template <typename TObject, typename TArgs>
+		struct CallerImplementation1<TObject, TArgs, TArgs>
 		{
-			template <typename TObject, typename TOtherObject>
-			static bool Caller(TObject &obj, void (TOtherObject::* const function)(TArgs &), TArgs &args)
+			static bool Caller(TObject &obj, bool (TObject::* const function)(TArgs), TArgs &args)
+			{
+				return (obj.*function)(args);
+			}
+
+			static bool Caller(TObject &obj, bool (TObject::* const function)(TArgs &), TArgs &args)
+			{
+				return (obj.*function)(args);
+			}
+
+			static bool Caller(TObject &obj, bool (TObject::* const function)(TArgs const &), TArgs &args)
+			{
+				return (obj.*function)(args);
+			}
+
+			static bool Caller(TObject &obj, void (TObject::* const function)(TArgs), TArgs &args)
+			{
+				(obj.*function)(args);
+				return false;
+			}
+
+			static bool Caller(TObject &obj, void (TObject::* const function)(TArgs &), TArgs &args)
+			{
+				(obj.*function)(args);
+				return false;
+			}
+
+			static bool Caller(TObject &obj, void (TObject::* const function)(TArgs const &), TArgs &args)
 			{
 				(obj.*function)(args);
 				return false;
@@ -202,16 +219,23 @@ namespace signals
 
 	template <typename TFunction, typename TArgs, typename TObject>
 	template <typename TOtherObject, typename TOtherArgs, typename TReturnType>
-	inline bool Callback<TFunction, TArgs, TObject, _CbNone>::EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs &), TArgs &args) const
+	inline bool Callback<TFunction, TArgs, TObject, _CbNone>::EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs), TArgs &args) const
 	{
-		return CallerImplementation1<TArgs, TOtherArgs, TReturnType>::Caller(d_obj, func, args);
+		return CallerImplementation1<TObject, TArgs, TOtherArgs>::Caller(d_obj, func, args);
 	}
 
 	template <typename TFunction, typename TArgs, typename TObject>
 	template <typename TOtherObject, typename TOtherArgs, typename TReturnType>
-	inline bool Callback<TFunction, TArgs, TObject, _CbNone>::EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs), TArgs &args) const
+	inline bool Callback<TFunction, TArgs, TObject, _CbNone>::EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs &), TArgs &args) const
 	{
-		return CallerImplementation1<TArgs, TOtherArgs, TReturnType>::Caller(d_obj, func, args);
+		return CallerImplementation1<TObject, TArgs, TOtherArgs>::Caller(d_obj, func, args);
+	}
+
+	template <typename TFunction, typename TArgs, typename TObject>
+	template <typename TOtherObject, typename TOtherArgs, typename TReturnType>
+	inline bool Callback<TFunction, TArgs, TObject, _CbNone>::EmitArg(TReturnType (TOtherObject::* const func)(TOtherArgs const &), TArgs &args) const
+	{
+		return CallerImplementation1<TObject, TArgs, TOtherArgs>::Caller(d_obj, func, args);
 	}
 }
 }

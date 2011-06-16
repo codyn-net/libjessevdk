@@ -10,6 +10,7 @@ header_DATA = \
 	callbacku2.hh \
 	callbacku3.hh \
 	callbacku4.hh \
+	create.hh \
 	signal.hh
 
 EXTRA_DIST = \

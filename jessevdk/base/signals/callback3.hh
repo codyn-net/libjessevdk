@@ -79,35 +79,90 @@ namespace signals
 			  */
 			virtual TFunction Function() const;
 		private:
-			template <typename TOtherArgs>
-			bool EmitArg(bool (* const func)(TOtherArgs &), TArgs &args) const;
+			template <typename TOtherArgs, typename TReturnType>
+			bool EmitArg(TReturnType (* const func)(TOtherArgs), TArgs &args) const;
 
-			template <typename TOtherArgs>
-			bool EmitArg(bool (* const func)(TOtherArgs), TArgs &args) const;
-	};
+			template <typename TOtherArgs, typename TReturnType>
+			bool EmitArg(TReturnType (* const func)(TOtherArgs &), TArgs &args) const;
+
+			template <typename TOtherArgs, typename TReturnType>
+			bool EmitArg(TReturnType (* const func)(TOtherArgs const &), TArgs &args) const;
+		};
 
 	namespace {
 		template <typename TArgs, typename TOtherArgs>
 		struct CallerImplementation3
 		{
+			static bool Caller(bool (* const function)(TOtherArgs), TArgs &args)
+			{
+				TOtherArgs &a(dynamic_cast<TOtherArgs &>(args));
+				return (*function)(a);
+			}
+
 			static bool Caller(bool (* const function)(TOtherArgs &), TArgs &args)
 			{
 				return (*function)(dynamic_cast<TOtherArgs &>(args));
 			}
 
-			static bool Caller(bool (* const function)(TOtherArgs), TArgs &args)
+			static bool Caller(bool (* const function)(TOtherArgs const &), TArgs &args)
 			{
-				TOtherArgs a = args;
-				return (*function)(a);
+				return (*function)(dynamic_cast<TOtherArgs const &>(args));
+			}
+
+			static bool Caller(void (* const function)(TOtherArgs), TArgs &args)
+			{
+				TOtherArgs &a(dynamic_cast<TOtherArgs &>(args));
+				(*function)(a);
+				return false;
+			}
+
+			static bool Caller(void (* const function)(TOtherArgs &), TArgs &args)
+			{
+				(*function)(dynamic_cast<TOtherArgs &>(args));
+				return false;
+			}
+
+			static bool Caller(void (* const function)(TOtherArgs const &), TArgs &args)
+			{
+				(*function)(dynamic_cast<TOtherArgs const &>(args));
+				return false;
 			}
 		};
 
 		template <typename TArgs>
 		struct CallerImplementation3<TArgs, TArgs>
 		{
+			static bool Caller(bool (* const function)(TArgs), TArgs &args)
+			{
+				return (*function)(args);
+			}
+
 			static bool Caller(bool (* const function)(TArgs &), TArgs &args)
 			{
 				return (*function)(args);
+			}
+
+			static bool Caller(bool (* const function)(TArgs const &), TArgs &args)
+			{
+				return (*function)(args);
+			}
+
+			static bool Caller(void (* const function)(TArgs), TArgs &args)
+			{
+				(*function)(args);
+				return false;
+			}
+
+			static bool Caller(void (* const function)(TArgs &), TArgs &args)
+			{
+				(*function)(args);
+				return false;
+			}
+
+			static bool Caller(void (* const function)(TArgs const &), TArgs &args)
+			{
+				(*function)(args);
+				return false;
 			}
 		};
 	}
@@ -161,15 +216,22 @@ namespace signals
 	}
 
 	template <typename TFunction, typename TArgs>
-	template <typename TOtherArgs>
-	inline bool Callback<TFunction, TArgs, _CbNone, _CbNone>::EmitArg(bool (* const func)(TOtherArgs &), TArgs &args) const
+	template <typename TOtherArgs, typename TReturnType>
+	inline bool Callback<TFunction, TArgs, _CbNone, _CbNone>::EmitArg(TReturnType (* const func)(TOtherArgs), TArgs &args) const
 	{
 		return CallerImplementation3<TArgs, TOtherArgs>::Caller(func, args);
 	}
 
 	template <typename TFunction, typename TArgs>
-	template <typename TOtherArgs>
-	inline bool Callback<TFunction, TArgs, _CbNone, _CbNone>::EmitArg(bool (* const func)(TOtherArgs), TArgs &args) const
+	template <typename TOtherArgs, typename TReturnType>
+	inline bool Callback<TFunction, TArgs, _CbNone, _CbNone>::EmitArg(TReturnType (* const func)(TOtherArgs &), TArgs &args) const
+	{
+		return CallerImplementation3<TArgs, TOtherArgs>::Caller(func, args);
+	}
+
+	template <typename TFunction, typename TArgs>
+	template <typename TOtherArgs, typename TReturnType>
+	inline bool Callback<TFunction, TArgs, _CbNone, _CbNone>::EmitArg(TReturnType (* const func)(TOtherArgs const &), TArgs &args) const
 	{
 		return CallerImplementation3<TArgs, TOtherArgs>::Caller(func, args);
 	}
