@@ -1,6 +1,6 @@
-libjessevdk1 (1.1-1precise1) UNRELEASED; urgency=low
+libjessevdk1 (1.1-1precise1) precise; urgency=low
 
-
+  * Precise release
   * Added rule override to use autogen.sh file
   * Added build dependency on libtool
 
