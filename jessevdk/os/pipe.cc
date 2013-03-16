@@ -1,4 +1,5 @@
 #include "pipe.hh"
+#include <unistd.h>
 
 using namespace std;
 using namespace jessevdk::os;

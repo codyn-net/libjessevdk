@@ -1,6 +1,7 @@
 #include "fifo.hh"
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace jessevdk::os;

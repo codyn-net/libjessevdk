@@ -1,6 +1,7 @@
 #include "unixserver.hh"
 #include <jessevdk/network/socketaddress.hh>
 #include <sys/un.h>
+#include <unistd.h>
 
 using namespace std;
 using namespace jessevdk::network;
