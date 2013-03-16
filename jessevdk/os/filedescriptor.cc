@@ -173,10 +173,10 @@ FileDescriptor::Data::Read(char *buffer, ssize_t len)
 int
 FileDescriptor::Data::Recv(string &data)
 {
-	char buffer[1024];
+	char buffer[1024 * 1024];
 	ssize_t len;
 
-	len = this->Read(buffer, 1024 - 1);
+	len = this->Read(buffer, sizeof(buffer) - 1);
 
 	data.clear();
 
