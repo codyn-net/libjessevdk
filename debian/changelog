@@ -1,4 +1,12 @@
-libjessevdk1 (1.1-1precise1) UNRELEASED; urgency=low
+libjessevdk1 (1.2-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * Increase buffer size for reading
+  * Added missing headers
+
+ -- Jesse van den Kieboom <jesse.vandenkieboom@epfl.ch>  Sun, 17 Mar 2013 10:52:34 +0100
+
+libjessevdk1 (1.1-1) UNRELEASED; urgency=low
 
   * Precise release
   * Added rule override to use autogen.sh file
