@@ -31,11 +31,11 @@ namespace base
 			Enum<Type> &operator=(Value value);
 
 			signals::Signal<Value> OnChanged;
+		protected:
+			void Set(Value newValue);
 		private:
 			/* Private functions */
 			Value d_value;
-
-			void Set(Value newValue);
 	};
 
 	template <typename Type>

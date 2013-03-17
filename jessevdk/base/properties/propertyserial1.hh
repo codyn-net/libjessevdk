@@ -135,7 +135,7 @@ namespace properties
 
 		if (Implementation<Type>::Deserialize(value, val))
 		{
-			Set(val);
+			this->Set(val);
 		}
 
 		return *this;

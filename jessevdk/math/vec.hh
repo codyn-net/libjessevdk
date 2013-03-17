@@ -186,6 +186,11 @@ namespace math
 			return *this * -1;
 		}
 
+		inline typename Base::type Hypot() const
+		{
+			return Dot(*this);
+		}
+
 		inline typename Base::type Dot(Vec<Base> const &other) const
 		{
 			typename Base::type d = 0;
@@ -284,6 +289,12 @@ namespace math
 			};
 		};
 
+		enum
+		{
+			X = 0,
+			Y = 1
+		};
+
 		static Vec2Data<Type> empty;
 		static Vec2Data<Type> zeros;
 		static Vec2Data<Type> ones;
@@ -352,6 +363,13 @@ namespace math
 				Type _xpad;
 				Vec<Vec2Data<Type> > yz;
 			};
+		};
+
+		enum
+		{
+			X = 0,
+			Y = 1,
+			Z = 2
 		};
 
 		Vec<Vec3Data<Type> > Cross(Vec<Vec3Data<Type> > const &other) const
@@ -468,6 +486,14 @@ namespace math
 				Vec<Vec3Data<Type> > rgb;
 				Type _apad;
 			};
+		};
+
+		enum
+		{
+			X = 1,
+			Y = 2,
+			Z = 3,
+			W = 4
 		};
 
 		static Vec4Data<Type> zeros;

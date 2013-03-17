@@ -1,4 +1,4 @@
-AC_INIT(libjessevdk, 1.1)
+AC_INIT(libjessevdk, 1.2)
 
 AM_INIT_AUTOMAKE([subdir-objects])
 
@@ -11,6 +11,8 @@ AC_HEADER_STDC
 
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
+
+PKG_PROG_PKG_CONFIG
 
 AC_CONFIG_HEADERS(jessevdk/config.hh)
 AM_MAINTAINER_MODE
@@ -90,5 +92,6 @@ jessevdk/math/Makefile
 jessevdk/math/sse/Makefile
 jessevdk/network/Makefile
 jessevdk/os/Makefile
+tests/Makefile
 libjessevdk.pc
 )

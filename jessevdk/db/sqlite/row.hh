@@ -76,7 +76,9 @@ namespace sqlite
 	template <>
 	inline std::string Row::Get<std::string>(size_t column) const
 	{
-		return std::string(reinterpret_cast<char const *>(sqlite3_column_text(d_data->statement, column)));
+		char const *ret = reinterpret_cast<char const *>(sqlite3_column_text(d_data->statement, column));
+
+		return std::string(!ret ? "" : ret);
 	}
 
 	template <>
