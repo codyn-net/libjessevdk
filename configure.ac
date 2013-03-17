@@ -1,4 +1,4 @@
-AC_INIT(libjessevdk, 1.1)
+AC_INIT(libjessevdk, 1.2)
 
 AM_INIT_AUTOMAKE([subdir-objects])
 
