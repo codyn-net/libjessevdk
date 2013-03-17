@@ -6,8 +6,7 @@ Build-Depends: debhelper (>= 7),
                cdbs, 
                pkg-config, 
                libglibmm-2.4-dev, 
-               libsqlite3-dev,
-	       libtool
+               libsqlite3-dev
 Standards-Version: 3.8.0
 Section: libs
 Homepage: http://birg.epfl.ch
